@@ -3,23 +3,21 @@ version: '3'
 services:
   frontend:
     build: Frontend
-    # working_dir: /usr/src/frontend
-    # volumes:
-    #   - ./Frontend/:/usr/src/frontend
-    #   - /usr/src/frontend/node_modules
+    working_dir: /usr/src/frontend
+    volumes:
+      - ./Frontend/:/usr/src/frontend
+      - /usr/src/frontend/node_modules
     ports:
-     - '80:80'
      - '4200:4200'
      - '49153:49153'
      - '9876:9876'
      - '49152:49152'
     expose:
-     - '80'
      - '4200'
      - '49153'
      - '9876'
      - '49152'
-    #command: ng serve --host 0.0.0.0 --poll 500
+    command: ng serve --host 0.0.0.0 --poll 500
   
   database:
     image: mysql:5.7
@@ -46,7 +44,7 @@ services:
       - '8080:8080'
     expose:
       - '8080'
-    # command: mvn spring-boot:run
+    command: mvn spring-boot:run
 
 networks:
   backend:

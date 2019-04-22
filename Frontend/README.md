@@ -34,6 +34,6 @@ Para crear el contenedor para el frontend
 
 Para levantar el contenedor
 
-`docker run -d -p 80:80 frontend-angular`
+`docker run --name frontend -d -p 80:80 frontend-angular`
 
 
