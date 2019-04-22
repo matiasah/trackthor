@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  frontend:
+    build:
+      dockerfile: prod.dockerfile
+    ports:
+     - '80:80'
+    expose:
+     - '80'
+
+  backend:
+    build:
+      dockerfile: prod.dockerfile
+    working_dir: /usr/src/java-code
+    ports:
+      - '8080:8080'
+    expose:
+      - '8080'

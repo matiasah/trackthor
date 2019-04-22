@@ -1,6 +1,7 @@
-##DOCKER-COMPOSE
+# Track-thor
 
-Desplegar el proyecto completo
+# Despliegue en desarrollo
+`docker-compose -f docker-compose.yml -f docker-compose.dev.yml up`
 
-`docker-compose up`
-
+# Despliegue en producción
+`docker-compose -f docker-compose.yml -f docker-compose.prod.yml up`

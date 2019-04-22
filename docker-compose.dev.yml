@@ -1,8 +1,9 @@
-version: '3'
+version: '3.4'
 
 services:
   frontend:
-    build: Frontend
+    build:
+      dockerfile: dev.dockerfile
     working_dir: /usr/src/frontend
     volumes:
       - ./Frontend/:/usr/src/frontend
@@ -18,33 +19,17 @@ services:
      - '9876'
      - '49152'
     command: ng serve --host 0.0.0.0 --poll 500
-  
-  database:
-    image: mysql:5.7
-    networks:
-      backend:
-        aliases:
-          - mysql
-    environment:
-      - "MYSQL_DATABASE=trackthor"
-      - "MYSQL_USER=root"
-      - "MYSQL_PASSWORD=root"
-      - "MYSQL_ROOT_PASSWORD=root"
 
   backend:
-    build: Backend
+    build:
+      dockerfile: dev.dockerfile
     working_dir: /usr/src/backend
     volumes:
       - ./Backend/:/usr/src/backend
-    networks:
-      backend:
-        aliases:
-          - backend
     ports:
       - '8080:8080'
+      - '35729:35729'
     expose:
       - '8080'
+      - '35729'
     command: mvn spring-boot:run
-
-networks:
-  backend:
