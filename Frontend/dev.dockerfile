@@ -10,8 +10,8 @@ RUN mkdir -p /usr/src/frontend
 # Ubicarse en carpeta /usr/src/frontend
 WORKDIR /usr/src/frontend
 
-# Copiar package.json
-COPY package.json /usr/src/frontend
+# Copiar package.json y package-lock.json
+COPY package*.json /usr/src/frontend/
 
 # Instalar dependencias de package.json
 RUN npm install
