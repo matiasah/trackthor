@@ -14,3 +14,6 @@
 
 # Eliminar imágenes y volumenes
 `docker system prune`
+
+# Eliminar imágenes, volumenes y caché
+`docker system prune -a`
