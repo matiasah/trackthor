@@ -10,24 +10,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="trs_adm_empresa")
-public class AdministradorEmpresa implements Serializable{
+@Table(name="trs_maquina")
+public class Maquina implements Serializable{
 	
     @Column(name = "id", nullable = false, length = 11)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+    
+    @Column(name = "emp_create_at", nullable = false)
+    private java.time.LocalDateTime createdAt;
 
-    @Column(name = "lis_fecha", nullable = false)
-    private java.sql.Timestamp createAt;
-    
-    //TODO
-    private GestionEmpresa gestores;
-    private Pago pago;
-    
-    
-    
-    
-    
-    
 }
