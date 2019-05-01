@@ -17,7 +17,7 @@
 ### Eliminar imágenes y volumenes
 `docker system prune`
 
-## Eliminar imágenes, volumenes y caché
+### Eliminar imágenes, volumenes y caché
 `docker system prune -a`
 
 ## Generación de Elementos
