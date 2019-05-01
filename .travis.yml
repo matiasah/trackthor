@@ -1,7 +1,7 @@
 sudo: false
 dist: trusty
 
-frontend:
+jobs:
   include:
     - language: node_js
 
@@ -28,8 +28,9 @@ script:
 
 after_success:
   - language: java
-  jdk:
-    - oraclejdk11
+
+jdk:
+  - oraclejdk11
 
 install:
   - cd $TRAVIS_BUILD_DIR
