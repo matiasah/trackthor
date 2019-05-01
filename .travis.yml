@@ -1,9 +1,12 @@
 sudo: false
 dist: trusty
 
-language: node_js
+frontend:
+  include:
+  - language: node_js
+
 node_js:
-  - "8"
+  - "8.15.1"
 
 cache:
   directories:
@@ -11,10 +14,6 @@ cache:
 
 addons:
   chrome: stable
-
-branches:
-  only:
-    - master
 
 install:
   - cd $TRAVIS_BUILD_DIR
@@ -26,3 +25,16 @@ script:
   - cd $TRAVIS_BUILD_DIR
   - cd Frontend
   - ng build --prod --aot
+
+after_success:
+  - language: java
+  jdk:
+  - oraclejdk11
+
+install:
+  - cd $TRAVIS_BUILD_DIR
+  - cd Backend
+  - mvn dependency:resolve
+
+script:
+  - mvn package
