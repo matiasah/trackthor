@@ -28,9 +28,8 @@ script:
 
 after_success:
   - language: java
-
-jdk:
-  - oraclejdk11
+  jdk:
+    - oraclejdk11
 
 install:
   - cd $TRAVIS_BUILD_DIR
