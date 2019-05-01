@@ -3,7 +3,7 @@ dist: trusty
 
 frontend:
   include:
-  - language: node_js
+    - language: node_js
 
 node_js:
   - "8.15.1"
@@ -28,7 +28,8 @@ script:
 
 after_success:
   - language: java
-  jdk:
+
+jdk:
   - oraclejdk11
 
 install:
