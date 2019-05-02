@@ -16,10 +16,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-/**
- *
- * @author Matías Hermosilla
- */
 @Entity
 @Table(name = "tra_usuario")
 public class Usuario implements Serializable, UserDetails {

@@ -20,5 +20,8 @@ public class Maquina implements Serializable{
     
     @Column(name = "emp_create_at", nullable = false)
     private java.time.LocalDateTime createdAt;
+    
+    //TODO
+    private TipoMaquina tipoMaquina;
 
 }
