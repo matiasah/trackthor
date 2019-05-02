@@ -19,87 +19,87 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity
 @Table(name = "tra_usuario")
 public class Usuario implements Serializable, UserDetails {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
 
-    @Column(name = "usu_nombre", unique = true)
-    private String nombre;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 
-    @Column(name = "usu_password")
-    private String password;
-    
-    @CreationTimestamp
-    private LocalDateTime createdAt;
-    
-    public Usuario() {
-        
-    }
+	@Column(name = "usu_nombre", unique = true)
+	private String nombre;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return new ArrayList<>();
-    }
+	@Column(name = "usu_password")
+	private String password;
 
-    @Override
-    @JsonIgnore
-    public String getPassword() {
-        return this.password;
-    }
-    
-    @JsonProperty
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	@CreationTimestamp
+	private LocalDateTime createdAt;
 
-    @Override
-    public String getUsername() {
-        return this.nombre;
-    }
+	public Usuario() {
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
+	}
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return new ArrayList<>();
+	}
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
+	@Override
+	@JsonIgnore
+	public String getPassword() {
+		return this.password;
+	}
 
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+	@JsonProperty
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public long getId() {
-        return id;
-    }
+	@Override
+	public String getUsername() {
+		return this.nombre;
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
 
-    public String getNombre() {
-        return nombre;
-    }
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-    
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
 }

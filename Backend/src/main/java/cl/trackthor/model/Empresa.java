@@ -14,40 +14,38 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="trs_empresa")
-public class Empresa implements Serializable{
-	
-    @Column(name = "id", nullable = false, length = 11)
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Table(name = "trs_empresa")
+public class Empresa implements Serializable {
+
+	@Column(name = "id", nullable = false, length = 11)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-    
-    @Column(name = "emp_nombre", nullable = false)
-    private String nombre;
-    
-    @Column(name = "emp_rut", nullable = false)
-    private String rut;
-    
-    @Column(name = "sub_telefono", nullable = false)
-    private String telefono;
-    
-    @Column(name = "emp_create_at", nullable = false)
-    private java.time.LocalDateTime createdAt;
-    
-    //TODO
-    @OneToMany(mappedBy = "empresa")
-    private List<Contrato> contratos;
-    
-    @OneToMany(mappedBy = "empresa")
-    private List<Maquina> maquinas;
-    
-    @OneToMany(mappedBy = "empresa")
-    private List<Alerta> alertas;
-    
-    @OneToMany(mappedBy = "empresa")
-    private List<GestionEmpresa> gestores;
-    
-    
+
+	@Column(name = "emp_nombre", nullable = false)
+	private String nombre;
+
+	@Column(name = "emp_rut", nullable = false)
+	private String rut;
+
+	@Column(name = "sub_telefono", nullable = false)
+	private String telefono;
+
+	@Column(name = "emp_create_at", nullable = false)
+	private java.time.LocalDateTime createdAt;
+
+	// TODO
+	@OneToMany(mappedBy = "empresa")
+	private List<Contrato> contratos;
+
+	@OneToMany(mappedBy = "empresa")
+	private List<Maquina> maquinas;
+
+	@OneToMany(mappedBy = "empresa")
+	private List<Alerta> alertas;
+
+	@OneToMany(mappedBy = "empresa")
+	private List<GestionEmpresa> gestores;
 
 	public Empresa(long id, String nombre, String rut, String telefono, LocalDateTime createdAt,
 			List<Contrato> contratos, List<Maquina> maquinas, List<Alerta> alertas, List<GestionEmpresa> gestores) {
@@ -145,16 +143,5 @@ public class Empresa implements Serializable{
 	public void setGestores(List<GestionEmpresa> gestores) {
 		this.gestores = gestores;
 	}
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
 }

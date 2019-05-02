@@ -22,12 +22,10 @@ public class Plan implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	// TODO
 	@OneToMany(mappedBy = "plan")
 	private List<Contrato> contratos;
-	
-	
 
 	@Column(name = "pla_nombre", nullable = false, length = 100)
 	private String nombre;
@@ -45,7 +43,8 @@ public class Plan implements Serializable {
 
 	}
 
-	public Plan(long id, List<Contrato> contratos, String nombre, String descripcion, long costo, LocalDateTime createdAt) {
+	public Plan(long id, List<Contrato> contratos, String nombre, String descripcion, long costo,
+			LocalDateTime createdAt) {
 		super();
 		this.id = id;
 		this.contratos = contratos;

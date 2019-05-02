@@ -10,19 +10,19 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="trs_tipo_maquina")
-public class TipoMaquina implements Serializable{
-    @Column(name = "id", nullable = false, length = 11)
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Table(name = "trs_tipo_maquina")
+public class TipoMaquina implements Serializable {
+	@Column(name = "id", nullable = false, length = 11)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-    
-    @Column(name = "tip_nombre", nullable = false)
-    private String nombre;
-    
-    //TODO
-    @OneToOne()
-    private Maquina maquina;
+
+	@Column(name = "tip_nombre", nullable = false)
+	private String nombre;
+
+	// TODO
+	@OneToOne()
+	private Maquina maquina;
 
 	public TipoMaquina() {
 		super();
@@ -32,7 +32,7 @@ public class TipoMaquina implements Serializable{
 		super();
 		this.id = id;
 		this.nombre = nombre;
-	
+
 		this.maquina = maquina;
 	}
 
@@ -62,9 +62,7 @@ public class TipoMaquina implements Serializable{
 
 	@Override
 	public String toString() {
-		return "TipoMaquina [id=" + id + ", nombre=" + nombre + ", maquina=" + maquina
-				+ "]";
+		return "TipoMaquina [id=" + id + ", nombre=" + nombre + ", maquina=" + maquina + "]";
 	}
-    
-    
+
 }

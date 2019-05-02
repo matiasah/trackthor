@@ -25,16 +25,16 @@ public class Contrato implements Serializable {
 
 	@Column(name = "con_created_at", nullable = false)
 	private java.sql.Timestamp createdAt;
-	
+
 	// TODO
 	@ManyToOne()
 	@JoinColumn(name = "plan_id")
 	private Plan plan;
 
-	@OneToMany()
+	@OneToMany(mappedBy = "contrato")
 	@JoinColumn(name = "cobranza_id")
 	private List<Cobranza> cobranzas;
-	
+
 	@ManyToOne()
 	@JoinColumn(name = "empresa_id")
 	private Empresa empresa;
@@ -51,11 +51,11 @@ public class Contrato implements Serializable {
 		this.cobranzas = cobranzas;
 	}
 
-	public List<Cobranza>  getCobranza() {
+	public List<Cobranza> getCobranza() {
 		return cobranzas;
 	}
 
-	public void setCobranza(List<Cobranza>  cobranzas) {
+	public void setCobranza(List<Cobranza> cobranzas) {
 		this.cobranzas = cobranzas;
 	}
 
@@ -82,6 +82,5 @@ public class Contrato implements Serializable {
 	public void setPlan(Plan plan) {
 		this.plan = plan;
 	}
-    
 
 }
