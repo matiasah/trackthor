@@ -1,1 +1,56 @@
-LOGIN!!
+<div class="container section h-100">
+    <div class="row h-100">
+        <div class="col-sm-12 col-md-6 col-lg-4 offset-md-3 offset-lg-4 align-self-center">
+            <mat-card class="mat-elevation-z8">
+
+                <div class="row">
+                    <!--
+                    <div class="col-4 offset-4">
+                        <img src="../../../assets/img/logo.jpg" style="border-radius: 100%; width: 100%" />
+                    </div>
+                    -->
+                    <div class="col-12">
+                        <h2 class="mat-h2 text-center">Track-Thor</h2>
+                    </div>
+                </div>
+
+                <div *ngIf="incorrecto" class="section">
+                    <div class="mat-elevation-z2 panel-incorrecto">
+                        Usuario o Contraseña son Incorrectos.
+                    </div>
+                </div>
+
+                <!-- Formulario de datos para inicio de sesión -->
+                <form class="section" #form="ngForm" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <mat-form-field class="col-12">
+                            <input matInput placeholder="Usuario" [(ngModel)]="usuario.nombre" name="username" required>
+                        </mat-form-field>
+                        <mat-form-field class="col-12">
+                            <input matInput placeholder="Contraseña" [(ngModel)]="usuario.contrasena" type="password"
+                                name="password" required>
+                        </mat-form-field>
+                    </div>
+
+                    <!-- Botón de inicio de sesión -->
+                    <button *ngIf="!iniciando" type="submit" class="col-12" mat-raised-button
+                        color="primary">Ingresar</button>
+
+                    <div *ngIf="iniciando" class="row">
+                        <mat-progress-spinner class="m-auto" diameter="48" color="primary"
+                            mode="indeterminate">
+                        </mat-progress-spinner>
+                    </div>
+                </form>
+
+                <div class="section">
+                    <div class="col-12">
+                        <mat-divider></mat-divider>
+                    </div>
+                </div>
+
+                <button class="col-12" mat-button>Recuperar contraseña</button>
+            </mat-card>
+        </div>
+    </div>
+</div>

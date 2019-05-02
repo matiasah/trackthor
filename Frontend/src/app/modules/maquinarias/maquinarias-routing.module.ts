@@ -4,14 +4,13 @@ import { MaquinariasComponent } from './maquinarias/maquinarias.component';
 
 const routes: Routes = [
     {
-        path: 'maquinarias',
+        path: '',
         component: MaquinariasComponent
     },
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
 export class MaquinariasRoutingModule { }
-
