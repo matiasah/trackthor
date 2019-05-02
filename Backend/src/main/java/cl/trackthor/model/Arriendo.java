@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -28,9 +30,14 @@ public class Arriendo implements Serializable{
     private java.time.LocalDateTime createdAt;
     
     //TODO
+    @ManyToOne()
+    @JoinColumn(name = "maquina_id")
+    private Maquina maquina;
+    
+    
     private Cliente cliente;
     private HoraTrabajada horasTrabajadas;
-    private Maquina maquina;
+   
     
     
     

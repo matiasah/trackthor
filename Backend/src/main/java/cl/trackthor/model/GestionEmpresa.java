@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,8 +25,13 @@ public class GestionEmpresa implements Serializable{
     private java.sql.Timestamp createAt;
     
     //TODO
-    private Usuario usiario;
+    @ManyToOne()
+    @JoinColumn(name = "empresa_id")
     private Empresa empresa;
+    
+    @ManyToOne()
+    @JoinColumn(name = "usuario_id")
+    private Usuario usiario;
     
     
 
