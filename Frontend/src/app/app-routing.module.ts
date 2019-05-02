@@ -8,6 +8,10 @@ const routes: Routes = [
         path: '',
         component: LoginComponent,
         canActivate: [LoginGuard]
+    },
+    {
+        path: 'maquinarias',
+        loadChildren: './modules/maquinarias/maquinarias.module#MaquinariasModule'
     }
 ];
 

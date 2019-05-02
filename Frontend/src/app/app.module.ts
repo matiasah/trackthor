@@ -4,13 +4,10 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MaquinariasModule } from './maquinarias/maquinarias.module';
-import { MaterialModule } from './material/material.module';
+import { MaterialModule } from './modules/material/material.module';
 
 import { LoginComponent } from './components/login/login.component';
-
 
 @NgModule({
   declarations: [
@@ -20,8 +17,6 @@ import { LoginComponent } from './components/login/login.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    MaquinariasModule,
     HttpClientModule,
     MaterialModule
   ],
