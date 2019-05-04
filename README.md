@@ -32,3 +32,6 @@
 
 ### Generar guard
 `ng generate guard guards/[nombre del guard]`
+
+### Generar modelo
+`ng generate interface models/[nombre del modelo]`

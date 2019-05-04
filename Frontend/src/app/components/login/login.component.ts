@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 import { Usuario } from 'src/app/models/usuario';
+import { UserToken } from 'src/app/models/user-token';
 
 @Component({
     selector: 'app-login',
@@ -17,12 +19,14 @@ export class LoginComponent implements OnInit {
     public form: NgForm;
 
     // Indicar si se encuentra iniciando sesión
-    public iniciando: boolean = false;
+    public iniciando = false;
 
     // Indicar si el usuario o contraseña son incorrectos
-    public incorrecto: boolean = false;
+    public incorrecto = false;
 
-    public constructor() {
+    public constructor(
+        private authService: AuthService
+    ) {
 
     }
 
@@ -37,7 +41,29 @@ export class LoginComponent implements OnInit {
             this.iniciando = true;
 
             // Indicar que usuario o contraseña no son incorrectos
-            this.incorrecto = true;
+            this.incorrecto = false;
+
+            // Iniciar sesión
+            this.authService.login(this.usuario).subscribe(
+                Response => {
+                    // Crear instancia de token
+                    const userToken: UserToken = {
+                        access_token: Response.access_token,
+                        expiration: new Date(Date.now() + Response.expires_in * 1000),
+                        token_type: Response.token_type,
+                    }
+
+                    // Fijar token
+                    this.authService.setToken(userToken);
+                },
+                error => {
+                    // Indicar que no se encuentra iniciando sesión
+                    this.iniciando = false;
+
+                    // Indicar que usuario o contraseña son incorrectos
+                    this.incorrecto = true;
+                }
+            )
         }
     }
 
