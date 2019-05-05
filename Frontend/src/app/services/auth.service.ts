@@ -18,12 +18,15 @@ export class AuthService {
         private http: HttpClient
     ) {
         // Leer datos de localstorage
-        const tokenData: string = localStorage.getItem('token');
+        const tokenData: string = localStorage.getItem('trackthor_token');
 
         // Si hay token
         if (tokenData != null) {
             // Leer token de local storage
             this.token = JSON.parse(tokenData);
+
+            // Transformar fecha de expiración a objeto 'Date'
+            this.token.expiration = new Date(this.token.expiration);
         }
     }
 
@@ -55,7 +58,7 @@ export class AuthService {
      */
     public setToken(token: UserToken): void {
         // Almacenar token en localstorage
-        localStorage.setItem('token', JSON.stringify(token));
+        localStorage.setItem('trackthor_token', JSON.stringify(token));
 
         // Cachear en memoria
         this.token = token;
@@ -66,7 +69,7 @@ export class AuthService {
      */
     public removeToken(): void {
         // Eliminar token de localstorage
-        localStorage.removeItem('token');
+        localStorage.removeItem('trackthor_token');
 
         // Quitar de caché
         this.token = null;
