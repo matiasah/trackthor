@@ -15,4 +15,8 @@ localhost:8080/v2/api-docs
 
 localhost:8080/swagger-ui.html
 
+#H2 DB - Console
+
+localhost:8080/h2-console
+
 

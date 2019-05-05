@@ -1,109 +1,90 @@
 package cl.trackthor.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.Inheritance;
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-/**
- *
- * @author Matías Hermosilla
- */
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+//Swagger anotation
+@ApiModel(description = "Detalles sobre el Usuario.")
 @Entity
-@Table(name = "tra_usuario")
-public class Usuario implements Serializable, UserDetails {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+@Inheritance
+public abstract class Usuario implements UserDetails {
 
-    @Column(name = "usu_nombre", unique = true)
-    private String nombre;
+	@Column(name = "id", nullable = false, length = 11)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 
-    @Column(name = "usu_password")
-    private String password;
-    
-    @CreationTimestamp
-    private LocalDateTime createdAt;
-    
-    public Usuario() {
-        
-    }
+	@NotNull
+	@ApiModelProperty(notes = "nombre del usuario :)") //swagger anotation
+	private String nombre;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return new ArrayList<>();
-    }
+	@NotNull
+	private String password;
 
-    @Override
-    @JsonIgnore
-    public String getPassword() {
-        return this.password;
-    }
-    
-    @JsonProperty
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	@CreationTimestamp
+	private LocalDateTime createdAt;
 
-    @Override
-    public String getUsername() {
-        return this.nombre;
-    }
+	public Usuario() {
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
+	}
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
+	public Usuario(long id, @NotNull String nombre, @NotNull String password, LocalDateTime createdAt) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.password = password;
+		this.createdAt = createdAt;
+	}
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nombre=" + nombre + ", password=" + password + ", createdAt=" + createdAt + "]";
+	}
 
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public long getId() {
-        return id;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public String getNombre() {
-        return nombre;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-    
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
 }
