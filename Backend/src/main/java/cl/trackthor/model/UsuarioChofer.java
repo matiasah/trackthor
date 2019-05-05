@@ -2,6 +2,7 @@ package cl.trackthor.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -12,20 +13,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.security.core.GrantedAuthority;
+
 @Entity
 @Table(name = "trs_usuario_chofer")
-public class UsuarioChofer implements Serializable {
-
-	@Column(name = "id", nullable = false, length = 11)
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+public class UsuarioChofer extends Usuario {
 
 	@Column(name = "usc_rut", nullable = false)
 	private String rut;
-
-	@Column(name = "usc_create_at", nullable = false)
-	private java.time.LocalDateTime createdAt;
 
 	// TODO
 	@OneToMany(mappedBy = "uchofer")
@@ -38,60 +33,50 @@ public class UsuarioChofer implements Serializable {
 		super();
 	}
 
-	public UsuarioChofer(long id, String rut, LocalDateTime createdAt, List<Alerta> alertas,
-			List<HoraTrabajada> horasTrabajadas) {
+	public UsuarioChofer(String rut, List<Alerta> alertas, List<HoraTrabajada> horasTrabajadas) {
 		super();
-		this.id = id;
 		this.rut = rut;
-		this.createdAt = createdAt;
 		this.alertas = alertas;
-		this.horasTrabajadas = horasTrabajadas;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getRut() {
-		return rut;
-	}
-
-	public void setRut(String rut) {
-		this.rut = rut;
-	}
-
-	public java.time.LocalDateTime getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(java.time.LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public List<Alerta> getAlertas() {
-		return alertas;
-	}
-
-	public void setAlertas(List<Alerta> alertas) {
-		this.alertas = alertas;
-	}
-
-	public List<HoraTrabajada> getHorasTrabajadas() {
-		return horasTrabajadas;
-	}
-
-	public void setHorasTrabajadas(List<HoraTrabajada> horasTrabajadas) {
 		this.horasTrabajadas = horasTrabajadas;
 	}
 
 	@Override
 	public String toString() {
-		return "UsuarioChofer [id=" + id + ", rut=" + rut + ", createdAt=" + createdAt + ", alertas=" + alertas
-				+ ", horasTrabajadas=" + horasTrabajadas + "]";
+		return "UsuarioChofer [rut=" + rut + ", alertas=" + alertas + ", horasTrabajadas=" + horasTrabajadas + "]";
 	}
 
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+
+		return this.getAuthorities();
+	}
+
+	@Override
+	public String getUsername() {
+		return this.getNombre();
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+
+		return true;
+	}
 }
