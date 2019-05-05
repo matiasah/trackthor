@@ -33,3 +33,20 @@ services:
       - '8080'
       - '35729'
     command: mvn spring-boot:run
+  
+  phpMyAdmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - '8081:80'
+    expose:
+      - '8081'
+    environment:
+      - "MYSQL_ROOT_PASSWORD=root"
+      - "PMA_USER=root"
+      - "PMA_PASSWORD=root"
+      - "PMA_HOST=mysql"
+      - "PMA_PORT=3306"
+    networks:
+      backend:
+        aliases:
+          - phpmyadmin

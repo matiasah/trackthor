@@ -1,0 +1,28 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$app-primary:    mat-palette($mat-indigo);
+$app-accent:     mat-palette($mat-pink);
+$app-warn:       mat-palette($mat-red, 700);
+
+$app-theme: mat-dark-theme($app-primary, $app-accent, $app-warn);
+
+@include angular-material-theme($app-theme);
+
+.theme-2 {
+    $theme-2-primary:   mat-palette($mat-blue, 700);
+    $theme-2-accent:    mat-palette($mat-green, 700);
+    $theme-2-warn:      mat-palette($mat-red, 700);
+
+    $theme-2-theme: mat-dark-theme($theme-2-primary, $theme-2-accent, $theme-2-warn);
+
+    @include angular-material-theme($theme-2-theme);
+}
+
+.bg-warn {
+    background-color: mat-color($app-warn);
+}
+
+.bg-success {
+    background-color: mat-color($mat-green, 700);
+}

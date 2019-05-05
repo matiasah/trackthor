@@ -17,7 +17,7 @@
 ### Eliminar imágenes y volumenes
 `docker system prune`
 
-## Eliminar imágenes, volumenes y caché
+### Eliminar imágenes, volumenes y caché
 `docker system prune -a`
 
 ## Generación de Elementos
@@ -32,3 +32,6 @@
 
 ### Generar guard
 `ng generate guard guards/[nombre del guard]`
+
+### Generar modelo
+`ng generate interface models/[nombre del modelo]`

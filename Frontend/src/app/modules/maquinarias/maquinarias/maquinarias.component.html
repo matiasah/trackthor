@@ -1,0 +1,74 @@
+<mat-card style="margin: 10px">
+
+  <mat-card-title>
+      Maquinarias
+  </mat-card-title>
+
+  <mat-card-content>
+
+      <div *ngIf="!maquinarias">
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
+
+      <mat-form-field *ngIf="maquinarias" style="width: 100%">
+          <mat-placeholder>
+              <mat-icon>search</mat-icon>Buscar Maquinaria
+          </mat-placeholder>
+          <input matInput name="busqueda">
+      </mat-form-field>
+
+      <table mat-table style="width: 100%" [hidden]="!maquinarias" [dataSource]="dataSource" matSort>
+          <!-- ID -->
+          <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>
+                  #
+              </mat-header-cell>
+              <mat-cell *matCellDef="let maquinaria">
+                  {{maquinaria.id}}
+              </mat-cell>
+          </ng-container>
+
+          <!-- Patente -->
+          <ng-container matColumnDef="patente">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>
+                  Patente
+              </mat-header-cell>
+              <mat-cell *matCellDef="let maquinaria">
+                  {{maquinaria.patente}}
+              </mat-cell>
+          </ng-container>
+
+          <!-- Tipo de maquinaria -->
+          <ng-container matColumnDef="tipo">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>
+                  Tipo
+              </mat-header-cell>
+              <mat-cell *matCellDef="let maquinaria">
+                  {{maquinaria.tipo}}
+              </mat-cell>
+          </ng-container>
+
+          <!-- Chofer -->
+          <ng-container matColumnDef="chofer">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>
+                  Chofer
+              </mat-header-cell>
+              <mat-cell *matCellDef="let maquinaria">
+                  {{maquinaria.chofer}}
+              </mat-cell>
+          </ng-container>
+          
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </table>
+
+      <mat-paginator [hidden]="!maquinarias" #maquinariaPaginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+  </mat-card-content>
+</mat-card>
+
+<div style="position: fixed; right: 20px; bottom: 20px">
+  <button mat-fab color="primary" (click)="registrarMaquinaria()">
+      <mat-icon>add</mat-icon>
+  </button>
+</div>
