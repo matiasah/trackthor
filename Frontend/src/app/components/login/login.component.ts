@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
                         access_token: Response.access_token,
                         expiration: new Date(Date.now() + Response.expires_in * 1000),
                         token_type: Response.token_type,
-                    }
+                    };
 
                     // Fijar token
                     this.authService.setToken(userToken);
@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
                     // Indicar que usuario o contraseña son incorrectos
                     this.incorrecto = true;
                 }
-            )
+            );
         }
     }
 

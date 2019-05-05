@@ -44,6 +44,10 @@ export class AuthService {
         return this.http.post<ResponseToken>(environment.api + 'oauth/token', form);
     }
 
+    public register(usuario: Usuario): Observable<boolean> {
+        return this.http.post<boolean>(environment.api + 'auth/store', usuario);
+    }
+
     /**
      * Definir token
      *
