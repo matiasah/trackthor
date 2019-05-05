@@ -2,6 +2,8 @@ package cl.trackthor.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -11,18 +13,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.security.core.GrantedAuthority;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "trs_adm_empresa")
-public class AdministradorEmpresa implements Serializable {
-
-	@Column(name = "id", nullable = false, length = 11)
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-
-	@Column(name = "ade_create_at", nullable = false)
-	private java.sql.Timestamp createAt;
+public class AdministradorEmpresa extends Usuario {
 
 	// TODO
 	@OneToMany(mappedBy = "admempresa")
@@ -35,28 +34,10 @@ public class AdministradorEmpresa implements Serializable {
 		super();
 	}
 
-	public AdministradorEmpresa(long id, Timestamp createAt, List<GestionEmpresa> gestores, List<Pago> pago) {
+	public AdministradorEmpresa(List<GestionEmpresa> gestores, List<Pago> pago) {
 		super();
-		this.id = id;
-		this.createAt = createAt;
 		this.gestores = gestores;
 		this.pago = pago;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public java.sql.Timestamp getCreateAt() {
-		return createAt;
-	}
-
-	public void setCreateAt(java.sql.Timestamp createAt) {
-		this.createAt = createAt;
 	}
 
 	public List<GestionEmpresa> getGestores() {
@@ -76,9 +57,39 @@ public class AdministradorEmpresa implements Serializable {
 	}
 
 	@Override
-	public String toString() {
-		return "AdministradorEmpresa [id=" + id + ", createAt=" + createAt + ", gestores=" + gestores + ", pago=" + pago
-				+ "]";
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+
+		return this.getAuthorities();
+	}
+
+	@Override
+	public String getUsername() {
+
+		return getNombre();
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+
+		return true;
 	}
 
 }

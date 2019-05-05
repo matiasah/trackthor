@@ -31,7 +31,7 @@ public class Contrato implements Serializable {
 	@JoinColumn(name = "plan_id")
 	private Plan plan;
 
-	@OneToMany(mappedBy = "contrato")
+	@OneToMany()
 	@JoinColumn(name = "cobranza_id")
 	private List<Cobranza> cobranzas;
 
