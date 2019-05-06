@@ -29,12 +29,15 @@ public abstract class Usuario implements UserDetails {
 
     @NotNull
     @ApiModelProperty(notes = "nombre del usuario :)") //swagger anotation
+    @Column(name = "usu_nombre")
     private String nombre;
 
     @NotNull
+    @Column(name = "usu_password")
     private String password;
 
     @CreationTimestamp
+    @Column(name = "usu_created_at")
     private LocalDateTime createdAt;
 
     public Usuario() {

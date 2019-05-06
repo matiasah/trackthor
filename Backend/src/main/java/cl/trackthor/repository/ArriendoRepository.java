@@ -8,6 +8,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 public interface ArriendoRepository extends PagingAndSortingRepository<Arriendo, Long> {
 
     @Override
-    Page<Arriendo> findAll(Pageable pageable);
+    public Page<Arriendo> findAll(Pageable pageable);
 
 }

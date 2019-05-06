@@ -1,68 +1,56 @@
 package cl.trackthor.model;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "trs_tipo_maquina")
 public class TipoMaquina implements Serializable {
-	@Column(name = "id", nullable = false, length = 11)
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
 
-	@Column(name = "tip_nombre", nullable = false)
-	private String nombre;
+    @Column(name = "id", nullable = false, length = 11)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	// TODO
-	@OneToOne()
-	private Maquina maquina;
+    @Column(name = "tip_nombre", nullable = false)
+    private String nombre;
 
-	public TipoMaquina() {
-		super();
-	}
+    @OneToMany(mappedBy = "tipoMaquina")
+    private Set<Maquina> maquinas;
 
-	public TipoMaquina(long id, String nombre, Maquina maquina) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
+    public TipoMaquina() {
+        
+    }
 
-		this.maquina = maquina;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public long getId() {
-		return id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public Set<Maquina> getMaquinas() {
+        return maquinas;
+    }
 
-	public Maquina getMaquina() {
-		return maquina;
-	}
-
-	public void setMaquina(Maquina maquina) {
-		this.maquina = maquina;
-	}
-
-	@Override
-	public String toString() {
-		return "TipoMaquina [id=" + id + ", nombre=" + nombre + ", maquina=" + maquina + "]";
-	}
-
+    public void setMaquinas(Set<Maquina> maquinas) {
+        this.maquinas = maquinas;
+    }
+    
 }

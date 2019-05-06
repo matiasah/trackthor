@@ -8,6 +8,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 public interface AlertaRepository extends PagingAndSortingRepository<Alerta, Long> {
 
     @Override
-    Page<Alerta> findAll(Pageable pageable);
+    public Page<Alerta> findAll(Pageable pageable);
 
 }

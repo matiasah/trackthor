@@ -2,14 +2,13 @@ package cl.trackthor.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
-
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -17,131 +16,109 @@ import javax.persistence.Table;
 @Table(name = "trs_empresa")
 public class Empresa implements Serializable {
 
-	@Column(name = "id", nullable = false, length = 11)
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+    @Column(name = "id", nullable = false, length = 11)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(name = "emp_nombre", nullable = false)
-	private String nombre;
+    @Column(name = "emp_nombre", nullable = false)
+    private String nombre;
 
-	@Column(name = "emp_rut", nullable = false)
-	private String rut;
+    @Column(name = "emp_rut", nullable = false)
+    private String rut;
 
-	@Column(name = "sub_telefono", nullable = false)
-	private String telefono;
+    @Column(name = "sub_telefono", nullable = false)
+    private String telefono;
 
-	@Column(name = "emp_create_at", nullable = false)
-	private java.time.LocalDateTime createdAt;
+    @Column(name = "emp_create_at", nullable = false)
+    private LocalDateTime createdAt;
 
-	// TODO
-	@OneToMany(mappedBy = "empresa")
-	private List<Contrato> contratos;
+    @OneToMany(mappedBy = "empresa")
+    private Set<Contrato> contratos = new HashSet<>();
 
-	@OneToMany(mappedBy = "empresa")
-	private List<Maquina> maquinas;
+    @OneToMany(mappedBy = "empresa")
+    private Set<Maquina> maquinas = new HashSet<>();
 
-	@OneToMany(mappedBy = "empresa")
-	private List<Alerta> alertas;
+    @OneToMany(mappedBy = "empresa")
+    private Set<Alerta> alertas = new HashSet<>();
 
-	@OneToMany(mappedBy = "empresa")
-	private List<GestionEmpresa> gestores;
+    @OneToMany(mappedBy = "empresa")
+    private Set<GestionEmpresa> gestores = new HashSet<>();
 
-	public Empresa(long id, String nombre, String rut, String telefono, LocalDateTime createdAt,
-			List<Contrato> contratos, List<Maquina> maquinas, List<Alerta> alertas, List<GestionEmpresa> gestores) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.rut = rut;
-		this.telefono = telefono;
-		this.createdAt = createdAt;
-		this.contratos = contratos;
-		this.maquinas = maquinas;
-		this.alertas = alertas;
-		this.gestores = gestores;
-	}
+    public Empresa() {
 
-	public Empresa() {
-		super();
-	}
+    }
 
-	@Override
-	public String toString() {
-		return "Empresa [id=" + id + ", nombre=" + nombre + ", rut=" + rut + ", telefono=" + telefono + ", createdAt="
-				+ createdAt + ", contratos=" + contratos + ", maquinas=" + maquinas + ", alertas=" + alertas
-				+ ", gestores=" + gestores + "]";
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public long getId() {
-		return id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public String getRut() {
+        return rut;
+    }
 
-	public String getRut() {
-		return rut;
-	}
+    public void setRut(String rut) {
+        this.rut = rut;
+    }
 
-	public void setRut(String rut) {
-		this.rut = rut;
-	}
+    public String getTelefono() {
+        return telefono;
+    }
 
-	public String getTelefono() {
-		return telefono;
-	}
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
 
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
 
-	public java.time.LocalDateTime getCreatedAt() {
-		return createdAt;
-	}
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 
-	public void setCreatedAt(java.time.LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
+    public Set<Contrato> getContratos() {
+        return contratos;
+    }
 
-	public List<Contrato> getContratos() {
-		return contratos;
-	}
+    public void setContratos(Set<Contrato> contratos) {
+        this.contratos = contratos;
+    }
 
-	public void setContratos(List<Contrato> contratos) {
-		this.contratos = contratos;
-	}
+    public Set<Maquina> getMaquinas() {
+        return maquinas;
+    }
 
-	public List<Maquina> getMaquinas() {
-		return maquinas;
-	}
+    public void setMaquinas(Set<Maquina> maquinas) {
+        this.maquinas = maquinas;
+    }
 
-	public void setMaquinas(List<Maquina> maquinas) {
-		this.maquinas = maquinas;
-	}
+    public Set<Alerta> getAlertas() {
+        return alertas;
+    }
 
-	public List<Alerta> getAlertas() {
-		return alertas;
-	}
+    public void setAlertas(Set<Alerta> alertas) {
+        this.alertas = alertas;
+    }
 
-	public void setAlertas(List<Alerta> alertas) {
-		this.alertas = alertas;
-	}
+    public Set<GestionEmpresa> getGestores() {
+        return gestores;
+    }
 
-	public List<GestionEmpresa> getGestores() {
-		return gestores;
-	}
-
-	public void setGestores(List<GestionEmpresa> gestores) {
-		this.gestores = gestores;
-	}
+    public void setGestores(Set<GestionEmpresa> gestores) {
+        this.gestores = gestores;
+    }
 
 }

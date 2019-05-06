@@ -8,6 +8,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 public interface CobranzaRepository extends PagingAndSortingRepository<Cobranza, Long> {
 
     @Override
-    Page<Cobranza> findAll(Pageable pageable);
+    public Page<Cobranza> findAll(Pageable pageable);
 
 }
