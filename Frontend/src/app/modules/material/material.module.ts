@@ -1,5 +1,4 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatCheckboxModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
@@ -36,7 +35,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
     imports: [
         // Módulos de Angular Material
-        BrowserAnimationsModule,
         MatCheckboxModule,
         MatCheckboxModule,
         MatButtonModule,
@@ -71,7 +69,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     ],
     exports: [
         // Módulos de Angular Material
-        BrowserAnimationsModule,
         MatCheckboxModule,
         MatCheckboxModule,
         MatButtonModule,
