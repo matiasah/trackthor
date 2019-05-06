@@ -6,7 +6,7 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
-<mat-sidenav-container>
+<mat-sidenav-container style="height:100%">
   <mat-sidenav #sidenav mode="push">
 
       <mat-card class="mat-elevation-z0">
@@ -114,7 +114,7 @@
       <button mat-raised-button class="col-12" (click)="onLogout()">Cerrar Sesión</button>
   </mat-sidenav>
 
-  <mat-sidenav-content style="{height:100%;}">
+  <mat-sidenav-content>
       <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

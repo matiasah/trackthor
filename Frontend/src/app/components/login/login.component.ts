@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Usuario } from 'src/app/models/usuario';
 import { UserToken } from 'src/app/models/user-token';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-login',
@@ -25,7 +26,8 @@ export class LoginComponent implements OnInit {
     public incorrecto = false;
 
     public constructor(
-        private authService: AuthService
+        private authService: AuthService,
+        private router: Router
     ) {
 
     }
@@ -55,6 +57,9 @@ export class LoginComponent implements OnInit {
 
                     // Fijar token
                     this.authService.setToken(userToken);
+
+                    // Enviar a login
+                    this.router.navigate(["admin"]);
                 },
                 error => {
                     // Indicar que no se encuentra iniciando sesión
