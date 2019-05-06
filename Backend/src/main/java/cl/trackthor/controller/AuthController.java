@@ -6,7 +6,7 @@
 package cl.trackthor.controller;
 
 import cl.trackthor.model.AdministradorEmpresa;
-import cl.trackthor.repository.UsuarioRepository;
+import cl.trackthor.repository.AdministradorEmpresaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
     
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private AdministradorEmpresaRepository usuarioRepository;
     
     @Autowired
     @Qualifier("userPasswordEncoder")

@@ -1,8 +1,7 @@
 package cl.trackthor.model;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
-
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,74 +12,23 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "trs_ges_empresa")
+@Table(name = "trs_gestion_empresas")
 public class GestionEmpresa implements Serializable {
 
-	@Column(name = "id", nullable = false, length = 11)
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+    @Column(name = "id", nullable = false, length = 11)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(name = "lis_fecha", nullable = false)
-	private java.sql.Timestamp createAt;
+    @ManyToOne
+    @JoinColumn(name = "gem_empresa_id")
+    private Empresa empresa;
 
-	// TODO
-	@ManyToOne()
-	@JoinColumn(name = "empresa_id")
-	private Empresa empresa;
-
-	@ManyToOne()
-	@JoinColumn(name = "adminempresa_id")
-	private AdministradorEmpresa admempresa;
-
-	public GestionEmpresa() {
-		super();
-	}
-
-	public GestionEmpresa(long id, Timestamp createAt, Empresa empresa, AdministradorEmpresa admempresa) {
-		super();
-		this.id = id;
-		this.createAt = createAt;
-		this.empresa = empresa;
-		this.admempresa = admempresa;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public java.sql.Timestamp getCreateAt() {
-		return createAt;
-	}
-
-	public void setCreateAt(java.sql.Timestamp createAt) {
-		this.createAt = createAt;
-	}
-
-	public Empresa getEmpresa() {
-		return empresa;
-	}
-
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
-	}
-
-	public AdministradorEmpresa getAdmempresa() {
-		return admempresa;
-	}
-
-	public void setAdmempresa(AdministradorEmpresa admempresa) {
-		this.admempresa = admempresa;
-	}
-
-	@Override
-	public String toString() {
-		return "GestionEmpresa [id=" + id + ", createAt=" + createAt + ", empresa=" + empresa + ", admempresa="
-				+ admempresa + "]";
-	}
+    @ManyToOne
+    @JoinColumn(name = "gem_usuario_id")
+    private AdministradorEmpresa usuario;
+    
+    @Column(name = "gem_created_at", nullable = false)
+    private LocalDateTime createdAt;
 
 }

@@ -8,7 +8,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 public interface PagoRepository extends PagingAndSortingRepository<Pago, Long> {
 
     @Override
-    Page<Pago> findAll(Pageable pageable);
+    public Page<Pago> findAll(Pageable pageable);
 
 }
 

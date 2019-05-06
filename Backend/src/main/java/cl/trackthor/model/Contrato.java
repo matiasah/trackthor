@@ -1,9 +1,9 @@
 package cl.trackthor.model;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
-import java.util.List;
-
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,69 +18,67 @@ import javax.persistence.Table;
 @Table(name = "trs_contrato")
 public class Contrato implements Serializable {
 
-	@Column(name = "id", nullable = false, length = 11)
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+    @Column(name = "id", nullable = false, length = 11)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@Column(name = "con_created_at", nullable = false)
-	private java.sql.Timestamp createdAt;
+    @ManyToOne
+    @JoinColumn(name = "con_plan_id")
+    private Plan plan;
+    
+    @ManyToOne
+    @JoinColumn(name = "con_empresa_id")
+    private Empresa empresa;
 
-	// TODO
-	@ManyToOne()
-	@JoinColumn(name = "plan_id")
-	private Plan plan;
+    @OneToMany(mappedBy = "contrato")
+    private Set<Cobranza> cobranzas = new HashSet<>();
 
-	@OneToMany()
-	@JoinColumn(name = "cobranza_id")
-	private List<Cobranza> cobranzas;
+    @Column(name = "con_created_at", nullable = false)
+    private LocalDateTime createdAt;
 
-	@ManyToOne()
-	@JoinColumn(name = "empresa_id")
-	private Empresa empresa;
+    public Contrato() {
+        
+    }
 
-	public Contrato() {
-		super();
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public Contrato(long id, Timestamp createdAt, Plan plan, List<Cobranza> cobranzas) {
-		super();
-		this.id = id;
-		this.createdAt = createdAt;
-		this.plan = plan;
-		this.cobranzas = cobranzas;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public List<Cobranza> getCobranza() {
-		return cobranzas;
-	}
+    public Plan getPlan() {
+        return plan;
+    }
 
-	public void setCobranza(List<Cobranza> cobranzas) {
-		this.cobranzas = cobranzas;
-	}
+    public void setPlan(Plan plan) {
+        this.plan = plan;
+    }
 
-	public long getId() {
-		return id;
-	}
+    public Empresa getEmpresa() {
+        return empresa;
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
 
-	public java.sql.Timestamp getCreatedAt() {
-		return createdAt;
-	}
+    public Set<Cobranza> getCobranzas() {
+        return cobranzas;
+    }
 
-	public void setCreatedAt(java.sql.Timestamp createdAt) {
-		this.createdAt = createdAt;
-	}
+    public void setCobranzas(Set<Cobranza> cobranzas) {
+        this.cobranzas = cobranzas;
+    }
 
-	public Plan getPlan() {
-		return plan;
-	}
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
 
-	public void setPlan(Plan plan) {
-		this.plan = plan;
-	}
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 
 }

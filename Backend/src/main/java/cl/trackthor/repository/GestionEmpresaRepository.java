@@ -8,6 +8,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 public interface GestionEmpresaRepository extends PagingAndSortingRepository<GestionEmpresa, Long> {
 
     @Override
-    Page<GestionEmpresa> findAll(Pageable pageable);
+    public Page<GestionEmpresa> findAll(Pageable pageable);
 
 }

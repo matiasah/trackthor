@@ -8,6 +8,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 public interface HoraTrabajadaRepository extends PagingAndSortingRepository<HoraTrabajada, Long> {
 
     @Override
-    Page<HoraTrabajada> findAll(Pageable pageable);
+    public Page<HoraTrabajada> findAll(Pageable pageable);
 
 }

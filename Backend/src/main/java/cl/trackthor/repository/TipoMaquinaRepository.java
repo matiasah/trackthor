@@ -8,6 +8,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 public interface TipoMaquinaRepository extends PagingAndSortingRepository<TipoMaquina, Long> {
 
     @Override
-    Page<TipoMaquina> findAll(Pageable pageable);
+    public Page<TipoMaquina> findAll(Pageable pageable);
 
 }
