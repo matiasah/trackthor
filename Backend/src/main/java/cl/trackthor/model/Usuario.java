@@ -9,25 +9,25 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.userdetails.UserDetails;
 
-
 @ApiModel(description = "Detalles sobre el Usuario.")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Entity
 @Table(name = "trs_usuario")
-@Inheritance
 public abstract class Usuario implements UserDetails {
 
     @Column(name = "id", nullable = false, length = 11)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
 
     @NotNull
-    @ApiModelProperty(notes = "nombre del usuario :)") //swagger anotation
+    @ApiModelProperty(notes = "Nombre del usuario")
     @Column(name = "usu_nombre")
     private String nombre;
 
