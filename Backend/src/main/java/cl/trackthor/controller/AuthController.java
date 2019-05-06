@@ -5,7 +5,7 @@
  */
 package cl.trackthor.controller;
 
-import cl.trackthor.model.Usuario;
+import cl.trackthor.model.AdministradorEmpresa;
 import cl.trackthor.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -33,7 +33,7 @@ public class AuthController {
     
     @PreAuthorize("true")
     @PostMapping("store")
-    public boolean store(@RequestBody Usuario usuario) {
+    public boolean store(@RequestBody AdministradorEmpresa usuario) {
         // Obtener contraseña de usuario
         String password = usuario.getPassword();
         
