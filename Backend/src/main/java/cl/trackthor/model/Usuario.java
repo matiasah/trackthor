@@ -13,6 +13,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @ApiModel(description = "Detalles sobre el Usuario.")
@@ -26,11 +27,12 @@ public abstract class Usuario implements UserDetails {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
 
-    @NotNull
     @ApiModelProperty(notes = "Nombre del usuario")
-    @Column(name = "usu_nombre")
+    @NotNull
+    @Column(name = "usu_nombre", unique = true)
     private String nombre;
 
+    @RestResource(exported = false)
     @NotNull
     @Column(name = "usu_password")
     private String password;
