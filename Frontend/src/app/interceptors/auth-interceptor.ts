@@ -37,7 +37,7 @@ export class AuthInterceptor implements HttpInterceptor {
                 });
 
                 return next.handle(newRequest);
-            } else {
+            } else if (this.authService.isTokenValid()) {
                 // Obtener token
                 const token: UserToken = this.authService.getToken();
 
