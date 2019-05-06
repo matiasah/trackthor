@@ -1,24 +1,23 @@
 package cl.trackthor.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import java.time.LocalDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 
-//Swagger anotation
 @ApiModel(description = "Detalles sobre el Usuario.")
 @Entity
+@Table(name = "trs_usuario")
 @Inheritance
 public abstract class Usuario implements UserDetails {
 
@@ -42,14 +41,6 @@ public abstract class Usuario implements UserDetails {
 
     public Usuario() {
 
-    }
-
-    public Usuario(long id, @NotNull String nombre, @NotNull String password, LocalDateTime createdAt) {
-        super();
-        this.id = id;
-        this.nombre = nombre;
-        this.password = password;
-        this.createdAt = createdAt;
     }
 
     @Override
