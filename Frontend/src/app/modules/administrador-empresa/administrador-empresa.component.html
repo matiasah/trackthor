@@ -12,7 +12,7 @@
       <mat-card class="mat-elevation-z0">
           <mat-card-title>
               <div class="col-8 offset-2">
-                  <img class="logo" src="../../../assets/img/riosalcologo.svg" />
+                <mat-icon>person</mat-icon>
               </div>
               <div class="col-12">
                   <h2 class="mat-h2 text-center">Administrador</h2>
@@ -24,18 +24,13 @@
           <mat-expansion-panel hideToggle>
               <mat-expansion-panel-header>
                   <mat-panel-title>
-                      Home
+                      <a routerLink="/admin">Home</a>
                   </mat-panel-title>
                   <mat-panel-description>
                       <mat-icon>home</mat-icon>
                   </mat-panel-description>
               </mat-expansion-panel-header>
-
-              <mat-list dense>                  
-                  <mat-list-item>
-                      Listas de Maquinas
-                  </mat-list-item>                  
-              </mat-list>
+              
           </mat-expansion-panel>
 
           <mat-expansion-panel hideToggle>
@@ -52,19 +47,64 @@
           <mat-expansion-panel hideToggle>
               <mat-expansion-panel-header>
                   <mat-panel-title>
-                      Usuarios
+                      Maquinarias
                   </mat-panel-title>
                   <mat-panel-description>
-                      <mat-icon>account_circle</mat-icon>
-                  </mat-panel-description>
+                      <mat-icon>local_shipping</mat-icon>
+                  </mat-panel-description>                  
               </mat-expansion-panel-header>
 
-              <mat-list dense>
-                  <mat-list-item>
-                      <a routerLink="./usuarios">Cuentas de Usuario</a>
-                  </mat-list-item>
-              </mat-list>
+              <mat-list dense>                  
+                <mat-list-item>
+                    <a routerLink="./maquinarias">Lista de Maquinarias</a>
+                </mat-list-item>                  
+            </mat-list>
           </mat-expansion-panel>
+
+          <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Choferes
+                </mat-panel-title>
+                <mat-panel-description>
+                    <mat-icon>person_pin</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>              
+        </mat-expansion-panel>
+
+        <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Arriendos
+                </mat-panel-title>
+                <mat-panel-description>
+                    <i class="fas fa-handshake"></i>
+                </mat-panel-description>
+            </mat-expansion-panel-header>              
+        </mat-expansion-panel>
+
+        <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Alertas
+                </mat-panel-title>
+                <mat-panel-description>
+                    <mat-icon>notifications</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>              
+        </mat-expansion-panel>
+
+        <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Pagos
+                </mat-panel-title>
+                <mat-panel-description>
+                    <mat-icon>payment</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>              
+        </mat-expansion-panel>
+
       </mat-accordion>
 
       <div class="section">
@@ -74,7 +114,7 @@
       <button mat-raised-button class="col-12" (click)="onLogout()">Cerrar Sesión</button>
   </mat-sidenav>
 
-  <mat-sidenav-content>
+  <mat-sidenav-content style="{height:100%;}">
       <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
