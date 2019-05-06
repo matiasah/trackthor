@@ -13,6 +13,7 @@ import { AuthInterceptor } from './interceptors/auth-interceptor';
 
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AdministradorEmpresaModule } from './modules/administrador-empresa/administrador-empresa.module';
 
 @NgModule({
     declarations: [
@@ -27,7 +28,9 @@ import { RegisterComponent } from './components/register/register.component';
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
-        MaterialModule
+        MaterialModule,
+
+        AdministradorEmpresaModule
     ],
     providers: [
         {

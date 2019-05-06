@@ -16,11 +16,7 @@ const routes: Routes = [
         path: 'register',
         component: RegisterComponent,
         canActivate: [RegisterGuard]
-    },
-    {
-        path: 'maquinarias',
-        loadChildren: './modules/maquinarias/maquinarias.module#MaquinariasModule'
-    }
+    }    
 ];
 
 @NgModule({
