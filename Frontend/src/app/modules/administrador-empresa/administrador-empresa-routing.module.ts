@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AdministradorEmpresaComponent } from './administrador-empresa.component';
+import { AdministradorEmpresaComponent } from './administrador-empresa/administrador-empresa.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
@@ -14,7 +14,7 @@ const routes: Routes = [
             },
             {
                 path: 'maquinarias',
-                loadChildren: '../maquinarias/maquinarias.module#MaquinariasModule'            
+                loadChildren: '../maquinarias/maquinarias.module#MaquinariasModule'
             }
         ]
     }

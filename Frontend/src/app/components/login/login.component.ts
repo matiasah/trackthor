@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
                     this.authService.setToken(userToken);
 
                     // Enviar a login
-                    this.router.navigate(["admin"]);
+                    this.router.navigate(['admin']);
                 },
                 error => {
                     // Indicar que no se encuentra iniciando sesión

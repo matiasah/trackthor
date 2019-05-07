@@ -22,6 +22,6 @@ export class AdministradorEmpresaComponent implements OnInit {
     this.authService.removeToken();
 
     // Enviar a login
-    this.router.navigate([""]);
+    this.router.navigate(['']);
   }
 }
