@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.time.Duration;
 
 @Entity
 @Table(name = "trs_hora_trabajada")
@@ -22,6 +23,9 @@ public class HoraTrabajada implements Serializable {
 
     @Column(name = "hrt_rut", nullable = false)
     private String rut;
+
+    @Column(name = "hrt_tiempo", nullable = false)
+    private Duration tiempo;
 
     @Column(name = "hrt_created_at", nullable = false)
     private LocalDateTime createdAt;
