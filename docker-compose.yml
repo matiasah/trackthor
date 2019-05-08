@@ -11,7 +11,7 @@ services:
       backend:
         aliases:
           - mysql
-    restart: always
+    restart: on-failure
     environment:
       - "MYSQL_DATABASE=trackthor"
       - "MYSQL_USER=root"
