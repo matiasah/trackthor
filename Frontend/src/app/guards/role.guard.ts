@@ -28,7 +28,7 @@ export class RoleGuard implements CanActivate {
                 Response => {
                     // Por cada rol
                     for (const authority of Response) {
-                        if (RoleRoute[authority.authority] === '/' + route.url[0].path) {
+                        if (RoleRoute[authority.authority] === route.url[0].path) {
                             // Permitir acceso a ruta
                             return true;
                         } else {
