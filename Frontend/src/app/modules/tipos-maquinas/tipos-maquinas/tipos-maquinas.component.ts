@@ -48,4 +48,8 @@ export class TiposMaquinasComponent implements OnInit {
         this.paginator.init(this.dataSource, this.matPaginator, this.matSort);
     }
 
+    public registrar() {
+
+    }
+
 }
