@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AdministradorEmpresaComponent } from './administrador-empresa/administrador-empresa.component';
+
 import { RoleGuard } from 'src/app/guards/role.guard';
 import { RoleRoute } from 'src/app/models/role-route.enum';
+
+import { AdministradorEmpresaComponent } from './administrador-empresa/administrador-empresa.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
