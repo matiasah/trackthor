@@ -7,10 +7,17 @@ package cl.trackthor.controller;
 
 import cl.trackthor.model.AdministradorEmpresa;
 import cl.trackthor.repository.AdministradorEmpresaRepository;
+import java.security.Principal;
+import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,6 +54,13 @@ public class AuthController {
         this.usuarioRepository.save(usuario);
         
         return usuario.getId() > 0;
+    }
+    
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("authorities")
+    //@Secured("IS_AUTHENTICATED_FULLY")
+    public Collection authorities(Authentication auth) {
+        return auth.getAuthorities();
     }
     
 }

@@ -58,8 +58,8 @@ export class LoginComponent implements OnInit {
                     // Fijar token
                     this.authService.setToken(userToken);
 
-                    // Enviar a login
-                    this.router.navigate(['admin']);
+                    // Enviar a sistema
+                    this.router.navigate(['ae']);
                 },
                 error => {
                     // Indicar que no se encuentra iniciando sesión

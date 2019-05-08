@@ -15,6 +15,7 @@ export class AdministradorEmpresaComponent implements OnInit {
     ) { }
 
     public ngOnInit() {
+
     }
 
     public onLogout() {

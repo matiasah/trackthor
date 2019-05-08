@@ -13,10 +13,15 @@ const routes: Routes = [
         canActivate: [LoginGuard]
     },
     {
+        path: 'login',
+        component: LoginComponent,
+        canActivate: [LoginGuard]
+    },
+    {
         path: 'register',
         component: RegisterComponent,
         canActivate: [RegisterGuard]
-    }    
+    }
 ];
 
 @NgModule({

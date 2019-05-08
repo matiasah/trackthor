@@ -9,43 +9,51 @@ import { RoleRoute } from '../models/role-route.enum';
 @Injectable({
     providedIn: 'root'
 })
-export class LoginGuard implements CanActivate {
+export class RoleGuard implements CanActivate {
+
 
     public constructor(
         private authService: AuthService,
-        private router: Router
+        private router: Router,
     ) {
 
     }
 
     public canActivate(route: ActivatedRouteSnapshot): Observable<boolean> | boolean {
-        // Si el token es válido
+        // Si existe un token válido
         if (this.authService.isTokenValid()) {
+
             // Obtener permisos de usuario
             return this.authService.getAuthorities().pipe(map(
                 Response => {
                     // Por cada rol
                     for (const authority of Response) {
-                        // Si el rol tiene ruta
-                        if (RoleRoute[authority.authority]) {
+                        if (RoleRoute[authority.authority] === '/' + route.url[0].path) {
+                            // Permitir acceso a ruta
+                            return true;
+                        } else {
                             // Navegar a la ruta correspondiente
                             this.router.navigate([RoleRoute[authority.authority]]);
 
                             // Negar acceso a ruta
                             return false;
-                        } else {
-                            // Permitir acceso a ruta
-                            return true;
                         }
                     }
 
+                    // Navegar a login
+                    this.router.navigate(['']);
+
                     // Rol no se posee
-                    return true;
+                    return false;
                 }
             ));
         }
 
-        return true;
+        // Navegar a login
+        this.router.navigate(['']);
+
+        // Negar acceso a ruta
+        return false;
     }
 
 }
