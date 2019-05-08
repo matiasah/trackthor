@@ -22,10 +22,10 @@
 
             
             <mat-form-field class="col-sm-12 col-md-6">
-                <input matInput  name="tipoMaquina" [matAutocomplete]="autocompleteComunas" required placeholder="Tipo Maquina">
-                <mat-autocomplete #autocompleteComunas="matAutocomplete" [displayWith]="getNombreComuna">
-                    <mat-option *ngFor="let comuna of comunas" [value]="comuna">
-                        {{comuna.nombre}}
+                <input matInput  name="tipoMaquina" [matAutocomplete]="autocompleteTipoMaquina" required placeholder="Tipo Maquina">
+                <mat-autocomplete #autocompleteTipoMaquina="matAutocomplete" >
+                    <mat-option >
+                        
                     </mat-option>
                 </mat-autocomplete>
             </mat-form-field>            
