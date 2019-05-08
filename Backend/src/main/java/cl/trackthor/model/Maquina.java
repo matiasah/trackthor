@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "trs_maquina")
@@ -36,11 +37,60 @@ public class Maquina implements Serializable {
     @OneToMany(mappedBy = "maquina")
     private Set<Arriendo> arriendos;
     
+    @CreationTimestamp
     @Column(name = "maq_created_at", nullable = false)
     private LocalDateTime createdAt;
 
     public Maquina() {
         
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPatente() {
+        return patente;
+    }
+
+    public void setPatente(String patente) {
+        this.patente = patente;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public TipoMaquina getTipoMaquina() {
+        return tipoMaquina;
+    }
+
+    public void setTipoMaquina(TipoMaquina tipoMaquina) {
+        this.tipoMaquina = tipoMaquina;
+    }
+
+    public Set<Arriendo> getArriendos() {
+        return arriendos;
+    }
+
+    public void setArriendos(Set<Arriendo> arriendos) {
+        this.arriendos = arriendos;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
     

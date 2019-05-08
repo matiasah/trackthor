@@ -19,13 +19,13 @@
             </mat-form-field>
 
             <table mat-table class="w-100" [dataSource]="dataSource" matSort>
-                <!-- ID -->
-                <ng-container matColumnDef="id">
+                <!-- Contador de registros mostrados -->
+                <ng-container matColumnDef="numero">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>
                         #
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let maquinaria">
-                        {{maquinaria.id}}
+                    <mat-cell *matCellDef="let maquinaria; let i = index;">
+                        {{ i+1 }}
                     </mat-cell>
                 </ng-container>
 
@@ -39,23 +39,23 @@
                     </mat-cell>
                 </ng-container>
 
-                <!-- Tipo de maquinaria -->
-                <ng-container matColumnDef="tipo">
+                <!-- Fecha de registro de la maquina -->
+                <ng-container matColumnDef="fecha_registro">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>
-                        Tipo
+                        Fecha Registro
                     </mat-header-cell>
                     <mat-cell *matCellDef="let maquinaria">
-                        {{maquinaria.tipo}}
+                        {{ maquinaria.createdAt }}
                     </mat-cell>
                 </ng-container>
 
-                <!-- Chofer -->
-                <ng-container matColumnDef="chofer">
+                <!-- Mostrar más detalles -->
+                <ng-container matColumnDef="show">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>
-                        Chofer
+                        
                     </mat-header-cell>
                     <mat-cell *matCellDef="let maquinaria">
-                        {{maquinaria.chofer}}
+                        <mat-icon>visibility</mat-icon>
                     </mat-cell>
                 </ng-container>
 

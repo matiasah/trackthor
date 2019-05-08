@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSort, MatPaginator, MatDialog } from '@angular/material';
 import { RegistrarMaquinariaComponent } from '../registrar-maquinaria/registrar-maquinaria.component';
+import { Maquina } from 'src/app/models/maquina';
+import { MaquinaService } from 'src/app/services/maquina.service';
 
 
 @Component({
@@ -11,38 +13,13 @@ import { RegistrarMaquinariaComponent } from '../registrar-maquinaria/registrar-
 export class MaquinariasComponent implements OnInit {
 
     // Columnas de datatable
-    public displayedColumns: string[] = ['id', 'patente', 'tipo', 'chofer', 'edit', 'delete'];
+    public displayedColumns: string[] = ['numero', 'patente', 'fecha_registro', 'show', 'edit', 'delete'];
 
     // Data-source
     public dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
-    // Lista de maquinarias (se tiene que cambiar por un modelo de maquinarias)
-    public maquinarias: any[] = [
-        {
-            id: 1,
-            patente: 'KD3243',
-            tipo: 'Grúa',
-            chofer: 'Fabián Mariqueo'
-        },
-        {
-            id: 2,
-            patente: 'KKSJ32',
-            tipo: 'Camión',
-            chofer: 'Pablo Barría'
-        },
-        {
-            id: 3,
-            patente: 'GGDU34',
-            tipo: 'Retroexcavadora',
-            chofer: 'Felipe Quezada'
-        },
-        {
-            id: 4,
-            patente: 'HHOO45',
-            tipo: 'Motoniveladora',
-            chofer: 'Matías Hermosilla'
-        }
-    ];
+    // Lista de maquinarias registradas en el sistema para la empresa actual
+    public maquinarias: Maquina[] = [];
 
     // Sort
     @ViewChild(MatSort)
@@ -53,9 +30,10 @@ export class MaquinariasComponent implements OnInit {
     public paginator: MatPaginator;
 
     public constructor(
-        private dialog: MatDialog
+        private dialog: MatDialog,
+        private maquinaService: MaquinaService
     ) {
-
+        
     }
 
     public ngOnInit() {
@@ -63,7 +41,16 @@ export class MaquinariasComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
 
-        this.dataSource.data = this.maquinarias;
+        this.maquinaService.query().subscribe(
+            Response => {
+                this.maquinarias = Response;
+                this.dataSource.data = this.maquinarias;
+            },
+            Error => {
+
+            }
+        );
+                
     }
 
     public registrarMaquinaria() {
