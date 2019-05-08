@@ -22,6 +22,9 @@ public class Maquina implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "maq_patente", nullable = false)
+    private String patente;
+
     @ManyToOne
     @JoinColumn(name = "maq_empresa_id")
     private Empresa empresa;
