@@ -6,6 +6,10 @@ import { ResponseToken } from '../models/response-token';
 import { Usuario } from '../models/usuario';
 import { environment } from 'src/environments/environment';
 
+export interface GrantedAuthority {
+    authority: string;
+}
+
 @Injectable({
     providedIn: 'root'
 })
@@ -93,6 +97,13 @@ export class AuthService {
             return this.token.expiration.getTime() > Date.now();
         }
         return false;
+    }
+
+    /**
+     * Obtener autorizaciones
+     */
+    public getAuthorities(): Observable<GrantedAuthority[]> {
+        return this.http.get<any>(environment.api + 'auth/authorities');
     }
 
 }
