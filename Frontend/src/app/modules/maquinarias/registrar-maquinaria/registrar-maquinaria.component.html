@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="col-11">
+        <h2 mat-dialog-title>
+            Registrar Maquinaria
+        </h2>
+    </div>
+
+    <div class="col-1">
+        <button mat-icon-button mat-dialog-close>
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+</div>
+
+<form #form="ngForm" (ngSubmit)="onSubmit()">
+
+    <mat-dialog-content>
+        <div class="row">
+            <mat-form-field class="col-sm-12 col-md-6">
+                <input matInput name="patente" required placeholder="Patente">
+            </mat-form-field>
+
+            
+            <mat-form-field class="col-sm-12 col-md-6">
+                <input matInput  name="tipoMaquina" [matAutocomplete]="autocompleteComunas" required placeholder="Tipo Maquina">
+                <mat-autocomplete #autocompleteComunas="matAutocomplete" [displayWith]="getNombreComuna">
+                    <mat-option *ngFor="let comuna of comunas" [value]="comuna">
+                        {{comuna.nombre}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>            
+
+        </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <div *ngIf="!registrando" class="col-sm-12 col-md-3 offset-sm-0 offset-md-6">
+            <button style="width: 100%" type="submit" mat-raised-button color="primary">Registrar</button>
+        </div>
+
+        <div *ngIf="!registrando" class="col-sm-12 col-md-3 offset-sm-0">
+            <button style="width: 100%" mat-raised-button mat-dialog-close color="warn">Cancelar</button>
+        </div>
+
+        <div class="col-12" *ngIf="registrando">
+            <mat-progress-spinner style="margin: 0 auto;" diameter="48" color="primary" mode="indeterminate"></mat-progress-spinner>
+        </div>
+    </mat-dialog-actions>
+
+</form>

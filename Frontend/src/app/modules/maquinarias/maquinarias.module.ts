@@ -5,6 +5,7 @@ import { MaterialModule } from '../material/material.module';
 
 import { MaquinariasComponent } from './maquinarias/maquinarias.component';
 import { RegistrarMaquinariaComponent } from './registrar-maquinaria/registrar-maquinaria.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -15,7 +16,8 @@ import { RegistrarMaquinariaComponent } from './registrar-maquinaria/registrar-m
         CommonModule,
         MaquinariasRoutingModule,
         MaterialModule,
-    ],
+        FormsModule,
+    ],    
     entryComponents: [
         RegistrarMaquinariaComponent,
     ]

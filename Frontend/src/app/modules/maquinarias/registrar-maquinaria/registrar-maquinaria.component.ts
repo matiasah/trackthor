@@ -17,4 +17,8 @@ export class RegistrarMaquinariaComponent implements OnInit {
     public ngOnInit() {
     }
 
+    public onSubmit(): void {
+        
+    }
+
 }
