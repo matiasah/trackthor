@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
+import { NgForm } from '@angular/forms';
 
 @Component({
     selector: 'app-registrar-maquinaria',
@@ -7,6 +8,12 @@ import { MatDialogRef } from '@angular/material';
     styleUrls: ['./registrar-maquinaria.component.scss']
 })
 export class RegistrarMaquinariaComponent implements OnInit {
+
+    public registrando: boolean = false;
+
+    // Formulario
+    @ViewChild("form")
+    public form: NgForm;
 
     public constructor(
         private dialogRef: MatDialogRef<RegistrarMaquinariaComponent>,
