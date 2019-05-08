@@ -45,17 +45,17 @@
                         Fecha Registro
                     </mat-header-cell>
                     <mat-cell *matCellDef="let maquinaria">
-                        {{ maquinaria.createdAt }}
+                        {{ maquinaria.createdAt | date: 'short' : undefined : 'es-CL' }}
                     </mat-cell>
                 </ng-container>
 
                 <!-- Mostrar más detalles -->
                 <ng-container matColumnDef="show">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>
-                        
-                    </mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
                     <mat-cell *matCellDef="let maquinaria">
-                        <mat-icon>visibility</mat-icon>
+                        <button mat-icon-button matTooltip="Editar maquinaria">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
                     </mat-cell>
                 </ng-container>
 
