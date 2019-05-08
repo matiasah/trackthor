@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { MatTableDataSource, MatPaginator, MatSort, PageEvent } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort, PageEvent, Sort } from '@angular/material';
 import { environment } from 'src/environments/environment';
 import { Pagination } from './pagination';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export class Paginator<T> {
 
@@ -9,7 +10,7 @@ export class Paginator<T> {
     private sort: any = {};
     private pageIndex = 0;
     private pageSize = 5;
-    public isLoadingResults = false;
+    public isLoadingResults: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
     public constructor(
         private http: HttpClient,
@@ -17,7 +18,6 @@ export class Paginator<T> {
         private attribute: string
     ) {
 
-        this.query();
     }
 
     public init(dataSource: MatTableDataSource<T>, paginator: MatPaginator, sort: MatSort): void {
@@ -33,14 +33,16 @@ export class Paginator<T> {
         });
 
         // Al cambiar el orden de alguna columna
-        sort.sortChange.subscribe(event => {
+        sort.sortChange.subscribe((event: Sort) => {
             if (event.direction === '') {
-                this.sort[event.active] = null;
+                delete this.sort[event.active];
             } else {
                 this.sort[event.active] = event.direction;
             }
             this.query();
         });
+
+        this.query();
     }
 
     private query(): void {
@@ -55,7 +57,7 @@ export class Paginator<T> {
         const pageAndSizePath = 'page=' + this.pageIndex + '&size=' + this.pageSize;
 
         // Indicar que se encuentra cargando resultados
-        this.isLoadingResults = true;
+        this.isLoadingResults.next(true);
 
         this.http.get<Pagination>(environment.api + this.path + '?' + pageAndSizePath + sortPath).subscribe(
             Response => {
@@ -63,7 +65,7 @@ export class Paginator<T> {
                 this.dataSource.data = Response._embedded[this.attribute];
 
                 // Indicar que no se encuentra cargando resultados
-                this.isLoadingResults = true;
+                this.isLoadingResults.next(false);
             }
         );
     }

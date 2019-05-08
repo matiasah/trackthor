@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
+import { Observable } from 'rxjs';
 import { TipoMaquinaService } from 'src/app/services/tipo-maquina.service';
 import { TipoMaquina } from 'src/app/models/tipo-maquina';
 import { Paginator } from 'src/app/models/paginator';
@@ -20,6 +21,9 @@ export class TiposMaquinasComponent implements OnInit {
     // DataSource
     public dataSource: MatTableDataSource<TipoMaquina> = new MatTableDataSource();
 
+    // Indicar si se encuentra cargando resultados
+    public isLoadingResults: Observable<boolean>;
+
     // Sort
     @ViewChild(MatSort)
     public matSort: MatSort;
@@ -33,7 +37,11 @@ export class TiposMaquinasComponent implements OnInit {
     public constructor(
         private tipoMaquinaService: TipoMaquinaService
     ) {
+        // Instanciar paginador
         this.paginator = this.tipoMaquinaService.getPaginator();
+
+        // Observable, indica si se encuentra cargando resultados
+        this.isLoadingResults = this.paginator.isLoadingResults;
     }
 
     public ngOnInit() {
