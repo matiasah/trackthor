@@ -58,12 +58,18 @@
             <mat-expansion-panel hideToggle>
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-                        Choferes
+                        Empresas
                     </mat-panel-title>
                     <mat-panel-description>
-                        <mat-icon>person_pin</mat-icon>
+                        <mat-icon>work_outline</mat-icon>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
+
+                <mat-list dense>
+                    <mat-list-item>
+                        <a routerLink="./empresas">Empresas</a>
+                    </mat-list-item>
+                </mat-list>
             </mat-expansion-panel>
 
             <mat-expansion-panel hideToggle>
@@ -109,6 +115,6 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-        <router-outlet></router-outlet>
+        <router-outlet class="h-100"></router-outlet>
     </mat-sidenav-content>
 </mat-sidenav-container>

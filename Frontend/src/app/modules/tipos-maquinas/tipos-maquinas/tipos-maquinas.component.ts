@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
 import { Observable } from 'rxjs';
-import { TipoMaquinaService } from 'src/app/services/tipo-maquina.service';
-import { TipoMaquina } from 'src/app/models/tipo-maquina';
 import { Paginator } from 'src/app/models/paginator';
 import { Page } from 'src/app/models/page';
+import { TipoMaquinaService } from 'src/app/services/tipo-maquina.service';
+import { TipoMaquina } from 'src/app/models/tipo-maquina';
 import { RegistrarTipoMaquinaComponent } from '../registrar-tipo-maquina/registrar-tipo-maquina.component';
 
 @Component({

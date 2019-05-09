@@ -1,27 +1,27 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatSort, MatPaginator, MatDialog } from '@angular/material';
+import { MatSort, MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
 import { Observable } from 'rxjs';
 import { Paginator } from 'src/app/models/paginator';
 import { Page } from 'src/app/models/page';
-import { MaquinaService } from 'src/app/services/maquina.service';
-import { Maquina } from 'src/app/models/maquina';
-import { RegistrarMaquinariaComponent } from '../registrar-maquinaria/registrar-maquinaria.component';
+import { EmpresaService } from 'src/app/services/empresa.service';
+import { Empresa } from 'src/app/models/empresa';
+import { RegistrarEmpresaComponent } from '../registrar-empresa/registrar-empresa.component';
 
 @Component({
-    selector: 'app-maquinarias',
-    templateUrl: './maquinarias.component.html',
-    styleUrls: ['./maquinarias.component.scss']
+    selector: 'app-empresas',
+    templateUrl: './empresas.component.html',
+    styleUrls: ['./empresas.component.scss']
 })
-export class MaquinariasComponent implements OnInit {
+export class EmpresasComponent implements OnInit {
 
     // Columnas de datatable
-    public displayedColumns: string[] = ['numero', 'patente', 'fecha_registro', 'show', 'edit', 'delete'];
+    public displayedColumns: string[] = ['nombre', 'rut', 'telefono', 'fecha_registro', 'show', 'edit', 'delete'];
 
     // Paginación
-    public paginator: Paginator<Maquina>;
+    public paginator: Paginator<Empresa>;
 
     // Data-source
-    public dataSource: MatTableDataSource<Maquina> = new MatTableDataSource();
+    public dataSource: MatTableDataSource<Empresa> = new MatTableDataSource();
 
     // Indicar si se encuentra cargando resultados
     public isLoading: Observable<boolean>;
@@ -38,11 +38,11 @@ export class MaquinariasComponent implements OnInit {
     public matPaginator: MatPaginator;
 
     public constructor(
-        private maquinaService: MaquinaService,
+        private empresaService: EmpresaService,
         private dialog: MatDialog
     ) {
         // Instanciar paginador
-        this.paginator = this.maquinaService.getPaginator();
+        this.paginator = this.empresaService.getPaginator();
 
         // Observables
         this.isLoading = this.paginator.isLoadingSubject;
@@ -54,7 +54,7 @@ export class MaquinariasComponent implements OnInit {
     }
 
     public registrar() {
-        this.dialog.open(RegistrarMaquinariaComponent, { width: '1000px' });
+        this.dialog.open(RegistrarEmpresaComponent, { width: '1000px' });
     }
 
 }

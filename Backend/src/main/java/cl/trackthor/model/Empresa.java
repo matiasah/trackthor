@@ -1,7 +1,7 @@
 package cl.trackthor.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "trs_empresa")
@@ -30,9 +31,6 @@ public class Empresa implements Serializable {
     @Column(name = "sub_telefono", nullable = false)
     private String telefono;
 
-    @Column(name = "emp_create_at", nullable = false)
-    private LocalDateTime createdAt;
-
     @OneToMany(mappedBy = "empresa")
     private Set<Contrato> contratos = new HashSet<>();
 
@@ -44,6 +42,10 @@ public class Empresa implements Serializable {
 
     @OneToMany(mappedBy = "empresa")
     private Set<GestionEmpresa> gestores = new HashSet<>();
+    
+    @CreationTimestamp
+    @Column(name = "emp_created_at", nullable = false)
+    private ZonedDateTime createdAt;
 
     public Empresa() {
 
@@ -81,11 +83,11 @@ public class Empresa implements Serializable {
         this.telefono = telefono;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public ZonedDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(ZonedDateTime createdAt) {
         this.createdAt = createdAt;
     }
 

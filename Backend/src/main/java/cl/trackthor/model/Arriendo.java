@@ -1,7 +1,7 @@
 package cl.trackthor.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "trs_arriendo")
@@ -24,10 +25,10 @@ public class Arriendo implements Serializable {
     private Long id;
 
     @Column(name = "arr_inicio", nullable = false)
-    private LocalDateTime inicio;
+    private ZonedDateTime inicio;
 
     @Column(name = "arr_termino", nullable = false)
-    private LocalDateTime termino;
+    private ZonedDateTime termino;
 
     @ManyToOne
     @JoinColumn(name = "maquina_id")
@@ -40,8 +41,9 @@ public class Arriendo implements Serializable {
     @OneToMany(mappedBy = "arriendo")
     private Set<HoraTrabajada> horasTrabajadas = new HashSet<>();
     
+    @CreationTimestamp
     @Column(name = "arr_created_at", nullable = false)
-    private LocalDateTime createdAt;
+    private ZonedDateTime createdAt;
 
     public Arriendo() {
         
@@ -55,19 +57,19 @@ public class Arriendo implements Serializable {
         this.id = id;
     }
 
-    public LocalDateTime getInicio() {
+    public ZonedDateTime getInicio() {
         return inicio;
     }
 
-    public void setInicio(LocalDateTime inicio) {
+    public void setInicio(ZonedDateTime inicio) {
         this.inicio = inicio;
     }
 
-    public LocalDateTime getTermino() {
+    public ZonedDateTime getTermino() {
         return termino;
     }
 
-    public void setTermino(LocalDateTime termino) {
+    public void setTermino(ZonedDateTime termino) {
         this.termino = termino;
     }
 
@@ -95,11 +97,11 @@ public class Arriendo implements Serializable {
         this.horasTrabajadas = horasTrabajadas;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public ZonedDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(ZonedDateTime createdAt) {
         this.createdAt = createdAt;
     }
 

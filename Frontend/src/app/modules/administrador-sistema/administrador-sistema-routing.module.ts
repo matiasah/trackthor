@@ -15,6 +15,10 @@ const routes: Routes = [
             {
                 path: 'tipos-maquinas',
                 loadChildren: '../tipos-maquinas/tipos-maquinas.module#TiposMaquinasModule'
+            },
+            {
+                path: 'empresas',
+                loadChildren: '../empresas/empresas.module#EmpresasModule'
             }
         ]
     }

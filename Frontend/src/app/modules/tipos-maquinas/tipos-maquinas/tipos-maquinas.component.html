@@ -5,59 +5,55 @@
     </mat-card-title>
 
     <mat-card-content>
-        <div class="mat-card-content-list">
 
-            <div *ngIf="isLoading | async" class="loading-shade">
-                <mat-spinner></mat-spinner>
-            </div>
-
-            <mat-form-field class="w-100">
-                <mat-placeholder>
-                    <mat-icon>search</mat-icon>Buscar Maquinaria
-                </mat-placeholder>
-                <input matInput name="busqueda">
-            </mat-form-field>
-
-            <table mat-table class="w-100" [dataSource]="dataSource" matSort>
-                <!-- Nombre -->
-                <ng-container matColumnDef="nombre">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>
-                        Nombre
-                    </mat-header-cell>
-                    <mat-cell *matCellDef="let tipo">
-                        {{tipo.nombre}}
-                    </mat-cell>
-                </ng-container>
-
-                <!-- Editar -->
-                <ng-container matColumnDef="edit">
-                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                    <mat-cell *matCellDef="let tipo">
-                        <button mat-icon-button matTooltip="Editar tipo de maquinaria">
-                            <mat-icon>settings</mat-icon>
-                        </button>
-                    </mat-cell>
-                </ng-container>
-
-                <!-- Eliminar -->
-                <ng-container matColumnDef="delete">
-                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                    <mat-cell *matCellDef="let tipo">
-                        <button mat-icon-button matTooltip="Eliminar tipo de maquinaria">
-                            <mat-icon>delete</mat-icon>
-                        </button>
-                    </mat-cell>
-                </ng-container>
-
-                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-            </table>
+        <div *ngIf="isLoading | async" class="loading-shade">
+            <mat-spinner></mat-spinner>
         </div>
 
-        <mat-paginator
-            #paginator
-            [pageSizeOptions]="[5, 10, 25, 100]"
-            [pageIndex]="(page | async).pageIndex"
+        <mat-form-field class="w-100">
+            <mat-placeholder>
+                <mat-icon>search</mat-icon>Buscar Maquinaria
+            </mat-placeholder>
+            <input matInput name="busqueda">
+        </mat-form-field>
+
+        <table mat-table class="w-100" [dataSource]="dataSource" matSort>
+            
+            <!-- Nombre -->
+            <ng-container matColumnDef="nombre">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Nombre
+                </mat-header-cell>
+                <mat-cell *matCellDef="let tipo">
+                    {{tipo.nombre}}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Editar -->
+            <ng-container matColumnDef="edit">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let tipo">
+                    <button mat-icon-button matTooltip="Editar tipo de maquinaria">
+                        <mat-icon>settings</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <!-- Eliminar -->
+            <ng-container matColumnDef="delete">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let tipo">
+                    <button mat-icon-button matTooltip="Eliminar tipo de maquinaria">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </table>
+
+        <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageIndex]="(page | async).pageIndex"
             [length]="(page | async).length">
         </mat-paginator>
     </mat-card-content>

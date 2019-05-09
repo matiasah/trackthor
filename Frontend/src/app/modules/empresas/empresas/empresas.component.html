@@ -1,7 +1,7 @@
 <mat-card class="m-3 mat-elevation-z2">
 
     <mat-card-title>
-        Maquinarias
+        Empresa
     </mat-card-title>
 
     <mat-card-content>
@@ -12,48 +12,58 @@
 
         <mat-form-field class="w-100">
             <mat-placeholder>
-                <mat-icon>search</mat-icon>Buscar Maquinaria
+                <mat-icon>search</mat-icon>Buscar Empresa
             </mat-placeholder>
             <input matInput name="busqueda">
         </mat-form-field>
 
         <table mat-table class="w-100" [dataSource]="dataSource" matSort>
 
-            <!-- Contador de registros mostrados -->
-            <ng-container matColumnDef="numero">
+            <!-- Nombre -->
+            <ng-container matColumnDef="nombre">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>
-                    #
+                    Nombre
                 </mat-header-cell>
-                <mat-cell *matCellDef="let maquinaria; let i = index;">
-                    {{ i+1 }}
+                <mat-cell *matCellDef="let empresa">
+                    {{ empresa.nombre }}
                 </mat-cell>
             </ng-container>
 
-            <!-- Patente -->
-            <ng-container matColumnDef="patente">
+            <!-- Rut -->
+            <ng-container matColumnDef="rut">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>
-                    Patente
+                    Rut
                 </mat-header-cell>
-                <mat-cell *matCellDef="let maquinaria">
-                    {{maquinaria.patente}}
+                <mat-cell *matCellDef="let empresa">
+                    {{ empresa.rut }}
                 </mat-cell>
             </ng-container>
 
-            <!-- Fecha de registro de la maquina -->
+            <!-- Teléfono -->
+            <ng-container matColumnDef="telefono">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Teléfono
+                </mat-header-cell>
+                <mat-cell *matCellDef="let empresa">
+                    {{ empresa.telefono }}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Fecha de registro de la empresa -->
             <ng-container matColumnDef="fecha_registro">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>
                     Fecha Registro
                 </mat-header-cell>
-                <mat-cell *matCellDef="let maquinaria">
-                    {{ maquinaria.createdAt | date: 'short' : undefined : 'es-CL' }}
+                <mat-cell *matCellDef="let empresa">
+                    {{ empresa.createdAt | date: 'short' : undefined : 'es-CL' }}
                 </mat-cell>
             </ng-container>
 
             <!-- Mostrar más detalles -->
             <ng-container matColumnDef="show">
                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                <mat-cell *matCellDef="let maquinaria">
-                    <button mat-icon-button matTooltip="Editar maquinaria">
+                <mat-cell *matCellDef="let empresa">
+                    <button mat-icon-button matTooltip="Editar empresa">
                         <mat-icon>visibility</mat-icon>
                     </button>
                 </mat-cell>
@@ -62,8 +72,8 @@
             <!-- Editar -->
             <ng-container matColumnDef="edit">
                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                <mat-cell *matCellDef="let maquinaria">
-                    <button mat-icon-button matTooltip="Editar maquinaria">
+                <mat-cell *matCellDef="let empresa">
+                    <button mat-icon-button matTooltip="Editar empresa">
                         <mat-icon>settings</mat-icon>
                     </button>
                 </mat-cell>
@@ -72,8 +82,8 @@
             <!-- Eliminar -->
             <ng-container matColumnDef="delete">
                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                <mat-cell *matCellDef="let maquinaria">
-                    <button mat-icon-button matTooltip="Eliminar maquinaria">
+                <mat-cell *matCellDef="let empresa">
+                    <button mat-icon-button matTooltip="Eliminar empresa">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </mat-cell>

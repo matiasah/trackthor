@@ -2,7 +2,7 @@ package cl.trackthor.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,7 +39,7 @@ public abstract class Usuario implements UserDetails {
 
     @CreationTimestamp
     @Column(name = "usu_created_at")
-    private LocalDateTime createdAt;
+    private ZonedDateTime createdAt;
 
     public Usuario() {
 
@@ -75,11 +75,11 @@ public abstract class Usuario implements UserDetails {
         this.password = password;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public ZonedDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(ZonedDateTime createdAt) {
         this.createdAt = createdAt;
     }
     

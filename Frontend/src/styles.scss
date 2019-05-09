@@ -20,9 +20,3 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     align-items: center;
     justify-content: center;
 }
-
-.mat-card-content-list {
-    position: relative;
-    height: calc(100vh - 280px);
-    overflow: auto;
-}
