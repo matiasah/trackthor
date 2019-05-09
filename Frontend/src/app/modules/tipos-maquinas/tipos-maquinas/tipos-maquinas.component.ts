@@ -15,7 +15,7 @@ import { RegistrarTipoMaquinaComponent } from '../registrar-tipo-maquina/registr
 export class TiposMaquinasComponent implements OnInit {
 
     // Columnas de datatable
-    public displayedColumns: string[] = ['id', 'nombre', 'edit', 'delete'];
+    public displayedColumns: string[] = ['nombre', 'edit', 'delete'];
 
     // Paginación
     public paginator: Paginator<TipoMaquina>;
@@ -25,9 +25,6 @@ export class TiposMaquinasComponent implements OnInit {
 
     // Indicar si se encuentra cargando resultados
     public isLoading: Observable<boolean>;
-
-    // Cantidad de elementos en base de datos
-    public totalItems: Observable<number>;
 
     // Pagina actual
     public page: Observable<Page>;

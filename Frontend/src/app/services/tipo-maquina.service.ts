@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Pagination } from '../models/pagination';
-import { TipoMaquina } from '../models/tipo-maquina';
 import { Paginator } from '../models/paginator';
+import { TipoMaquina } from '../models/tipo-maquina';
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +14,9 @@ export class TipoMaquinaService {
 
     public constructor(
         private http: HttpClient
-    ) { }
+    ) {
+
+    }
 
     public getPaginator(): Paginator<any> {
         return new Paginator(this.http, 'tipos-maquinas', 'tipos-maquinas');

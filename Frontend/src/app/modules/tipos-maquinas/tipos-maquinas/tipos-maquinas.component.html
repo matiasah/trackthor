@@ -19,16 +19,6 @@
             </mat-form-field>
 
             <table mat-table class="w-100" [dataSource]="dataSource" matSort>
-                <!-- ID -->
-                <ng-container matColumnDef="id">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>
-                        #
-                    </mat-header-cell>
-                    <mat-cell *matCellDef="let tipo">
-                        {{tipo.id}}
-                    </mat-cell>
-                </ng-container>
-
                 <!-- Nombre -->
                 <ng-container matColumnDef="nombre">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>

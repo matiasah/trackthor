@@ -1,5 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSort, MatPaginator, MatDialog } from '@angular/material';
+import { Observable } from 'rxjs';
+import { MaquinariaService } from 'src/app/services/maquinaria.service';
+import { Maquina } from 'src/app/models/maquina';
+import { Paginator } from 'src/app/models/paginator';
+import { Page } from 'src/app/models/page';
 import { RegistrarMaquinariaComponent } from '../registrar-maquinaria/registrar-maquinaria.component';
 
 
@@ -11,59 +16,42 @@ import { RegistrarMaquinariaComponent } from '../registrar-maquinaria/registrar-
 export class MaquinariasComponent implements OnInit {
 
     // Columnas de datatable
-    public displayedColumns: string[] = ['id', 'patente', 'tipo', 'chofer', 'edit', 'delete'];
+    public displayedColumns: string[] = ['patente', 'edit', 'delete'];
+
+    // Paginación
+    public paginator: Paginator<Maquina>;
 
     // Data-source
-    public dataSource: MatTableDataSource<any> = new MatTableDataSource();
+    public dataSource: MatTableDataSource<Maquina> = new MatTableDataSource();
 
-    // Lista de maquinarias (se tiene que cambiar por un modelo de maquinarias)
-    public maquinarias: any[] = [
-        {
-            id: 1,
-            patente: 'KD3243',
-            tipo: 'Grúa',
-            chofer: 'Fabián Mariqueo'
-        },
-        {
-            id: 2,
-            patente: 'KKSJ32',
-            tipo: 'Camión',
-            chofer: 'Pablo Barría'
-        },
-        {
-            id: 3,
-            patente: 'GGDU34',
-            tipo: 'Retroexcavadora',
-            chofer: 'Felipe Quezada'
-        },
-        {
-            id: 4,
-            patente: 'HHOO45',
-            tipo: 'Motoniveladora',
-            chofer: 'Matías Hermosilla'
-        }
-    ];
+    // Indicar si se encuentra cargando resultados
+    public isLoading: Observable<boolean>;
+
+    // Pagina actual
+    public page: Observable<Page>;
 
     // Sort
     @ViewChild(MatSort)
-    public sort: MatSort;
+    public matSort: MatSort;
 
     // Paginación
-    @ViewChild('maquinariaPaginator')
-    public paginator: MatPaginator;
+    @ViewChild('paginator')
+    public matPaginator: MatPaginator;
 
     public constructor(
+        private maquinariaService: MaquinariaService,
         private dialog: MatDialog
     ) {
+        // Instanciar paginador
+        this.paginator = this.maquinariaService.getPaginator();
 
+        // Observables
+        this.isLoading = this.paginator.isLoadingSubject;
+        this.page = this.paginator.pageSubject;
     }
 
     public ngOnInit() {
-        // Inicializar data-source
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-
-        this.dataSource.data = this.maquinarias;
+        this.paginator.init(this.dataSource, this.matPaginator, this.matSort);
     }
 
     public registrarMaquinaria() {

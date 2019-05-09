@@ -7,11 +7,11 @@
     <mat-card-content>
         <div class="mat-card-content-list">
 
-            <div *ngIf="!maquinarias" class="loading-shade">
+            <div *ngIf="isLoading | async" class="loading-shade">
                 <mat-spinner></mat-spinner>
             </div>
 
-            <mat-form-field *ngIf="maquinarias" class="w-100">
+            <mat-form-field class="w-100">
                 <mat-placeholder>
                     <mat-icon>search</mat-icon>Buscar Maquinaria
                 </mat-placeholder>
@@ -19,16 +19,6 @@
             </mat-form-field>
 
             <table mat-table class="w-100" [dataSource]="dataSource" matSort>
-                <!-- ID -->
-                <ng-container matColumnDef="id">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>
-                        #
-                    </mat-header-cell>
-                    <mat-cell *matCellDef="let maquinaria">
-                        {{maquinaria.id}}
-                    </mat-cell>
-                </ng-container>
-
                 <!-- Patente -->
                 <ng-container matColumnDef="patente">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -36,26 +26,6 @@
                     </mat-header-cell>
                     <mat-cell *matCellDef="let maquinaria">
                         {{maquinaria.patente}}
-                    </mat-cell>
-                </ng-container>
-
-                <!-- Tipo de maquinaria -->
-                <ng-container matColumnDef="tipo">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>
-                        Tipo
-                    </mat-header-cell>
-                    <mat-cell *matCellDef="let maquinaria">
-                        {{maquinaria.tipo}}
-                    </mat-cell>
-                </ng-container>
-
-                <!-- Chofer -->
-                <ng-container matColumnDef="chofer">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>
-                        Chofer
-                    </mat-header-cell>
-                    <mat-cell *matCellDef="let maquinaria">
-                        {{maquinaria.chofer}}
                     </mat-cell>
                 </ng-container>
 
@@ -84,7 +54,11 @@
             </table>
         </div>
 
-        <mat-paginator #maquinariaPaginator [pageSizeOptions]="[5, 10, 25, 100]">
+        <mat-paginator
+            #paginator
+            [pageSizeOptions]="[5, 10, 25, 100]"
+            [pageIndex]="(page | async).pageIndex"
+            [length]="(page | async).length">
         </mat-paginator>
     </mat-card-content>
 </mat-card>
