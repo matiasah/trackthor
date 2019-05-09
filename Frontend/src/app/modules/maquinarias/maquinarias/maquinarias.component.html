@@ -19,6 +19,17 @@
             </mat-form-field>
 
             <table mat-table class="w-100" [dataSource]="dataSource" matSort>
+              
+                <!-- Contador de registros mostrados -->
+                <ng-container matColumnDef="numero">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>
+                        #
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let maquinaria; let i = index;">
+                        {{ i+1 }}
+                    </mat-cell>
+                </ng-container>
+
                 <!-- Patente -->
                 <ng-container matColumnDef="patente">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -26,6 +37,26 @@
                     </mat-header-cell>
                     <mat-cell *matCellDef="let maquinaria">
                         {{maquinaria.patente}}
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Fecha de registro de la maquina -->
+                <ng-container matColumnDef="fecha_registro">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Fecha Registro
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let maquinaria">
+                        {{ maquinaria.createdAt | date: 'short' : undefined : 'es-CL' }}
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Mostrar más detalles -->
+                <ng-container matColumnDef="show">
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let maquinaria">
+                        <button mat-icon-button matTooltip="Editar maquinaria">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
                     </mat-cell>
                 </ng-container>
 
