@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-11">
+        <h2 mat-dialog-title>
+            Registrar tipo de máquina
+        </h2>
+    </div>
+
+    <div class="col-1">
+        <button mat-icon-button mat-dialog-close>
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+</div>
+
+<form #form="ngForm" (ngSubmit)="onSubmit()" autocomplete="off">
+
+    <mat-dialog-content>
+        <div class="row">
+            <mat-form-field class="col-12">
+                <input matInput name="nombre" [(ngModel)]="tipoMaquina.nombre" required placeholder="Nombre">
+            </mat-form-field>
+        </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <div *ngIf="!registrando" class="col-sm-12 col-md-3 offset-sm-0 offset-md-6">
+            <button class="w-100" type="submit" mat-raised-button color="primary">Registrar</button>
+        </div>
+
+        <div *ngIf="!registrando" class="col-sm-12 col-md-3 offset-sm-0">
+            <button class="w-100" mat-raised-button mat-dialog-close color="warn">Cancelar</button>
+        </div>
+
+        <div class="col-12 justify-content-center d-flex" *ngIf="registrando">
+            <mat-progress-spinner diameter="48" color="primary" mode="indeterminate"></mat-progress-spinner>
+        </div>
+    </mat-dialog-actions>
+
+</form>

@@ -3,7 +3,6 @@ import { CanActivate, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
-import { Roles } from '../models/roles.enum';
 import { RoleRoute } from '../models/role-route.enum';
 
 @Injectable({

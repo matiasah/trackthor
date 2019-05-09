@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { RoleRoute } from 'src/app/models/role-route.enum';
 import { Usuario } from 'src/app/models/usuario';
 import { UserToken } from 'src/app/models/user-token';
 import { Router } from '@angular/router';
@@ -47,16 +48,33 @@ export class LoginComponent implements OnInit {
 
             // Iniciar sesión
             this.authService.login(this.usuario).subscribe(
-                Response => {
+                responseToken => {
                     // Crear instancia de token
                     const userToken: UserToken = {
-                        access_token: Response.access_token,
-                        expiration: new Date(Date.now() + Response.expires_in * 1000),
-                        token_type: Response.token_type,
+                        access_token: responseToken.access_token,
+                        expiration: new Date(Date.now() + responseToken.expires_in * 1000),
+                        token_type: responseToken.token_type,
                     };
 
                     // Fijar token
                     this.authService.setToken(userToken);
+
+                    // Obtener roles
+                    this.authService.getAuthorities().subscribe(
+                        authorities => {
+                            // Por cada rol
+                            for (const authority of authorities) {
+                                // Si el rol tiene ruta
+                                if (RoleRoute[authority.authority]) {
+                                    // Navegar a la ruta correspondiente
+                                    this.router.navigate([RoleRoute[authority.authority]]);
+
+                                    // Romper iteración
+                                    break;
+                                }
+                            }
+                        }
+                    );
 
                     // Enviar a sistema
                     this.router.navigate(['ae']);

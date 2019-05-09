@@ -10,7 +10,9 @@ export class Paginator<T> {
     private sort: any = {};
     private pageIndex = 0;
     private pageSize = 5;
-    public isLoadingResults: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
+    public totalItemsSubject: BehaviorSubject<number> = new BehaviorSubject(0);
+    public isLoadingSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
     public constructor(
         private http: HttpClient,
@@ -57,15 +59,18 @@ export class Paginator<T> {
         const pageAndSizePath = 'page=' + this.pageIndex + '&size=' + this.pageSize;
 
         // Indicar que se encuentra cargando resultados
-        this.isLoadingResults.next(true);
+        this.isLoadingSubject.next(true);
 
         this.http.get<Pagination>(environment.api + this.path + '?' + pageAndSizePath + sortPath).subscribe(
             Response => {
                 // Obtener datos
                 this.dataSource.data = Response._embedded[this.attribute];
 
+                // Indicar la cantidad de items
+                this.totalItemsSubject.next(Response.page.totalElements);
+
                 // Indicar que no se encuentra cargando resultados
-                this.isLoadingResults.next(false);
+                this.isLoadingSubject.next(false);
             }
         );
     }
