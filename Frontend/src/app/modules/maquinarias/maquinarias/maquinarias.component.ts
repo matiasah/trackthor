@@ -6,9 +6,6 @@ import { Maquina } from 'src/app/models/maquina';
 import { Paginator } from 'src/app/models/paginator';
 import { Page } from 'src/app/models/page';
 import { RegistrarMaquinariaComponent } from '../registrar-maquinaria/registrar-maquinaria.component';
-import { Maquina } from 'src/app/models/maquina';
-import { MaquinaService } from 'src/app/services/maquina.service';
-
 
 @Component({
     selector: 'app-maquinarias',
