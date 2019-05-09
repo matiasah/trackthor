@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { TipoMaquinaService } from 'src/app/services/tipo-maquina.service';
 import { TipoMaquina } from 'src/app/models/tipo-maquina';
 import { Paginator } from 'src/app/models/paginator';
+import { Page } from 'src/app/models/page';
 import { RegistrarTipoMaquinaComponent } from '../registrar-tipo-maquina/registrar-tipo-maquina.component';
 
 @Component({
@@ -25,6 +26,12 @@ export class TiposMaquinasComponent implements OnInit {
     // Indicar si se encuentra cargando resultados
     public isLoading: Observable<boolean>;
 
+    // Cantidad de elementos en base de datos
+    public totalItems: Observable<number>;
+
+    // Pagina actual
+    public page: Observable<Page>;
+
     // Sort
     @ViewChild(MatSort)
     public matSort: MatSort;
@@ -42,8 +49,9 @@ export class TiposMaquinasComponent implements OnInit {
         // Instanciar paginador
         this.paginator = this.tipoMaquinaService.getPaginator();
 
-        // Observable, indica si se encuentra cargando resultados
+        // Observables
         this.isLoading = this.paginator.isLoadingSubject;
+        this.page = this.paginator.pageSubject;
     }
 
     public ngOnInit() {

@@ -64,7 +64,11 @@
             </table>
         </div>
 
-        <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]">
+        <mat-paginator
+            #paginator
+            [pageSizeOptions]="[5, 10, 25, 100]"
+            [pageIndex]="(page | async).pageIndex"
+            [length]="(page | async).length">
         </mat-paginator>
     </mat-card-content>
 </mat-card>

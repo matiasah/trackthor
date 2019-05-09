@@ -3,6 +3,7 @@ import { MatTableDataSource, MatPaginator, MatSort, PageEvent, Sort } from '@ang
 import { environment } from 'src/environments/environment';
 import { Pagination } from './pagination';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Page } from './page';
 
 export class Paginator<T> {
 
@@ -11,7 +12,7 @@ export class Paginator<T> {
     private pageIndex = 0;
     private pageSize = 5;
 
-    public totalItemsSubject: BehaviorSubject<number> = new BehaviorSubject(0);
+    public pageSubject: BehaviorSubject<Page> = new BehaviorSubject({pageIndex: 0, length: 0});
     public isLoadingSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
     public constructor(
@@ -26,6 +27,7 @@ export class Paginator<T> {
         this.dataSource = dataSource;
         this.dataSource.paginator = paginator;
         this.dataSource.sort = sort;
+        this.pageSize = paginator.pageSize;
 
         // Al cambiar la pagina actual
         paginator.page.subscribe((event: PageEvent) => {
@@ -52,7 +54,7 @@ export class Paginator<T> {
         let sortPath = '';
 
         for (const [column, direction] of Object.entries(this.sort)) {
-            sortPath += '&' + column + ',' + direction;
+            sortPath += column + ',' + direction + '&';
         }
 
         // Pagina y tamaño
@@ -61,13 +63,16 @@ export class Paginator<T> {
         // Indicar que se encuentra cargando resultados
         this.isLoadingSubject.next(true);
 
-        this.http.get<Pagination>(environment.api + this.path + '?' + pageAndSizePath + sortPath).subscribe(
+        this.http.get<Pagination>(environment.api + this.path + '?' + sortPath + pageAndSizePath).subscribe(
             Response => {
                 // Obtener datos
                 this.dataSource.data = Response._embedded[this.attribute];
 
-                // Indicar la cantidad de items
-                this.totalItemsSubject.next(Response.page.totalElements);
+                // Indicar la pagina actual
+                this.pageSubject.next({
+                    pageIndex: Response.page.number,
+                    length: Response.page.totalElements,
+                });
 
                 // Indicar que no se encuentra cargando resultados
                 this.isLoadingSubject.next(false);
