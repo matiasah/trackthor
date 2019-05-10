@@ -24,7 +24,7 @@ export class MaquinaService {
 
     public query(): Observable<Maquina[]> {
         return this.http.get<Pagination>(environment.api + 'maquinarias')
-            .pipe(map(Response => Response._embedded));
+            .pipe(map(Response => Response._embedded.maquinas));
     }
 
     public save(maquina: Maquina): Observable<any> {

@@ -1,11 +1,9 @@
 <div class="row">
-    <div class="col-11">
+    <div class="col-12 d-flex justify-content-between">
         <h2 mat-dialog-title>
             Registrar Maquinaria
         </h2>
-    </div>
 
-    <div class="col-1">
         <button mat-icon-button mat-dialog-close>
             <mat-icon>close</mat-icon>
         </button>
@@ -15,20 +13,34 @@
 <form #form="ngForm" (ngSubmit)="onSubmit()">
 
     <mat-dialog-content>
-        <div class="row">
-            <mat-form-field class="col-sm-12 col-md-6">
-                <input matInput name="patente" required placeholder="Patente">
+        <div *ngIf="!empresas || !tiposMaquinas" class="row">
+            <div class="col-12 justify-content-center d-flex">
+                <mat-spinner></mat-spinner>
+            </div>
+        </div>
+
+        <div *ngIf="empresas && tiposMaquinas" class="row">
+            <mat-form-field class="col-12">
+                <input matInput name="patente" [(ngModel)]="maquina.patente" required placeholder="Patente">
             </mat-form-field>
 
-            
             <mat-form-field class="col-sm-12 col-md-6">
-                <input matInput  name="tipoMaquina" [matAutocomplete]="autocompleteTipoMaquina" required placeholder="Tipo Maquina">
-                <mat-autocomplete #autocompleteTipoMaquina="matAutocomplete" >
-                    <mat-option >
-                        
+                <mat-label>Empresa</mat-label>
+                <mat-select name="empresa" [(ngModel)]="maquina.empresa" required>
+                    <mat-option *ngFor="let empresa of empresas" [value]="empresa._links.self.href">
+                        {{ empresa.nombre }}
                     </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>            
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="col-sm-12 col-md-6">
+                <mat-label>Tipo de máquina</mat-label>
+                <mat-select name="tipoMaquina" [(ngModel)]="maquina.tipoMaquina" required>
+                    <mat-option *ngFor="let tipoMaquina of tiposMaquinas" [value]="tipoMaquina._links.self.href">
+                        {{ tipoMaquina.nombre }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
 
         </div>
     </mat-dialog-content>
@@ -43,7 +55,8 @@
         </div>
 
         <div class="col-12" *ngIf="registrando">
-            <mat-progress-spinner style="margin: 0 auto;" diameter="48" color="primary" mode="indeterminate"></mat-progress-spinner>
+            <mat-progress-spinner style="margin: 0 auto;" diameter="48" color="primary" mode="indeterminate">
+            </mat-progress-spinner>
         </div>
     </mat-dialog-actions>
 

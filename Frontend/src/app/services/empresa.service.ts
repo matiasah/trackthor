@@ -24,7 +24,7 @@ export class EmpresaService {
 
     public query(): Observable<Empresa[]> {
         return this.http.get<Pagination>(environment.api + 'empresas')
-            .pipe(map(Response => Response._embedded));
+            .pipe(map(Response => Response._embedded.empresas));
     }
 
     public save(empresa: Empresa): Observable<any> {

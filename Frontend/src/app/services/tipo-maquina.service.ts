@@ -24,7 +24,7 @@ export class TipoMaquinaService {
 
     public query(): Observable<TipoMaquina[]> {
         return this.http.get<Pagination>(environment.api + 'tipos-maquinas')
-            .pipe(map(Response => Response._embedded));
+            .pipe(map(Response => Response._embedded['tipos-maquinas']));
     }
 
     public save(tipoMaquina: TipoMaquina): Observable<any> {

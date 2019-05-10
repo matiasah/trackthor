@@ -33,7 +33,7 @@ export class RegistrarEmpresaComponent implements OnInit {
 
     }
 
-    public onSubmit() {
+    public onSubmit(): void {
         // Si el formulario es válido
         if (this.form.valid) {
             // Indicar que se encuentra registrando
