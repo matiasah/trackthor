@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { MaquinaService } from 'src/app/services/maquina.service';
 import { Maquina } from 'src/app/models/maquina';
 import { TipoMaquina } from 'src/app/models/tipo-maquina';
@@ -23,9 +23,11 @@ export class EliminarMaquinaComponent implements OnInit {
   public constructor(
     private dialogRef: MatDialogRef<EliminarMaquinaComponent>,
     private maquinaService: MaquinaService,
-    @Inject(MAT_DIALOG_DATA) private data: any
-  ) { 
+    @Inject(MAT_DIALOG_DATA) private data: any,
+    private snackBar: MatSnackBar,
+  ) {
 
+    // Modelo maquina datos para almacenar la maquina 
     this.maquina = data.maquina;
 
   }
@@ -40,8 +42,26 @@ export class EliminarMaquinaComponent implements OnInit {
 
   public eliminar() {
     this.maquinaService.delete(this.maquina).subscribe(
-      Response =>{
-        console.log(Response);
+      Response => {
+
+        // Indicar que no se encuentra registrando
+        this.eliminando = false;
+
+        // Notificar registro exitoso
+        this.snackBar.open('La máquina ha sido Eliminada', 'Aceptar', { duration: 2000 });
+
+        // Cerrar modal
+        this.dialogRef.close();
+      },
+      Error => {
+        // Indicar que no se encuentra registrando
+        this.eliminando = false;
+
+        // Notificar registro erroneo
+        this.snackBar.open('No se ha podido Eliminar la máquina', 'Aceptar', { duration: 2000 });
+
+        // Cerrar modal
+        this.dialogRef.close();
       }
     )
   }
