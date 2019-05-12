@@ -32,7 +32,7 @@ export class MaquinaService {
     }
 
     public update(maquina: Maquina): Observable<any> {
-        return this.http.put(maquina._links.self.href, maquina);
+        return this.http.patch(maquina._links.self.href, maquina);
     }
 
     public delete(maquina: Maquina): Observable<any> {

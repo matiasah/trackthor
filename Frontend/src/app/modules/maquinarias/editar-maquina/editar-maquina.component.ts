@@ -41,14 +41,29 @@ export class EditarMaquinaComponent implements OnInit {
     private snackBar: MatSnackBar,
   ) {
 
-    //this.maquina = data.maquina;
+    // Obtener la maquina sin los datos observables
     this.maquinaService.getAtributo(data.maquina._links.self.href).subscribe(
       Response => {
-        console.log(Response);
         this.maquina = Response;
+
+        // Obtener el link de la empresa (id)
+        data.maquina.empresa.subscribe(
+          Response => {
+            this.maquina.empresa = Response._links.self.href;
+          }
+        )
+
+        // Obtener el link del tipo de maquina (id)
+        data.maquina.tipoMaquina.subscribe(
+          Response => {
+            this.maquina.tipoMaquina = Response._links.self.href;
+          }
+        );
+
+
       }
     );
-    
+
   }
 
   public ngOnInit() {
