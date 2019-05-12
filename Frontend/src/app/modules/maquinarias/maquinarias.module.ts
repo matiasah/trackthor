@@ -7,12 +7,14 @@ import { MaquinariasRoutingModule } from './maquinarias-routing.module';
 import { MaquinariasComponent } from './maquinarias/maquinarias.component';
 import { RegistrarMaquinariaComponent } from './registrar-maquinaria/registrar-maquinaria.component';
 import { EliminarMaquinaComponent } from './eliminar-maquina/eliminar-maquina.component';
+import { EditarMaquinaComponent } from './editar-maquina/editar-maquina.component';
 
 @NgModule({
     declarations: [
         MaquinariasComponent,
-        RegistrarMaquinariaComponent,        
+        RegistrarMaquinariaComponent,
         EliminarMaquinaComponent,
+        EditarMaquinaComponent,
     ],
     imports: [
         CommonModule,

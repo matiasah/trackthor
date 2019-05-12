@@ -14,7 +14,7 @@
             <mat-placeholder>
                 <mat-icon>search</mat-icon>Buscar Maquinaria
             </mat-placeholder>
-            <input matInput name="busqueda">
+            <input matInput name="busqueda" [(ngModel)]="dataSource.filter">
         </mat-form-field>
 
         <table mat-table class="w-100" [dataSource]="dataSource" matSort>
@@ -61,16 +61,6 @@
                 </mat-header-cell>
                 <mat-cell *matCellDef="let maquinaria">
                     {{ maquinaria.createdAt | date: 'short' : undefined : 'es-CL' }}
-                </mat-cell>
-            </ng-container>
-
-            <!-- Mostrar más detalles -->
-            <ng-container matColumnDef="show">
-                <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                <mat-cell *matCellDef="let maquinaria">
-                    <button mat-icon-button matTooltip="Editar maquinaria">
-                        <mat-icon>visibility</mat-icon>
-                    </button>
                 </mat-cell>
             </ng-container>
 
