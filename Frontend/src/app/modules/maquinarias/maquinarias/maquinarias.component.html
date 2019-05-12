@@ -39,6 +39,21 @@
                 </mat-cell>
             </ng-container>
 
+            <!-- Tipo -->
+            <ng-container matColumnDef="tipo">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Tipo
+                </mat-header-cell>
+                <mat-cell *matCellDef="let maquinaria">
+                    <span *ngIf="maquinaria.tipoMaquina | async; let tipoMaquina; else esperandoTipo">
+                        {{tipoMaquina.nombre}}
+                    </span>
+                    <ng-template #esperandoTipo>
+                        <mat-spinner diameter="32"></mat-spinner>
+                    </ng-template>
+                </mat-cell>
+            </ng-container>
+
             <!-- Fecha de registro de la maquina -->
             <ng-container matColumnDef="fecha_registro">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>

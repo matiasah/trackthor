@@ -16,7 +16,7 @@ import { EliminarMaquinaComponent } from '../eliminar-maquina/eliminar-maquina.c
 export class MaquinariasComponent implements OnInit {
 
     // Columnas de datatable
-    public displayedColumns: string[] = ['numero', 'patente', 'fecha_registro', 'show', 'edit', 'delete'];
+    public displayedColumns: string[] = ['numero', 'patente', 'tipo', 'fecha_registro', 'show', 'edit', 'delete'];
 
     // Paginación
     public paginator: Paginator<Maquina>;

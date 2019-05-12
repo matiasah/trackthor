@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Pagination } from './pagination';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Page } from './page';
+import { LazyModel } from './lazy-model';
 
 export class Paginator<T> {
 
@@ -66,7 +67,7 @@ export class Paginator<T> {
         this.http.get<Pagination>(environment.api + this.path + '?' + sortPath + pageAndSizePath).subscribe(
             Response => {
                 // Obtener datos
-                this.dataSource.data = Response._embedded[this.attribute];
+                this.dataSource.data = Response._embedded[this.attribute].map(object => new LazyModel(this.http, object));
 
                 // Indicar la pagina actual
                 this.pageSubject.next({
