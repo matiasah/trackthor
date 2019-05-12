@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		configuration.setAllowCredentials(true);
 		configuration.setAllowedOrigins(Arrays.asList("*", "localhost"));
 		configuration.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));
-		configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+		configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
 		
 
 		// Rutas de cors
