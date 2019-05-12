@@ -38,4 +38,8 @@ export class MaquinaService {
     public delete(maquina: Maquina): Observable<any> {
         return this.http.delete(maquina._links.self.href);
     }
+
+    public getAtributo(url: string): Observable<any> {
+        return this.http.get<any>(url);
+    }
 }

@@ -73,7 +73,7 @@
             <ng-container matColumnDef="delete">
                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
                 <mat-cell *matCellDef="let maquinaria">
-                    <button mat-icon-button matTooltip="Eliminar maquinaria">
+                    <button mat-icon-button matTooltip="Eliminar maquinaria" (click)="eliminar(maquinaria)">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </mat-cell>

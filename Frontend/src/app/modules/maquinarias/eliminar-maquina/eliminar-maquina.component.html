@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-12 d-flex justify-content-between">
+    <h2 mat-dialog-title>
+      Eliminar Maquina
+    </h2>
+
+    <button mat-icon-button mat-dialog-close>
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>
+
+<mat-dialog-content class="row">
+  <mat-list role="list">
+
+    <mat-list-item role="listitem">
+      <p>
+        <b>Patente: </b>{{ maquina.patente }}
+      </p>
+    </mat-list-item>
+
+    <mat-list-item role="listitem">
+      <p>
+        <b>Fecha de Registro: </b>
+        {{ maquina.createdAt | date: 'short' : undefined : 'es-CL' }}
+      </p>
+    </mat-list-item>
+  </mat-list>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <div *ngIf="!eliminando" class="col-sm-12 col-md-3 offset-sm-0 offset-md-6">
+    <button style="width: 100%" (click)="eliminar()" mat-raised-button color="primary">Eliminar</button>
+  </div>
+
+  <div *ngIf="!eliminando" class="col-sm-12 col-md-3 offset-sm-0">
+    <button style="width: 100%" mat-raised-button mat-dialog-close color="warn">Cancelar</button>
+  </div>
+
+  <div class="col-12" *ngIf="eliminando">
+    <mat-progress-spinner style="margin: 0 auto;" diameter="48" color="primary" mode="indeterminate">
+    </mat-progress-spinner>
+  </div>
+</mat-dialog-actions>

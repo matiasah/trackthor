@@ -6,6 +6,7 @@ import { Page } from 'src/app/models/page';
 import { MaquinaService } from 'src/app/services/maquina.service';
 import { Maquina } from 'src/app/models/maquina';
 import { RegistrarMaquinariaComponent } from '../registrar-maquinaria/registrar-maquinaria.component';
+import { EliminarMaquinaComponent } from '../eliminar-maquina/eliminar-maquina.component';
 
 @Component({
     selector: 'app-maquinarias',
@@ -55,6 +56,16 @@ export class MaquinariasComponent implements OnInit {
 
     public registrar() {
         this.dialog.open(RegistrarMaquinariaComponent, { width: '1000px' });
+    }
+
+    public eliminar(maquina: Maquina) {
+        this.dialog.open(EliminarMaquinaComponent, {
+            width: '1000px',
+            data: { maquina }
+        }).afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+            console.log(result);
+        });
     }
 
 }

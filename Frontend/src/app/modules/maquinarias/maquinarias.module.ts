@@ -6,11 +6,13 @@ import { MaquinariasRoutingModule } from './maquinarias-routing.module';
 
 import { MaquinariasComponent } from './maquinarias/maquinarias.component';
 import { RegistrarMaquinariaComponent } from './registrar-maquinaria/registrar-maquinaria.component';
+import { EliminarMaquinaComponent } from './eliminar-maquina/eliminar-maquina.component';
 
 @NgModule({
     declarations: [
         MaquinariasComponent,
-        RegistrarMaquinariaComponent,
+        RegistrarMaquinariaComponent,        
+        EliminarMaquinaComponent,
     ],
     imports: [
         CommonModule,
@@ -21,6 +23,7 @@ import { RegistrarMaquinariaComponent } from './registrar-maquinaria/registrar-m
     ],
     entryComponents: [
         RegistrarMaquinariaComponent,
+        EliminarMaquinaComponent
     ]
 })
 export class MaquinariasModule { }
