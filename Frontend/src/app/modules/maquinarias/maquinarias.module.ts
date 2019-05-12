@@ -25,7 +25,8 @@ import { EditarMaquinaComponent } from './editar-maquina/editar-maquina.componen
     ],
     entryComponents: [
         RegistrarMaquinariaComponent,
-        EliminarMaquinaComponent
+        EliminarMaquinaComponent,
+        EditarMaquinaComponent,
     ]
 })
 export class MaquinariasModule { }

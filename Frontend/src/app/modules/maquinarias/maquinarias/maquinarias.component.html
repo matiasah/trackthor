@@ -68,7 +68,7 @@
             <ng-container matColumnDef="edit">
                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
                 <mat-cell *matCellDef="let maquinaria">
-                    <button mat-icon-button matTooltip="Editar maquinaria">
+                    <button mat-icon-button matTooltip="Editar maquinaria" (click)="editar(maquinaria)">
                         <mat-icon>settings</mat-icon>
                     </button>
                 </mat-cell>
