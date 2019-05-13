@@ -17,7 +17,7 @@ import { EditarMaquinaComponent } from '../editar-maquina/editar-maquina.compone
 export class MaquinariasComponent implements OnInit {
 
     // Columnas de datatable
-    public displayedColumns: string[] = ['numero', 'patente', 'tipo', 'fecha_registro', 'edit', 'delete'];
+    public displayedColumns: string[] = ['patente', 'tipo', 'fecha_registro', 'edit', 'delete'];
 
     // Paginación
     public paginator: Paginator<Maquina>;

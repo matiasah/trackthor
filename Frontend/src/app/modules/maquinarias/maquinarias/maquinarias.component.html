@@ -19,16 +19,6 @@
 
         <table mat-table class="w-100" [dataSource]="dataSource" matSort>
 
-            <!-- Contador de registros mostrados -->
-            <ng-container matColumnDef="numero">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>
-                    #
-                </mat-header-cell>
-                <mat-cell *matCellDef="let maquinaria; let i = index;">
-                    {{ i+1 }}
-                </mat-cell>
-            </ng-container>
-
             <!-- Patente -->
             <ng-container matColumnDef="patente">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>
