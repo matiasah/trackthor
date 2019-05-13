@@ -9,12 +9,16 @@ import { RegistrarMaquinariaComponent } from './registrar-maquinaria/registrar-m
 import { EliminarMaquinaComponent } from './eliminar-maquina/eliminar-maquina.component';
 import { EditarMaquinaComponent } from './editar-maquina/editar-maquina.component';
 
+import { HttpPipe } from 'src/app/pipes/http.pipe';
+
 @NgModule({
     declarations: [
         MaquinariasComponent,
         RegistrarMaquinariaComponent,
         EliminarMaquinaComponent,
         EditarMaquinaComponent,
+
+        HttpPipe,
     ],
     imports: [
         CommonModule,

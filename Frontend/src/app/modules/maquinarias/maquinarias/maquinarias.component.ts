@@ -69,7 +69,7 @@ export class MaquinariasComponent implements OnInit {
     public editar(maquina: Maquina) {
         this.dialog.open(EditarMaquinaComponent, {
             width: '1000px',
-            data: { maquina }
+            data: maquina
         });
     }
 

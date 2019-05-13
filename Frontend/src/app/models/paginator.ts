@@ -4,17 +4,8 @@ import { environment } from 'src/environments/environment';
 import { Pagination } from './pagination';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Page } from './page';
-import { LazyModel } from './lazy-model';
 
 export class Paginator<T> {
-
-    private dataSource: MatTableDataSource<T>;
-    private sort: any = {};
-    private pageIndex = 0;
-    private pageSize = 5;
-
-    public pageSubject: BehaviorSubject<Page> = new BehaviorSubject({pageIndex: 0, length: 0});
-    public isLoadingSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
     public constructor(
         private http: HttpClient,
@@ -23,6 +14,14 @@ export class Paginator<T> {
     ) {
 
     }
+
+    private dataSource: MatTableDataSource<T>;
+    private sort: any = {};
+    private pageIndex = 0;
+    private pageSize = 5;
+
+    public pageSubject: BehaviorSubject<Page> = new BehaviorSubject({ pageIndex: 0, length: 0 });
+    public isLoadingSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
     public init(dataSource: MatTableDataSource<T>, paginator: MatPaginator, sort: MatSort): void {
         this.dataSource = dataSource;
@@ -67,7 +66,7 @@ export class Paginator<T> {
         this.http.get<Pagination>(environment.api + this.path + '?' + sortPath + pageAndSizePath).subscribe(
             Response => {
                 // Obtener datos
-                this.dataSource.data = Response._embedded[this.attribute].map(object => new LazyModel(this.http, object));
+                this.dataSource.data = Response._embedded[this.attribute];
 
                 // Indicar la pagina actual
                 this.pageSubject.next({

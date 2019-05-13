@@ -27,6 +27,10 @@ export class EmpresaService {
             .pipe(map(Response => Response._embedded.empresas));
     }
 
+    public get(path: string): Observable<Empresa> {
+        return this.http.get<Empresa>(path);
+    }
+
     public save(empresa: Empresa): Observable<any> {
         return this.http.post(environment.api + 'empresas', empresa);
     }

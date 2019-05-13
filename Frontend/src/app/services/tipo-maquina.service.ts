@@ -27,6 +27,10 @@ export class TipoMaquinaService {
             .pipe(map(Response => Response._embedded['tipos-maquinas']));
     }
 
+    public get(path: string): Observable<TipoMaquina> {
+        return this.http.get<TipoMaquina>(path);
+    }
+
     public save(tipoMaquina: TipoMaquina): Observable<any> {
         return this.http.post(environment.api + 'tipos-maquinas', tipoMaquina);
     }

@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-12 d-flex justify-content-between">
         <h2 mat-dialog-title>
-            Registrar Maquinaria
+            Editar maquinaria
         </h2>
 
         <button mat-icon-button mat-dialog-close>
@@ -13,13 +13,13 @@
 <form #form="ngForm" (ngSubmit)="onSubmit()">
 
     <mat-dialog-content>
-        <div *ngIf="!empresas || !tiposMaquinas" class="row">
+        <div *ngIf="!maquina || !empresas || !tiposMaquinas" class="row">
             <div class="col-12 justify-content-center d-flex">
                 <mat-spinner></mat-spinner>
             </div>
         </div>
 
-        <div *ngIf="empresas && tiposMaquinas" class="row">
+        <div *ngIf="maquina && empresas && tiposMaquinas" class="row">
             <mat-form-field class="col-12">
                 <input matInput name="patente" [(ngModel)]="maquina.patente" required placeholder="Patente">
             </mat-form-field>
@@ -47,16 +47,15 @@
 
     <mat-dialog-actions>
         <div *ngIf="!registrando" class="col-sm-12 col-md-3 offset-sm-0 offset-md-6">
-            <button style="width: 100%" type="submit" mat-raised-button color="primary">Guardar Cambios</button>
+            <button class="w-100" type="submit" mat-raised-button color="primary">Actualizar</button>
         </div>
 
         <div *ngIf="!registrando" class="col-sm-12 col-md-3 offset-sm-0">
-            <button style="width: 100%" mat-raised-button mat-dialog-close color="warn">Cancelar</button>
+            <button class="w-100" mat-raised-button mat-dialog-close color="warn">Cancelar</button>
         </div>
 
-        <div class="col-12" *ngIf="registrando">
-            <mat-progress-spinner style="margin: 0 auto;" diameter="48" color="primary" mode="indeterminate">
-            </mat-progress-spinner>
+        <div class="col-12 justify-content-center d-flex" *ngIf="registrando">
+            <mat-progress-spinner diameter="48" color="primary" mode="indeterminate"></mat-progress-spinner>
         </div>
     </mat-dialog-actions>
 

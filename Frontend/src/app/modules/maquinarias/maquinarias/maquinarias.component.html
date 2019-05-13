@@ -45,7 +45,7 @@
                     Tipo
                 </mat-header-cell>
                 <mat-cell *matCellDef="let maquinaria">
-                    <span *ngIf="maquinaria.tipoMaquina | async; let tipoMaquina; else esperandoTipo">
+                    <span *ngIf="(maquinaria._links.tipoMaquina.href | http | async); let tipoMaquina; else esperandoTipo">
                         {{tipoMaquina.nombre}}
                     </span>
                     <ng-template #esperandoTipo>

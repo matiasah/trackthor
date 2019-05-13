@@ -27,6 +27,10 @@ export class MaquinaService {
             .pipe(map(Response => Response._embedded.maquinas));
     }
 
+    public get(path: string): Observable<Maquina> {
+        return this.http.get<Maquina>(path);
+    }
+
     public save(maquina: Maquina): Observable<any> {
         return this.http.post(environment.api + 'maquinarias', maquina);
     }
@@ -37,9 +41,5 @@ export class MaquinaService {
 
     public delete(maquina: Maquina): Observable<any> {
         return this.http.delete(maquina._links.self.href);
-    }
-
-    public getAtributo(url: string): Observable<any> {
-        return this.http.get<any>(url);
     }
 }
