@@ -33,9 +33,12 @@ export class EliminarMaquinaComponent implements OnInit {
     }
 
     public eliminar() {
+        // Indicar que se encuentra eliminando
+        this.eliminando = true;
+
+        // Eliminar
         this.maquinaService.delete(this.maquina).subscribe(
             Response => {
-
                 // Indicar que no se encuentra registrando
                 this.eliminando = false;
 
