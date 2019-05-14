@@ -20,6 +20,10 @@ const routes: Routes = [
             {
                 path: 'maquinas',
                 loadChildren: '../maquinas/maquinas.module#MaquinasModule'
+            },
+            {
+                path: 'choferes',
+                loadChildren: '../choferes/choferes.module#ChoferesModule'
             }
         ]
     }

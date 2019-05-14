@@ -15,8 +15,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 @Table(name = "trs_usuario_chofer")
 public class UsuarioChofer extends Usuario {
 
-    @Column(name = "usc_rut", nullable = false)
-    private String rut;
+    @Column(name = "usc_run", nullable = false)
+    private String run;
+
+    @Column(name = "usc_nombres", nullable = false)
+    private String nombresChofer;
 
     @OneToMany(mappedBy = "usuario")
     private Set<Alerta> alertas = new HashSet<>();
@@ -33,12 +36,12 @@ public class UsuarioChofer extends Usuario {
         return Arrays.asList(new SimpleGrantedAuthority("USER_CHOFER"));
     }
 
-    public String getRut() {
-        return rut;
+    public String getRun() {
+        return run;
     }
 
-    public void setRut(String rut) {
-        this.rut = rut;
+    public void setRun(String run) {
+        this.run = run;
     }
 
     public Set<Alerta> getAlertas() {
