@@ -54,7 +54,7 @@ export class Paginator<T> {
         let sortPath = '';
 
         for (const [column, direction] of Object.entries(this.sort)) {
-            sortPath += column + ',' + direction + '&';
+            sortPath += 'sort=' + column + ',' + direction + '&';
         }
 
         // Pagina y tamaño
