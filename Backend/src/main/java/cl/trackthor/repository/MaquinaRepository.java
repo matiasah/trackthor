@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-@RepositoryRestResource(path = "maquina", collectionResourceRel = "maquina")
+@RepositoryRestResource(path = "maquinas", collectionResourceRel = "maquinas")
 public interface MaquinaRepository extends PagingAndSortingRepository<Maquina,Long> {
 
     @Override
