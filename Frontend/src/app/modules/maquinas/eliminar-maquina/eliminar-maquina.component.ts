@@ -16,7 +16,7 @@ export class EliminarMaquinaComponent implements OnInit {
     public constructor(
         private dialogRef: MatDialogRef<EliminarMaquinaComponent>,
         private maquinaService: MaquinaService,
-        @Inject(MAT_DIALOG_DATA) private maquina: Maquina,
+        @Inject(MAT_DIALOG_DATA) public maquina: Maquina,
         private snackBar: MatSnackBar,
     ) {
 
