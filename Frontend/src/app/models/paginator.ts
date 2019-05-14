@@ -27,7 +27,6 @@ export class Paginator<T> {
         this.dataSource = dataSource;
         this.dataSource.paginator = paginator;
         this.dataSource.sort = sort;
-        this.pageSize = paginator.pageSize;
 
         // Al cambiar la pagina actual
         paginator.page.subscribe((event: PageEvent) => {
