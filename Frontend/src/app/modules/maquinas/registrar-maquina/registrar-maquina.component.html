@@ -20,6 +20,11 @@
         </div>
 
         <div *ngIf="empresas && tiposMaquinas" class="row">
+
+            <mat-card *ngIf="form.submitted && (!maquina.latitud || !maquina.longitud)" class="bg-warn col-12">
+                Debe indicar la ubicación de la máquina.
+            </mat-card>
+
             <mat-form-field class="col-12">
                 <input matInput name="patente" [(ngModel)]="maquina.patente" required placeholder="Patente">
             </mat-form-field>
@@ -41,6 +46,38 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
+
+            <mat-form-field class="col-sm-12 col-md-6">
+                <input matInput name="latitud" [(ngModel)]="maquina.latitud" required placeholder="Latitud">
+            </mat-form-field>
+
+            <mat-form-field class="col-sm-12 col-md-6">
+                <input matInput name="longitud" [(ngModel)]="maquina.longitud" required placeholder="Longitud">
+            </mat-form-field>
+
+            <div class="col-12">
+                <aol-map width="100%" height="300px" (onSingleClick)="setCoordenada($event)">
+                    <aol-interaction-default></aol-interaction-default>
+                    <aol-view>
+                        <aol-coordinate></aol-coordinate>
+                    </aol-view>
+                    <aol-layer-tile>
+                        <aol-source-osm></aol-source-osm>
+                    </aol-layer-tile>
+                    <aol-layer-vector *ngIf="maquina.latitud && maquina.longitud">
+                        <aol-source-vector>
+                            <aol-feature>
+                                <aol-geometry-point>
+                                    <aol-coordinate [x]="maquina.latitud" [y]="maquina.longitud" [srid]="'EPSG:4326'"></aol-coordinate>
+                                </aol-geometry-point>
+                                <aol-style>
+                                    <aol-style-icon src="assets/img/icons8-tractor-48.png"></aol-style-icon>
+                                </aol-style>
+                            </aol-feature>
+                        </aol-source-vector>
+                    </aol-layer-vector>
+                </aol-map>
+            </div>
 
         </div>
     </mat-dialog-content>

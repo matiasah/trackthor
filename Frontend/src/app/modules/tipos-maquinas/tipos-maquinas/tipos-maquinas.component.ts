@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSort, MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
+import { MatSort, MatPaginator, MatTableDataSource, MatDialog, MatDialogRef } from '@angular/material';
 import { Observable } from 'rxjs';
 import { Paginator } from 'src/app/models/paginator';
 import { Page } from 'src/app/models/page';
@@ -56,7 +56,18 @@ export class TiposMaquinasComponent implements OnInit {
     }
 
     public registrar() {
-        this.dialog.open(RegistrarTipoMaquinaComponent, { width: '1000px' });
+        // Abrir dialogo
+        const ref: MatDialogRef<RegistrarTipoMaquinaComponent> = this.dialog.open(RegistrarTipoMaquinaComponent, {
+            width: '1000px'
+        });
+
+        // Al cerrar dialogo
+        ref.afterClosed().subscribe(
+            response => {
+                // Actualizar paginador
+                this.paginator.update();
+            }
+        );
     }
 
 }
