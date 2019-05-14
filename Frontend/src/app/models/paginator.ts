@@ -32,7 +32,7 @@ export class Paginator<T> {
         paginator.page.subscribe((event: PageEvent) => {
             this.pageIndex = event.pageIndex;
             this.pageSize = event.pageSize;
-            this.query();
+            this.update();
         });
 
         // Al cambiar el orden de alguna columna
@@ -42,13 +42,13 @@ export class Paginator<T> {
             } else {
                 this.sort[event.active] = event.direction;
             }
-            this.query();
+            this.update();
         });
 
-        this.query();
+        this.update();
     }
 
-    private query(): void {
+    public update(): void {
         // Ordenamiento de columnas
         let sortPath = '';
 

@@ -1,20 +1,20 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatSort, MatPaginator, MatDialog } from '@angular/material';
+import { MatTableDataSource, MatSort, MatPaginator, MatDialog, MatDialogRef } from '@angular/material';
 import { Observable } from 'rxjs';
 import { Paginator } from 'src/app/models/paginator';
 import { Page } from 'src/app/models/page';
 import { MaquinaService } from 'src/app/services/maquina.service';
 import { Maquina } from 'src/app/models/maquina';
-import { RegistrarMaquinariaComponent } from '../registrar-maquinaria/registrar-maquinaria.component';
+import { RegistrarMaquinaComponent } from '../registrar-maquina/registrar-maquina.component';
 import { EliminarMaquinaComponent } from '../eliminar-maquina/eliminar-maquina.component';
 import { EditarMaquinaComponent } from '../editar-maquina/editar-maquina.component';
 
 @Component({
-    selector: 'app-maquinarias',
-    templateUrl: './maquinarias.component.html',
-    styleUrls: ['./maquinarias.component.scss']
+    selector: 'app-maquinas',
+    templateUrl: './maquinas.component.html',
+    styleUrls: ['./maquinas.component.scss']
 })
-export class MaquinariasComponent implements OnInit {
+export class MaquinasComponent implements OnInit {
 
     // Columnas de datatable
     public displayedColumns: string[] = ['patente', 'tipo', 'fecha_registro', 'edit', 'delete'];
@@ -56,21 +56,50 @@ export class MaquinariasComponent implements OnInit {
     }
 
     public registrar() {
-        this.dialog.open(RegistrarMaquinariaComponent, { width: '1000px' });
-    }
-
-    public eliminar(maquina: Maquina) {
-        this.dialog.open(EliminarMaquinaComponent, {
-            width: '1000px',
-            data: { maquina }
+        // Crear dialogo
+        const ref: MatDialogRef<RegistrarMaquinaComponent> = this.dialog.open(RegistrarMaquinaComponent, {
+            width: '1000px'
         });
+
+        // Al cerrar dialogo
+        ref.afterClosed().subscribe(
+            response => {
+                // Actualizar paginador
+                this.paginator.update();
+            }
+        );
     }
 
     public editar(maquina: Maquina) {
-        this.dialog.open(EditarMaquinaComponent, {
+        // Crear dialogo
+        const ref: MatDialogRef<EditarMaquinaComponent> = this.dialog.open(EditarMaquinaComponent, {
+            width: '1000px',
+            data: maquina
+        })
+
+        // Al cerrar dialogo
+        ref.afterClosed().subscribe(
+            response => {
+                // Actualizar paginador
+                this.paginator.update();
+            }
+        );
+    }
+
+    public eliminar(maquina: Maquina) {
+        // Crear dialogo
+        const ref: MatDialogRef<EliminarMaquinaComponent> = this.dialog.open(EliminarMaquinaComponent, {
             width: '1000px',
             data: maquina
         });
+
+        // Al cerrar dialogo
+        ref.afterClosed().subscribe(
+            response => {
+                // Actualizar paginador
+                this.paginator.update();
+            }
+        );
     }
 
 }

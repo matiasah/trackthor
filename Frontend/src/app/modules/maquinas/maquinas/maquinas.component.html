@@ -1,7 +1,7 @@
 <mat-card class="m-3 mat-elevation-z2">
 
     <mat-card-title>
-        Maquinarias
+        Máquinas
     </mat-card-title>
 
     <mat-card-content>
@@ -12,7 +12,7 @@
 
         <mat-form-field class="w-100">
             <mat-placeholder>
-                <mat-icon>search</mat-icon>Buscar Maquinaria
+                <mat-icon>search</mat-icon>Buscar máquina
             </mat-placeholder>
             <input matInput name="busqueda" [(ngModel)]="dataSource.filter">
         </mat-form-field>
@@ -24,8 +24,8 @@
                 <mat-header-cell *matHeaderCellDef mat-sort-header>
                     Patente
                 </mat-header-cell>
-                <mat-cell *matCellDef="let maquinaria">
-                    {{maquinaria.patente}}
+                <mat-cell *matCellDef="let maquina">
+                    {{maquina.patente}}
                 </mat-cell>
             </ng-container>
 
@@ -34,8 +34,8 @@
                 <mat-header-cell *matHeaderCellDef>
                     Tipo
                 </mat-header-cell>
-                <mat-cell *matCellDef="let maquinaria">
-                    <span *ngIf="(maquinaria._links.tipoMaquina.href | http | async); let tipoMaquina; else esperandoTipo">
+                <mat-cell *matCellDef="let maquina">
+                    <span *ngIf="(maquina._links.tipoMaquina.href | http | async); let tipoMaquina; else esperandoTipo">
                         {{tipoMaquina.nombre}}
                     </span>
                     <ng-template #esperandoTipo>
@@ -49,16 +49,16 @@
                 <mat-header-cell *matHeaderCellDef mat-sort-header>
                     Fecha Registro
                 </mat-header-cell>
-                <mat-cell *matCellDef="let maquinaria">
-                    {{ maquinaria.createdAt | date: 'short' : undefined : 'es-CL' }}
+                <mat-cell *matCellDef="let maquina">
+                    {{ maquina.createdAt | date: 'short' : undefined : 'es-CL' }}
                 </mat-cell>
             </ng-container>
 
             <!-- Editar -->
             <ng-container matColumnDef="edit">
                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                <mat-cell *matCellDef="let maquinaria">
-                    <button mat-icon-button matTooltip="Editar maquinaria" (click)="editar(maquinaria)">
+                <mat-cell *matCellDef="let maquina">
+                    <button mat-icon-button matTooltip="Editar máquina" (click)="editar(maquina)">
                         <mat-icon>settings</mat-icon>
                     </button>
                 </mat-cell>
@@ -67,8 +67,8 @@
             <!-- Eliminar -->
             <ng-container matColumnDef="delete">
                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                <mat-cell *matCellDef="let maquinaria">
-                    <button mat-icon-button matTooltip="Eliminar maquinaria" (click)="eliminar(maquinaria)">
+                <mat-cell *matCellDef="let maquina">
+                    <button mat-icon-button matTooltip="Eliminar máquina" (click)="eliminar(maquina)">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </mat-cell>

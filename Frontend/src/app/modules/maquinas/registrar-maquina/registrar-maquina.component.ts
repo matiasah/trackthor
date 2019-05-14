@@ -9,11 +9,11 @@ import { EmpresaService } from 'src/app/services/empresa.service';
 import { Empresa } from 'src/app/models/empresa';
 
 @Component({
-    selector: 'app-registrar-maquinaria',
-    templateUrl: './registrar-maquinaria.component.html',
-    styleUrls: ['./registrar-maquinaria.component.scss']
+    selector: 'app-registrar-maquina',
+    templateUrl: './registrar-maquina.component.html',
+    styleUrls: ['./registrar-maquina.component.scss']
 })
-export class RegistrarMaquinariaComponent implements OnInit {
+export class RegistrarMaquinaComponent implements OnInit {
 
     // Maquina a registrar
     public maquina: Maquina = {};
@@ -32,7 +32,7 @@ export class RegistrarMaquinariaComponent implements OnInit {
     public form: NgForm;
 
     public constructor(
-        private dialogRef: MatDialogRef<RegistrarMaquinariaComponent>,
+        private dialogRef: MatDialogRef<RegistrarMaquinaComponent>,
         private snackBar: MatSnackBar,
         private maquinaService: MaquinaService,
         private tipoMaquinaService: TipoMaquinaService,

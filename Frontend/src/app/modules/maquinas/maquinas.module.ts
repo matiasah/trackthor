@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
-import { MaquinariasRoutingModule } from './maquinarias-routing.module';
+import { MaquinasRoutingModule } from './maquinas-routing.module';
 
-import { MaquinariasComponent } from './maquinarias/maquinarias.component';
-import { RegistrarMaquinariaComponent } from './registrar-maquinaria/registrar-maquinaria.component';
+import { MaquinasComponent } from './maquinas/maquinas.component';
+import { RegistrarMaquinaComponent } from './registrar-maquina/registrar-maquina.component';
 import { EliminarMaquinaComponent } from './eliminar-maquina/eliminar-maquina.component';
 import { EditarMaquinaComponent } from './editar-maquina/editar-maquina.component';
 
@@ -13,8 +13,8 @@ import { HttpPipe } from 'src/app/pipes/http.pipe';
 
 @NgModule({
     declarations: [
-        MaquinariasComponent,
-        RegistrarMaquinariaComponent,
+        MaquinasComponent,
+        RegistrarMaquinaComponent,
         EliminarMaquinaComponent,
         EditarMaquinaComponent,
 
@@ -25,12 +25,12 @@ import { HttpPipe } from 'src/app/pipes/http.pipe';
         FormsModule,
         ReactiveFormsModule,
         MaterialModule,
-        MaquinariasRoutingModule,
+        MaquinasRoutingModule,
     ],
     entryComponents: [
-        RegistrarMaquinariaComponent,
+        RegistrarMaquinaComponent,
         EliminarMaquinaComponent,
         EditarMaquinaComponent,
     ]
 })
-export class MaquinariasModule { }
+export class MaquinasModule { }

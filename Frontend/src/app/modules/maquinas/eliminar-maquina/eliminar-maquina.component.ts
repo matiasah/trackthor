@@ -10,21 +10,15 @@ import { Maquina } from 'src/app/models/maquina';
 })
 export class EliminarMaquinaComponent implements OnInit {
 
-    // Máquina que se desea eliminar
-    public maquina: Maquina;
-
     // Indicar que se encuentra eliminando
     public eliminando = false;
 
     public constructor(
         private dialogRef: MatDialogRef<EliminarMaquinaComponent>,
         private maquinaService: MaquinaService,
-        @Inject(MAT_DIALOG_DATA) private data: any,
+        @Inject(MAT_DIALOG_DATA) private maquina: Maquina,
         private snackBar: MatSnackBar,
     ) {
-
-        // Modelo maquina datos para almacenar la maquina
-        this.maquina = data.maquina;
 
     }
 

@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-12 d-flex justify-content-between">
         <h2 mat-dialog-title>
-            Registrar Maquinaria
+            Editar maquina
         </h2>
 
         <button mat-icon-button mat-dialog-close>
@@ -13,13 +13,13 @@
 <form #form="ngForm" (ngSubmit)="onSubmit()">
 
     <mat-dialog-content>
-        <div *ngIf="!empresas || !tiposMaquinas" class="row">
+        <div *ngIf="!maquina || !empresas || !tiposMaquinas" class="row">
             <div class="col-12 justify-content-center d-flex">
                 <mat-spinner></mat-spinner>
             </div>
         </div>
 
-        <div *ngIf="empresas && tiposMaquinas" class="row">
+        <div *ngIf="maquina && empresas && tiposMaquinas" class="row">
             <mat-form-field class="col-12">
                 <input matInput name="patente" [(ngModel)]="maquina.patente" required placeholder="Patente">
             </mat-form-field>
@@ -47,7 +47,7 @@
 
     <mat-dialog-actions>
         <div *ngIf="!registrando" class="col-sm-12 col-md-3 offset-sm-0 offset-md-6">
-            <button class="w-100" type="submit" mat-raised-button color="primary">Registrar</button>
+            <button class="w-100" type="submit" mat-raised-button color="primary">Actualizar</button>
         </div>
 
         <div *ngIf="!registrando" class="col-sm-12 col-md-3 offset-sm-0">

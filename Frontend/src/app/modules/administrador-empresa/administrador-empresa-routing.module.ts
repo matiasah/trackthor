@@ -18,8 +18,8 @@ const routes: Routes = [
                 component: HomeComponent
             },
             {
-                path: 'maquinarias',
-                loadChildren: '../maquinarias/maquinarias.module#MaquinariasModule'
+                path: 'maquinas',
+                loadChildren: '../maquinas/maquinas.module#MaquinasModule'
             }
         ]
     }

@@ -19,11 +19,11 @@ export class MaquinaService {
     }
 
     public getPaginator(): Paginator<any> {
-        return new Paginator(this.http, 'maquinarias', 'maquinarias');
+        return new Paginator(this.http, 'maquinas', 'maquinas');
     }
 
     public query(): Observable<Maquina[]> {
-        return this.http.get<Pagination>(environment.api + 'maquinarias')
+        return this.http.get<Pagination>(environment.api + 'maquinas')
             .pipe(map(Response => Response._embedded.maquinas));
     }
 
@@ -32,7 +32,7 @@ export class MaquinaService {
     }
 
     public save(maquina: Maquina): Observable<any> {
-        return this.http.post(environment.api + 'maquinarias', maquina);
+        return this.http.post(environment.api + 'maquinas', maquina);
     }
 
     public update(maquina: Maquina): Observable<any> {
