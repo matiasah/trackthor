@@ -19,7 +19,7 @@ export class MaquinaService {
     }
 
     public getPaginator(): Paginator<any> {
-        return new Paginator(this.http, 'maquinas', 'maquinas');
+        return new Paginator(this.http, 'maquinas/search/page', 'maquinas');
     }
 
     public query(): Observable<Maquina[]> {

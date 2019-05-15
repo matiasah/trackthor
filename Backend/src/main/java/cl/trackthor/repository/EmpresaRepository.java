@@ -1,13 +1,20 @@
 package cl.trackthor.repository;
 
 import cl.trackthor.model.Empresa;
+import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.rest.core.annotation.RestResource;
 
-public interface EmpresaRepository extends PagingAndSortingRepository<Empresa, Long> {
-
+@RepositoryRestResource(path = "empresas", collectionResourceRel = "empresas")
+public interface EmpresaRepository extends CrudRepository<Empresa, Long> {
+    
     @Override
-    public Page<Empresa> findAll(Pageable pageable);
+    public List<Empresa> findAll();
+    
+    @RestResource(path = "page", rel = "empresas")
+    public Page<Empresa> findBy(Pageable pageable);
 
 }

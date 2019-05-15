@@ -11,6 +11,7 @@ import { EliminarMaquinaComponent } from './eliminar-maquina/eliminar-maquina.co
 import { EditarMaquinaComponent } from './editar-maquina/editar-maquina.component';
 
 import { HttpPipe } from 'src/app/pipes/http.pipe';
+import { UbicacionMaquinasComponent } from './ubicacion-maquinas/ubicacion-maquinas.component';
 
 @NgModule({
     declarations: [
@@ -20,6 +21,8 @@ import { HttpPipe } from 'src/app/pipes/http.pipe';
         EditarMaquinaComponent,
 
         HttpPipe,
+
+        UbicacionMaquinasComponent,
     ],
     imports: [
         CommonModule,

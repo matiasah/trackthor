@@ -19,7 +19,7 @@ export class TipoMaquinaService {
     }
 
     public getPaginator(): Paginator<any> {
-        return new Paginator(this.http, 'tipos-maquinas', 'tipos-maquinas');
+        return new Paginator(this.http, 'tipos-maquinas/search/page', 'tipos-maquinas');
     }
 
     public query(): Observable<TipoMaquina[]> {
