@@ -36,6 +36,9 @@ public class Empresa implements Serializable {
 
     @OneToMany(mappedBy = "empresa")
     private Set<Maquina> maquinas = new HashSet<>();
+    
+    @OneToMany(mappedBy = "empresa")
+    private Set<UsuarioChofer> usuariosChoferes = new HashSet<>();
 
     @OneToMany(mappedBy = "empresa")
     private Set<Alerta> alertas = new HashSet<>();

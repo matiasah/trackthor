@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,6 +22,10 @@ public class UsuarioChofer extends Usuario {
 
     @Column(name = "usc_nombres", nullable = false)
     private String nombresChofer;
+
+    @ManyToOne
+    @JoinColumn(name = "maq_empresa_id")
+    private Empresa empresa;
 
     @OneToMany(mappedBy = "usuario")
     private Set<Alerta> alertas = new HashSet<>();
@@ -42,6 +48,14 @@ public class UsuarioChofer extends Usuario {
 
     public void setRun(String run) {
         this.run = run;
+    }
+
+    public String getNombresChofer() {
+        return this.nombresChofer;
+    }
+
+    public void setNombresChofer(String nombresChofer) {
+        this.nombresChofer = nombresChofer;
     }
 
     public Set<Alerta> getAlertas() {

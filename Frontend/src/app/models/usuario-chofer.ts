@@ -5,5 +5,6 @@ export interface UsuarioChofer {
     nombresChofer?: string;
     password?: string;
     createdAt?: Date;
+    empresa?: string;
     _links?: { [key: string]: { href: string } };
 }
