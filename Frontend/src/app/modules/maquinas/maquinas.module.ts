@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { MaquinasRoutingModule } from './maquinas-routing.module';
+import { AngularOpenlayersModule } from 'ngx-openlayers';
 
 import { MaquinasComponent } from './maquinas/maquinas.component';
 import { RegistrarMaquinaComponent } from './registrar-maquina/registrar-maquina.component';
@@ -24,8 +25,7 @@ import { PipesModule } from 'src/app/pipes/pipes/pipes.module';
         ReactiveFormsModule,
         MaterialModule,
         MaquinasRoutingModule,
-
-        PipesModule,
+        AngularOpenlayersModule,
     ],
     entryComponents: [
         RegistrarMaquinaComponent,

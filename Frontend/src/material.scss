@@ -26,4 +26,5 @@ $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
 
 .bg-success {
     background-color: mat-color($mat-green, 700);
+    color: white;
 }

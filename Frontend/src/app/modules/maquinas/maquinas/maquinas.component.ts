@@ -75,7 +75,7 @@ export class MaquinasComponent implements OnInit {
         const ref: MatDialogRef<EditarMaquinaComponent> = this.dialog.open(EditarMaquinaComponent, {
             width: '1000px',
             data: maquina
-        })
+        });
 
         // Al cerrar dialogo
         ref.afterClosed().subscribe(

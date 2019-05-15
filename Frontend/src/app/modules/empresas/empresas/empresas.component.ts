@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSort, MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
+import { MatSort, MatPaginator, MatTableDataSource, MatDialog, MatDialogRef } from '@angular/material';
 import { Observable } from 'rxjs';
 import { Paginator } from 'src/app/models/paginator';
 import { Page } from 'src/app/models/page';
@@ -15,7 +15,7 @@ import { RegistrarEmpresaComponent } from '../registrar-empresa/registrar-empres
 export class EmpresasComponent implements OnInit {
 
     // Columnas de datatable
-    public displayedColumns: string[] = ['nombre', 'rut', 'telefono', 'fecha_registro', 'show', 'edit', 'delete'];
+    public displayedColumns: string[] = ['nombre', 'rut', 'telefono', 'fecha_registro', 'edit', 'delete'];
 
     // Paginación
     public paginator: Paginator<Empresa>;
@@ -54,7 +54,18 @@ export class EmpresasComponent implements OnInit {
     }
 
     public registrar() {
-        this.dialog.open(RegistrarEmpresaComponent, { width: '1000px' });
+        // Abrir dialogo
+        const ref: MatDialogRef<RegistrarEmpresaComponent> = this.dialog.open(RegistrarEmpresaComponent, {
+            width: '1000px'
+        });
+
+        // Al cerrar dialogo
+        ref.afterClosed().subscribe(
+            response => {
+                // Actualizar paginador
+                this.paginator.update();
+            }
+        );
     }
 
 }
