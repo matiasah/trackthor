@@ -26,6 +26,7 @@ import { PipesModule } from 'src/app/pipes/pipes/pipes.module';
         MaterialModule,
         MaquinasRoutingModule,
         AngularOpenlayersModule,
+        PipesModule,
     ],
     entryComponents: [
         RegistrarMaquinaComponent,
