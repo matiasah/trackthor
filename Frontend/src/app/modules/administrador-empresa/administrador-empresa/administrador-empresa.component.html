@@ -3,6 +3,7 @@
         <button mat-icon-button (click)="sidenav.toggle()">
             <mat-icon>menu</mat-icon>
         </button>
+        <h4>TrackThor</h4>
     </mat-toolbar-row>
 </mat-toolbar>
 
@@ -19,6 +20,7 @@
                 </div>
             </mat-card-title>
         </mat-card>
+
 
         <mat-accordion>
             <mat-expansion-panel hideToggle>
@@ -75,6 +77,11 @@
                         <mat-icon>person_pin</mat-icon>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
+                <mat-list dense>
+                    <mat-list-item>
+                        <a routerLink="./choferes">Lista de Choferes</a>
+                    </mat-list-item>
+                </mat-list>
             </mat-expansion-panel>
 
             <mat-expansion-panel hideToggle>
