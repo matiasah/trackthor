@@ -2,13 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSnackBar, MatDialogRef } from '@angular/material';
 import { NgForm } from '@angular/forms';
 import { Geolocation, Map, View, MapBrowserEvent, Coordinate, proj } from 'openlayers';
+import { MapComponent } from 'ngx-openlayers';
 import { MaquinaService } from 'src/app/services/maquina.service';
 import { Maquina } from 'src/app/models/maquina';
 import { TipoMaquinaService } from 'src/app/services/tipo-maquina.service';
 import { TipoMaquina } from 'src/app/models/tipo-maquina';
 import { EmpresaService } from 'src/app/services/empresa.service';
 import { Empresa } from 'src/app/models/empresa';
-import { MapComponent } from 'ngx-openlayers';
 
 @Component({
     selector: 'app-registrar-maquina',

@@ -25,6 +25,12 @@ public class Maquina implements Serializable {
 
     @Column(name = "maq_patente", nullable = false)
     private String patente;
+    
+    @Column(name = "maq_latitud", nullable = false)
+    private double latitud;
+    
+    @Column(name = "maq_longitud", nullable = false)
+    private double longitud;
 
     @ManyToOne
     @JoinColumn(name = "maq_empresa_id")
@@ -59,6 +65,22 @@ public class Maquina implements Serializable {
 
     public void setPatente(String patente) {
         this.patente = patente;
+    }
+
+    public double getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(double latitud) {
+        this.latitud = latitud;
+    }
+
+    public double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(double longitud) {
+        this.longitud = longitud;
     }
 
     public Empresa getEmpresa() {
