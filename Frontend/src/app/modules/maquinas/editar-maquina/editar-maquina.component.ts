@@ -1,13 +1,15 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { NgForm } from '@angular/forms';
+import { Observable, forkJoin } from 'rxjs';
+import { Geolocation, Map, View, MapBrowserEvent, Coordinate, proj } from 'openlayers';
+import { MapComponent } from 'ngx-openlayers';
 import { MaquinaService } from 'src/app/services/maquina.service';
 import { Maquina } from 'src/app/models/maquina';
 import { TipoMaquinaService } from 'src/app/services/tipo-maquina.service';
-import { EmpresaService } from 'src/app/services/empresa.service';
 import { TipoMaquina } from 'src/app/models/tipo-maquina';
+import { EmpresaService } from 'src/app/services/empresa.service';
 import { Empresa } from 'src/app/models/empresa';
-import { NgForm } from '@angular/forms';
-import { Observable, forkJoin } from 'rxjs';
 
 @Component({
     selector: 'app-editar-maquina',
@@ -83,6 +85,26 @@ export class EditarMaquinaComponent implements OnInit {
         );
     }
 
+    @ViewChild(MapComponent)
+    public set map(mapComponent: MapComponent) {
+        if (mapComponent != null) {
+            // Obtener vista
+            const view: View = mapComponent.instance.getView();
+
+            // Centrar mapa
+            view.setCenter(proj.transform([this.maquina.latitud, this.maquina.longitud], 'EPSG:4326', 'EPSG:3857'));
+            view.setZoom(15);
+        }
+    }
+
+    public setCoordenada(e: MapBrowserEvent) {
+        // Transformar coordenadas
+        const coordinate: Coordinate = proj.transform(e.coordinate, 'EPSG:3857', 'EPSG:4326');
+
+        // Asignar coordenadas
+        this.maquina.latitud = coordinate[0];
+        this.maquina.longitud = coordinate[1];
+    }
 
     public onSubmit(): void {
         // Si el formulario es válido
