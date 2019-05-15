@@ -110,6 +110,14 @@ public class Empresa implements Serializable {
         this.maquinas = maquinas;
     }
 
+    public Set<UsuarioChofer> getUsuariosChoferes() {
+        return usuariosChoferes;
+    }
+
+    public void setUsuariosChoferes(Set<UsuarioChofer> usuariosChoferes) {
+        this.usuariosChoferes = usuariosChoferes;
+    }
+
     public Set<Alerta> getAlertas() {
         return alertas;
     }

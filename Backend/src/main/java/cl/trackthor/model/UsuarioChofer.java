@@ -73,5 +73,14 @@ public class UsuarioChofer extends Usuario {
     public void setHorasTrabajadas(Set<HoraTrabajada> horasTrabajadas) {
         this.horasTrabajadas = horasTrabajadas;
     }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+    
     
 }

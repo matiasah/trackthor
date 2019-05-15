@@ -9,7 +9,7 @@ import { RegistrarMaquinaComponent } from './registrar-maquina/registrar-maquina
 import { EliminarMaquinaComponent } from './eliminar-maquina/eliminar-maquina.component';
 import { EditarMaquinaComponent } from './editar-maquina/editar-maquina.component';
 
-import { HttpPipe } from 'src/app/pipes/http.pipe';
+import { PipesModule } from 'src/app/pipes/pipes/pipes.module';
 
 @NgModule({
     declarations: [
@@ -17,8 +17,6 @@ import { HttpPipe } from 'src/app/pipes/http.pipe';
         RegistrarMaquinaComponent,
         EliminarMaquinaComponent,
         EditarMaquinaComponent,
-
-        HttpPipe,
     ],
     imports: [
         CommonModule,
@@ -26,6 +24,8 @@ import { HttpPipe } from 'src/app/pipes/http.pipe';
         ReactiveFormsModule,
         MaterialModule,
         MaquinasRoutingModule,
+
+        PipesModule,
     ],
     entryComponents: [
         RegistrarMaquinaComponent,

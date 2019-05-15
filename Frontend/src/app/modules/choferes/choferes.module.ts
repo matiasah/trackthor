@@ -8,12 +8,14 @@ import { RegistrarChoferComponent } from './registrar-chofer/registrar-chofer.co
 import { EditarChoferComponent } from './editar-chofer/editar-chofer.component';
 import { EliminarChoferComponent } from './eliminar-chofer/eliminar-chofer.component';
 
+import { PipesModule } from 'src/app/pipes/pipes/pipes.module';
+
 @NgModule({
   declarations: [
     ChoferesComponent,
     RegistrarChoferComponent,
     EditarChoferComponent,
-    EliminarChoferComponent,
+    EliminarChoferComponent
   ],
   imports: [
     CommonModule,
@@ -21,6 +23,8 @@ import { EliminarChoferComponent } from './eliminar-chofer/eliminar-chofer.compo
     ReactiveFormsModule,
     MaterialModule,
     ChoferesRoutingModule,
+
+    PipesModule,
   ],
   entryComponents: [
     RegistrarChoferComponent,
