@@ -1,0 +1,16 @@
+:host, mat-card {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+mat-card {
+    display: flex;
+    flex-flow: column;
+}
+
+mat-card-content {
+    flex-grow: 1;
+}
