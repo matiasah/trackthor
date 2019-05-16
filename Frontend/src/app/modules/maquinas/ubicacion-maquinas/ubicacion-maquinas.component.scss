@@ -12,5 +12,7 @@ mat-card {
 }
 
 mat-card-content {
+    display: block;
+    overflow: auto;
     flex-grow: 1;
 }

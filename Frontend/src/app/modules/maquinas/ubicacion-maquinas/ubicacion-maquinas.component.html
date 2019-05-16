@@ -1,4 +1,4 @@
-<mat-card class="m-3 mat-elevation-z2" style="position: absolute; top: 0; bottom: 0">
+<mat-card class="m-3 mat-elevation-z2">
 
     <mat-card-title>
         Ubicación de máquinas
@@ -10,8 +10,8 @@
             <mat-spinner></mat-spinner>
         </div>
 
-        <div *ngIf="maquinas" style="height: inherit">
-            <aol-map width="100%" height="inherit">
+        <div *ngIf="maquinas" class="h-100">
+            <aol-map class="h-100" [width]="'100%'" [height]="'inherit'">
                 <aol-interaction-default></aol-interaction-default>
                 <aol-view>
                     <aol-coordinate></aol-coordinate>
