@@ -18,6 +18,8 @@ import { PipesModule } from 'src/app/pipes/pipes/pipes.module';
         RegistrarMaquinaComponent,
         EliminarMaquinaComponent,
         EditarMaquinaComponent,
+
+        HttpPipe,
     ],
     imports: [
         CommonModule,

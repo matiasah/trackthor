@@ -1,6 +1,9 @@
 # Node 8.15.1
 FROM node:8.15.1-alpine
 
+# Instalar bash
+RUN apk update && apk add bash
+
 # Instalar @angular/cli
 RUN npm install -g @angular/cli@7.3.8
 

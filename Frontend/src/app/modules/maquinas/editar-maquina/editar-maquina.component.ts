@@ -2,7 +2,7 @@ import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NgForm } from '@angular/forms';
 import { Observable, forkJoin } from 'rxjs';
-import { Geolocation, Map, View, MapBrowserEvent, Coordinate, proj } from 'openlayers';
+import { View, MapBrowserEvent, Coordinate, proj } from 'openlayers';
 import { MapComponent } from 'ngx-openlayers';
 import { MaquinaService } from 'src/app/services/maquina.service';
 import { Maquina } from 'src/app/models/maquina';

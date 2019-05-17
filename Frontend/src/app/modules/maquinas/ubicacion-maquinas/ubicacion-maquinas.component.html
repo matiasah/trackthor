@@ -1,0 +1,38 @@
+<mat-card class="m-3 mat-elevation-z2">
+
+    <mat-card-title>
+        Ubicación de máquinas
+    </mat-card-title>
+
+    <mat-card-content>
+
+        <div *ngIf="!maquinas" class="loading-shade">
+            <mat-spinner></mat-spinner>
+        </div>
+
+        <div *ngIf="maquinas" class="h-100">
+            <aol-map class="h-100" [width]="'100%'" [height]="'inherit'">
+                <aol-interaction-default></aol-interaction-default>
+                <aol-view>
+                    <aol-coordinate></aol-coordinate>
+                </aol-view>
+                <aol-layer-tile>
+                    <aol-source-osm></aol-source-osm>
+                </aol-layer-tile>
+                <aol-layer-vector>
+                    <aol-source-vector>
+                        <aol-feature *ngFor="let maquina of maquinas">
+                            <aol-geometry-point>
+                                <aol-coordinate [x]="maquina.latitud" [y]="maquina.longitud" [srid]="'EPSG:4326'"></aol-coordinate>
+                            </aol-geometry-point>
+                            <aol-style>
+                                <aol-style-icon src="assets/img/icons8-tractor-48.png"></aol-style-icon>
+                            </aol-style>
+                        </aol-feature>
+                    </aol-source-vector>
+                </aol-layer-vector>
+            </aol-map>
+        </div>
+
+    </mat-card-content>
+</mat-card>

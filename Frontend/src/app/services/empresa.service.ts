@@ -19,7 +19,7 @@ export class EmpresaService {
     }
 
     public getPaginator(): Paginator<any> {
-        return new Paginator(this.http, 'empresas', 'empresas');
+        return new Paginator(this.http, 'empresas/search/page', 'empresas');
     }
 
     public query(): Observable<Empresa[]> {
