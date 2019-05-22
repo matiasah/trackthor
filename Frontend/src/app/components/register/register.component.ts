@@ -11,7 +11,7 @@ import { Usuario } from 'src/app/models/usuario';
 export class RegisterComponent implements OnInit {
 
     // Usuario que se va a registrar
-    public usuario: Usuario = {};
+    public usuario: Usuario = {} as Usuario;
 
     // Formulario
     @ViewChild('form')

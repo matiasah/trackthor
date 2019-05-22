@@ -16,21 +16,24 @@ export interface GrantedAuthority {
 export class AuthService {
 
     // Token actual
-    private token: UserToken;
+    private token: UserToken | null;
 
     public constructor(
         private http: HttpClient
     ) {
         // Leer datos de localstorage
-        const tokenData: string = localStorage.getItem('trackthor_token');
+        const tokenData: string | null = localStorage.getItem('trackthor_token');
 
         // Si hay token
         if (tokenData != null) {
             // Leer token de local storage
             this.token = JSON.parse(tokenData);
 
-            // Transformar fecha de expiración a objeto 'Date'
-            this.token.expiration = new Date(this.token.expiration);
+            // En caso de que el JSON sea inválido
+            if ( this.token != null ) {
+                // Transformar fecha de expiración a objeto 'Date'
+                this.token.expiration = new Date(this.token.expiration);
+            }
         }
     }
 
@@ -82,7 +85,7 @@ export class AuthService {
     /**
      * Obtener token
      */
-    public getToken(): UserToken {
+    public getToken(): UserToken | null {
         // Retornar token en memoria
         return this.token;
     }

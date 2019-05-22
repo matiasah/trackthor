@@ -39,17 +39,20 @@ export class AuthInterceptor implements HttpInterceptor {
                 return next.handle(newRequest);
             } else if (this.authService.isTokenValid()) {
                 // Obtener token
-                const token: UserToken = this.authService.getToken();
+                const token: UserToken | null = this.authService.getToken();
 
-                // Cabeceras
-                const headers: HttpHeaders = request.headers.set('Authorization', token.token_type + ' ' + token.access_token);
+                // Si hay un token
+                if ( token != null ) {
+                    // Cabeceras
+                    const headers: HttpHeaders = request.headers.set('Authorization', token.token_type + ' ' + token.access_token);
 
-                // Copiar petición
-                const newRequest: HttpRequest<any> = request.clone({
-                    headers
-                });
+                    // Copiar petición
+                    const newRequest: HttpRequest<any> = request.clone({
+                        headers
+                    });
 
-                return next.handle(newRequest);
+                    return next.handle(newRequest);
+                }
             }
         }
 
