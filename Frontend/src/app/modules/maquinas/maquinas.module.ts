@@ -10,7 +10,7 @@ import { RegistrarMaquinaComponent } from './registrar-maquina/registrar-maquina
 import { EliminarMaquinaComponent } from './eliminar-maquina/eliminar-maquina.component';
 import { EditarMaquinaComponent } from './editar-maquina/editar-maquina.component';
 
-import { HttpPipe } from 'src/app/pipes/http.pipe';
+import { PipesModule } from 'src/app/pipes/pipes/pipes.module';
 import { UbicacionMaquinasComponent } from './ubicacion-maquinas/ubicacion-maquinas.component';
 
 @NgModule({
@@ -19,8 +19,6 @@ import { UbicacionMaquinasComponent } from './ubicacion-maquinas/ubicacion-maqui
         RegistrarMaquinaComponent,
         EliminarMaquinaComponent,
         EditarMaquinaComponent,
-
-        HttpPipe,
 
         UbicacionMaquinasComponent,
     ],
@@ -31,6 +29,7 @@ import { UbicacionMaquinasComponent } from './ubicacion-maquinas/ubicacion-maqui
         MaterialModule,
         MaquinasRoutingModule,
         AngularOpenlayersModule,
+        PipesModule,
     ],
     entryComponents: [
         RegistrarMaquinaComponent,

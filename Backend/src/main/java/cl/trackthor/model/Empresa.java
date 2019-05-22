@@ -36,6 +36,9 @@ public class Empresa implements Serializable {
 
     @OneToMany(mappedBy = "empresa")
     private Set<Maquina> maquinas = new HashSet<>();
+    
+    @OneToMany(mappedBy = "empresa")
+    private Set<UsuarioChofer> usuariosChoferes = new HashSet<>();
 
     @OneToMany(mappedBy = "empresa")
     private Set<Alerta> alertas = new HashSet<>();
@@ -105,6 +108,14 @@ public class Empresa implements Serializable {
 
     public void setMaquinas(Set<Maquina> maquinas) {
         this.maquinas = maquinas;
+    }
+
+    public Set<UsuarioChofer> getUsuariosChoferes() {
+        return usuariosChoferes;
+    }
+
+    public void setUsuariosChoferes(Set<UsuarioChofer> usuariosChoferes) {
+        this.usuariosChoferes = usuariosChoferes;
     }
 
     public Set<Alerta> getAlertas() {
