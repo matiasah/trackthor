@@ -17,7 +17,7 @@ export class UsuarioChoferService {
   ) { }
 
   public getPaginator(): Paginator<any> {
-    return new Paginator(this.http, 'usuarios-choferes', 'usuarios-choferes');
+    return new Paginator(this.http, 'usuarios-choferes/search/page', 'usuarios-choferes');
   }
 
   public query(): Observable<UsuarioChofer[]> {

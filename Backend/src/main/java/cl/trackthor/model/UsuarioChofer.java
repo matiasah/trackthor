@@ -1,5 +1,6 @@
 package cl.trackthor.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -37,6 +38,7 @@ public class UsuarioChofer extends Usuario {
         
     }
 
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Arrays.asList(new SimpleGrantedAuthority("USER_CHOFER"));
