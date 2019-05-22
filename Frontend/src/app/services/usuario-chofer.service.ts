@@ -8,37 +8,39 @@ import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class UsuarioChoferService {
 
-  constructor(
-    private http: HttpClient
-  ) { }
+    public constructor(
+        private http: HttpClient
+    ) {
+        
+    }
 
-  public getPaginator(): Paginator<any> {
-    return new Paginator(this.http, 'usuarios-choferes/search/page', 'usuarios-choferes');
-  }
+    public getPaginator(): Paginator<any> {
+        return new Paginator(this.http, 'usuarios-choferes/search/page', 'usuarios-choferes');
+    }
 
-  public query(): Observable<UsuarioChofer[]> {
-    return this.http.get<Pagination>(environment.api + 'usuarios-choferes')
-      .pipe(map(Response => Response._embedded["usuarios-choferes"]));
-  }
+    public query(): Observable<UsuarioChofer[]> {
+        return this.http.get<Pagination>(environment.api + 'usuarios-choferes')
+            .pipe(map(Response => Response._embedded["usuarios-choferes"]));
+    }
 
-  public get(path: string): Observable<UsuarioChofer> {
-    return this.http.get<UsuarioChofer>(path);
-  }
+    public get(path: string): Observable<UsuarioChofer> {
+        return this.http.get<UsuarioChofer>(path);
+    }
 
-  public save(usuarioChofer: UsuarioChofer): Observable<any> {
-    return this.http.post(environment.api + 'usuarios-choferes', usuarioChofer);
-  }
+    public save(usuarioChofer: UsuarioChofer): Observable<any> {
+        return this.http.post(environment.api + 'usuarios-choferes', usuarioChofer);
+    }
 
-  public update(usuarioChofer: UsuarioChofer): Observable<any> {
-    return this.http.patch(usuarioChofer._links.self.href, usuarioChofer);
-  }
+    public update(usuarioChofer: UsuarioChofer): Observable<any> {
+        return this.http.patch(usuarioChofer._links.self.href, usuarioChofer);
+    }
 
-  public delete(usuarioChofer: UsuarioChofer): Observable<any> {
-    return this.http.delete(usuarioChofer._links.self.href);
-  }
+    public delete(usuarioChofer: UsuarioChofer): Observable<any> {
+        return this.http.delete(usuarioChofer._links.self.href);
+    }
 
 }

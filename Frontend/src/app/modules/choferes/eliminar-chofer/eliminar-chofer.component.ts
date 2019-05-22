@@ -4,52 +4,54 @@ import { UsuarioChoferService } from 'src/app/services/usuario-chofer.service';
 import { UsuarioChofer } from 'src/app/models/usuario-chofer';
 
 @Component({
-  selector: 'app-eliminar-chofer',
-  templateUrl: './eliminar-chofer.component.html',
-  styleUrls: ['./eliminar-chofer.component.scss']
+    selector: 'app-eliminar-chofer',
+    templateUrl: './eliminar-chofer.component.html',
+    styleUrls: ['./eliminar-chofer.component.scss']
 })
 export class EliminarChoferComponent implements OnInit {
 
-  // Indicar que se encuentra eliminando
-  public eliminando = false;
-
-  constructor(
-    private dialogRef: MatDialogRef<EliminarChoferComponent>,
-    private usuarioChoferService: UsuarioChoferService,
-    @Inject(MAT_DIALOG_DATA) public chofer: UsuarioChofer,
-    private snackBar: MatSnackBar,
-  ) { }
-
-  ngOnInit() {
-  }
-
-  public eliminar() {
     // Indicar que se encuentra eliminando
-    this.eliminando = true;
+    public eliminando = false;
 
-    // Eliminar
-    this.usuarioChoferService.delete(this.chofer).subscribe(
-      Response => {
-        // Indicar que no se encuentra registrando
-        this.eliminando = false;
+    public constructor(
+        private dialogRef: MatDialogRef<EliminarChoferComponent>,
+        private usuarioChoferService: UsuarioChoferService,
+        @Inject(MAT_DIALOG_DATA) public chofer: UsuarioChofer,
+        private snackBar: MatSnackBar,
+    ) {
 
-        // Notificar registro exitoso
-        this.snackBar.open('El chofer ha sido Eliminado', 'Aceptar', { duration: 2000 });
+    }
 
-        // Cerrar modal
-        this.dialogRef.close();
-      },
-      Error => {
-        // Indicar que no se encuentra registrando
-        this.eliminando = false;
+    public ngOnInit() {
+    }
 
-        // Notificar registro erroneo
-        this.snackBar.open('No se ha podido Eliminar al chofer', 'Aceptar', { duration: 2000 });
+    public eliminar() {
+        // Indicar que se encuentra eliminando
+        this.eliminando = true;
 
-        // Cerrar modal
-        this.dialogRef.close();
-      }
-    );
-  }
+        // Eliminar
+        this.usuarioChoferService.delete(this.chofer).subscribe(
+            Response => {
+                // Indicar que no se encuentra registrando
+                this.eliminando = false;
+
+                // Notificar registro exitoso
+                this.snackBar.open('El chofer ha sido Eliminado', 'Aceptar', { duration: 2000 });
+
+                // Cerrar modal
+                this.dialogRef.close();
+            },
+            Error => {
+                // Indicar que no se encuentra registrando
+                this.eliminando = false;
+
+                // Notificar registro erroneo
+                this.snackBar.open('No se ha podido Eliminar al chofer', 'Aceptar', { duration: 2000 });
+
+                // Cerrar modal
+                this.dialogRef.close();
+            }
+        );
+    }
 
 }

@@ -1,96 +1,96 @@
 <mat-card class="m-3 mat-elevation-z2">
 
-  <mat-card-title>
-    Choferes
-  </mat-card-title>
+    <mat-card-title>
+        Choferes
+    </mat-card-title>
 
-  <mat-card-content>
+    <mat-card-content>
 
-    <div *ngIf="isLoading | async" class="loading-shade">
-      <mat-spinner></mat-spinner>
-    </div>
+        <div *ngIf="isLoading | async" class="loading-shade">
+            <mat-spinner></mat-spinner>
+        </div>
 
-    <mat-form-field class="w-100">
-      <mat-placeholder>
-        <mat-icon>search</mat-icon>Buscar Chofer
-      </mat-placeholder>
-      <input matInput name="busqueda" [(ngModel)]="dataSource.filter">
-    </mat-form-field>
+        <mat-form-field class="w-100">
+            <mat-placeholder>
+                <mat-icon>search</mat-icon>Buscar Chofer
+            </mat-placeholder>
+            <input matInput name="busqueda" [(ngModel)]="dataSource.filter">
+        </mat-form-field>
 
-    <table mat-table class="w-100" [dataSource]="dataSource" matSort>
+        <table mat-table class="w-100" [dataSource]="dataSource" matSort>
 
-      <!-- RUN -->
-      <ng-container matColumnDef="run">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>
-          RUN
-        </mat-header-cell>
-        <mat-cell *matCellDef="let chofer">
-          {{ chofer.run }}
-        </mat-cell>
-      </ng-container>
+            <!-- RUN -->
+            <ng-container matColumnDef="run">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    RUN
+                </mat-header-cell>
+                <mat-cell *matCellDef="let chofer">
+                    {{ chofer.run }}
+                </mat-cell>
+            </ng-container>
 
-      <!-- Nombre de usuario-->
-      <ng-container matColumnDef="nombre">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>
-          Usuario
-        </mat-header-cell>
-        <mat-cell *matCellDef="let chofer">
-          {{ chofer.nombre }}
-        </mat-cell>
-      </ng-container>
+            <!-- Nombre de usuario-->
+            <ng-container matColumnDef="nombre">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Usuario
+                </mat-header-cell>
+                <mat-cell *matCellDef="let chofer">
+                    {{ chofer.nombre }}
+                </mat-cell>
+            </ng-container>
 
-      <!-- Nombre del chofer-->
-      <ng-container matColumnDef="nombres_chofer">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>
-          Nombres
-        </mat-header-cell>
-        <mat-cell *matCellDef="let chofer">
-          {{ chofer.nombresChofer }}
-        </mat-cell>
-      </ng-container>
-      
-      <!-- Fecha de registro del chofer-->
-      <ng-container matColumnDef="fecha_registro">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>
-          Fecha Registro
-        </mat-header-cell>
-        <mat-cell *matCellDef="let chofer">
-          {{ chofer.createdAt | date: 'short' : undefined : 'es-CL' }}
-        </mat-cell>
-      </ng-container>
+            <!-- Nombre del chofer-->
+            <ng-container matColumnDef="nombres_chofer">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Nombres
+                </mat-header-cell>
+                <mat-cell *matCellDef="let chofer">
+                    {{ chofer.nombresChofer }}
+                </mat-cell>
+            </ng-container>
 
-      <!-- Editar -->
-      <ng-container matColumnDef="edit">
-        <mat-header-cell *matHeaderCellDef></mat-header-cell>
-        <mat-cell *matCellDef="let chofer">
-          <button mat-icon-button matTooltip="Editar chofer" (click)="editar(chofer)">
-            <mat-icon>settings</mat-icon>
-          </button>
-        </mat-cell>
-      </ng-container>
+            <!-- Fecha de registro del chofer-->
+            <ng-container matColumnDef="fecha_registro">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Fecha Registro
+                </mat-header-cell>
+                <mat-cell *matCellDef="let chofer">
+                    {{ chofer.createdAt | date: 'short' : undefined : 'es-CL' }}
+                </mat-cell>
+            </ng-container>
 
-      <!-- Eliminar -->
-      <ng-container matColumnDef="delete">
-        <mat-header-cell *matHeaderCellDef></mat-header-cell>
-        <mat-cell *matCellDef="let chofer">
-          <button mat-icon-button matTooltip="Eliminar chofer" (click)="eliminar(chofer)">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </mat-cell>
-      </ng-container>
+            <!-- Editar -->
+            <ng-container matColumnDef="edit">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let chofer">
+                    <button mat-icon-button matTooltip="Editar chofer" (click)="editar(chofer)">
+                        <mat-icon>settings</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
 
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </table>
+            <!-- Eliminar -->
+            <ng-container matColumnDef="delete">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let chofer">
+                    <button mat-icon-button matTooltip="Eliminar chofer" (click)="eliminar(chofer)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
 
-    <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageIndex]="(page | async).pageIndex"
-      [length]="(page | async).length">
-    </mat-paginator>
-  </mat-card-content>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </table>
+
+        <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageIndex]="(page | async).pageIndex"
+            [length]="(page | async).length">
+        </mat-paginator>
+    </mat-card-content>
 </mat-card>
 
 <div style="position: fixed; right: 20px; bottom: 20px">
-  <button mat-fab color="primary" (click)="registrar()">
-    <mat-icon>add</mat-icon>
-  </button>
+    <button mat-fab color="primary" (click)="registrar()">
+        <mat-icon>add</mat-icon>
+    </button>
 </div>

@@ -8,92 +8,90 @@ import { EmpresaService } from 'src/app/services/empresa.service';
 import { Observable, forkJoin } from 'rxjs';
 
 @Component({
-  selector: 'app-editar-chofer',
-  templateUrl: './editar-chofer.component.html',
-  styleUrls: ['./editar-chofer.component.scss']
+    selector: 'app-editar-chofer',
+    templateUrl: './editar-chofer.component.html',
+    styleUrls: ['./editar-chofer.component.scss']
 })
 export class EditarChoferComponent implements OnInit {
 
-  // Chofer que se desea editar
-  public chofer: UsuarioChofer;
+    // Chofer que se desea editar
+    public chofer: UsuarioChofer;
 
-  // Empresas disponibles
-  public empresas: Empresa[];
+    // Empresas disponibles
+    public empresas: Empresa[];
 
-  // Indicar si se encuentra registrando
-  public registrando = false;
+    // Indicar si se encuentra registrando
+    public registrando = false;
 
-  // Formulario
-  @ViewChild('form')
-  public form: NgForm;
+    // Formulario
+    @ViewChild('form')
+    public form: NgForm;
 
-  public constructor(
-    private dialogRef: MatDialogRef<EditarChoferComponent>,
-    private usuarioChoferService: UsuarioChoferService,
-    @Inject(MAT_DIALOG_DATA) private data: any,
-    private empresaService: EmpresaService,
-    private snackBar: MatSnackBar,
-  ) { }
+    public constructor(
+        private dialogRef: MatDialogRef<EditarChoferComponent>,
+        private usuarioChoferService: UsuarioChoferService,
+        @Inject(MAT_DIALOG_DATA) private data: any,
+        private empresaService: EmpresaService,
+        private snackBar: MatSnackBar,
+    ) { }
 
-  public ngOnInit() {
+    public ngOnInit() {
+        // Obtener la maquina sin los datos observables
+        this.usuarioChoferService.get(this.data._links.self.href).subscribe(
+            chofer => {
+                // Obtener empresa
+                const obsEmpresa: Observable<Empresa> = this.empresaService.get(chofer._links.empresa.href);
 
-    // Obtener la maquina sin los datos observables
-    this.usuarioChoferService.get(this.data._links.self.href).subscribe(
-      chofer => {
-        // Obtener empresa
-        const obsEmpresa: Observable<Empresa> = this.empresaService.get(chofer._links.empresa.href);
+                forkJoin(obsEmpresa).subscribe(
+                    (Response: [Empresa]) => {
+                        // Asignar empresa
+                        chofer.empresa = Response[0]._links.self.href;
 
-        forkJoin(obsEmpresa).subscribe(
-          (Response: [Empresa]) => {
-            // Asignar empresa
-            chofer.empresa = Response[0]._links.self.href;
-
-            // Asignar maquina
-            this.chofer = chofer;
-          }
+                        // Asignar maquina
+                        this.chofer = chofer;
+                    }
+                );
+            }
         );
-      }
-    );
 
-    // Obtener empresas
-    this.empresaService.query().subscribe(
-      Response => {
-        this.empresas = Response;
-      }
-    );
-
-  }
-
-  public onSubmit(): void {
-    // Si el formulario es válido
-    if (this.form.valid) {
-      // Indicar que se encuentra registrando
-      this.registrando = true;
-
-      // Registrar
-      this.usuarioChoferService.update(this.chofer).subscribe(
-        Respose => {
-          // Indicar que no se encuentra registrando
-          this.registrando = false;
-
-          // Notificar registro exitoso
-          this.snackBar.open('El chofer ha sido Editado', 'Aceptar', { duration: 2000 });
-
-          // Cerrar modal
-          this.dialogRef.close();
-        },
-        Error => {
-          // Indicar que no se encuentra registrando
-          this.registrando = false;
-
-          // Notificar registro erroneo
-          this.snackBar.open('No se ha podido Editar el chofer', 'Aceptar', { duration: 2000 });
-
-          // Cerrar modal
-          this.dialogRef.close();
-        }
-      );
+        // Obtener empresas
+        this.empresaService.query().subscribe(
+            Response => {
+                this.empresas = Response;
+            }
+        );
     }
-  }
+
+    public onSubmit(): void {
+        // Si el formulario es válido
+        if (this.form.valid) {
+            // Indicar que se encuentra registrando
+            this.registrando = true;
+
+            // Registrar
+            this.usuarioChoferService.update(this.chofer).subscribe(
+                Respose => {
+                    // Indicar que no se encuentra registrando
+                    this.registrando = false;
+
+                    // Notificar registro exitoso
+                    this.snackBar.open('El chofer ha sido Editado', 'Aceptar', { duration: 2000 });
+
+                    // Cerrar modal
+                    this.dialogRef.close();
+                },
+                Error => {
+                    // Indicar que no se encuentra registrando
+                    this.registrando = false;
+
+                    // Notificar registro erroneo
+                    this.snackBar.open('No se ha podido Editar el chofer', 'Aceptar', { duration: 2000 });
+
+                    // Cerrar modal
+                    this.dialogRef.close();
+                }
+            );
+        }
+    }
 
 }

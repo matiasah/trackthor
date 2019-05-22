@@ -10,98 +10,96 @@ import { EditarChoferComponent } from '../editar-chofer/editar-chofer.component'
 import { EliminarChoferComponent } from '../eliminar-chofer/eliminar-chofer.component';
 
 @Component({
-  selector: 'app-choferes',
-  templateUrl: './choferes.component.html',
-  styleUrls: ['./choferes.component.scss']
+    selector: 'app-choferes',
+    templateUrl: './choferes.component.html',
+    styleUrls: ['./choferes.component.scss']
 })
 export class ChoferesComponent implements OnInit {
 
+    // Columnas de datatable
+    public displayedColumns: string[] = ['run', 'nombre', 'nombres_chofer', 'fecha_registro', 'edit', 'delete'];
 
-  // Columnas de datatable
-  public displayedColumns: string[] = ['run', 'nombre', 'nombres_chofer', 'fecha_registro', 'edit', 'delete'];
+    // Paginación
+    public paginator: Paginator<UsuarioChofer>;
 
-  // Paginación
-  public paginator: Paginator<UsuarioChofer>;
+    // Data-source
+    public dataSource: MatTableDataSource<UsuarioChofer> = new MatTableDataSource();
 
-  // Data-source
-  public dataSource: MatTableDataSource<UsuarioChofer> = new MatTableDataSource();
+    // Indicar si se encuentra cargando resultados
+    public isLoading: Observable<boolean>;
 
-  // Indicar si se encuentra cargando resultados
-  public isLoading: Observable<boolean>;
+    // Pagina actual
+    public page: Observable<Page>;
 
-  // Pagina actual
-  public page: Observable<Page>;
+    // Sort
+    @ViewChild(MatSort)
+    public matSort: MatSort;
 
-  // Sort
-  @ViewChild(MatSort)
-  public matSort: MatSort;
+    // Paginación
+    @ViewChild('paginator')
+    public matPaginator: MatPaginator;
 
-  // Paginación
-  @ViewChild('paginator')
-  public matPaginator: MatPaginator;
+    public constructor(
+        private usuarioChoferService: UsuarioChoferService,
+        private dialog: MatDialog
+    ) {
 
+        // Instanciar paginador
+        this.paginator = this.usuarioChoferService.getPaginator();
 
-  public constructor(
-    private usuarioChoferService: UsuarioChoferService,
-    private dialog: MatDialog
-  ) {
+        // Observables
+        this.isLoading = this.paginator.isLoadingSubject;
+        this.page = this.paginator.pageSubject;
+    }
 
-    // Instanciar paginador
-    this.paginator = this.usuarioChoferService.getPaginator();
+    public ngOnInit() {
+        this.paginator.init(this.dataSource, this.matPaginator, this.matSort);
+    }
 
-    // Observables
-    this.isLoading = this.paginator.isLoadingSubject;
-    this.page = this.paginator.pageSubject;
-  }
+    public registrar() {
+        // Crear dialogo
+        const ref: MatDialogRef<RegistrarChoferComponent> = this.dialog.open(RegistrarChoferComponent, {
+            width: '1000px'
+        });
 
-  public ngOnInit() {
-    this.paginator.init(this.dataSource, this.matPaginator, this.matSort);
-  }
+        // Al cerrar dialogo
+        ref.afterClosed().subscribe(
+            response => {
+                // Actualizar paginador
+                this.paginator.update();
+            }
+        );
+    }
 
-  public registrar() {
-    // Crear dialogo
-    const ref: MatDialogRef<RegistrarChoferComponent> = this.dialog.open(RegistrarChoferComponent, {
-      width: '1000px'
-    });
+    public editar(chofer: UsuarioChofer) {
+        // Crear dialogo
+        const ref: MatDialogRef<EditarChoferComponent> = this.dialog.open(EditarChoferComponent, {
+            width: '1000px',
+            data: chofer
+        });
 
-    // Al cerrar dialogo
-    ref.afterClosed().subscribe(
-      response => {
-        // Actualizar paginador
-        this.paginator.update();
-      }
-    );
-  }
+        // Al cerrar dialogo
+        ref.afterClosed().subscribe(
+            response => {
+                // Actualizar paginador
+                this.paginator.update();
+            }
+        );
+    }
 
-  public editar(chofer: UsuarioChofer) {
-    // Crear dialogo
-    const ref: MatDialogRef<EditarChoferComponent> = this.dialog.open(EditarChoferComponent, {
-      width: '1000px',
-      data: chofer
-    })
+    public eliminar(chofer: UsuarioChofer) {
+        // Crear dialogo
+        const ref: MatDialogRef<EliminarChoferComponent> = this.dialog.open(EliminarChoferComponent, {
+            width: '1000px',
+            data: chofer
+        });
 
-    // Al cerrar dialogo
-    ref.afterClosed().subscribe(
-      response => {
-        // Actualizar paginador
-        this.paginator.update();
-      }
-    );
-  }
-
-  public eliminar(chofer: UsuarioChofer) {
-    // Crear dialogo
-    const ref: MatDialogRef<EliminarChoferComponent> = this.dialog.open(EliminarChoferComponent, {
-      width: '1000px',
-      data: chofer
-    });
-
-    // Al cerrar dialogo
-    ref.afterClosed().subscribe(
-      response => {
-        // Actualizar paginador
-        this.paginator.update();
-      }
-    );
-  }
+        // Al cerrar dialogo
+        ref.afterClosed().subscribe(
+            response => {
+                // Actualizar paginador
+                this.paginator.update();
+            }
+        );
+    }
 }
