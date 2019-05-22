@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
     // Usuario que va a iniciar sesión
-    public usuario: Usuario = {};
+    public usuario: Usuario = {} as Usuario;
 
     // Formulario
     @ViewChild('form')
@@ -65,9 +65,9 @@ export class LoginComponent implements OnInit {
                             // Por cada rol
                             for (const authority of authorities) {
                                 // Si el rol tiene ruta
-                                if (RoleRoute[authority.authority]) {
+                                if (RoleRoute[authority.authority as any]) {
                                     // Navegar a la ruta correspondiente
-                                    this.router.navigate([RoleRoute[authority.authority]]);
+                                    this.router.navigate([RoleRoute[authority.authority as any]]);
 
                                     // Romper iteración
                                     break;

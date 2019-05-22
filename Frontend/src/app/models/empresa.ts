@@ -3,5 +3,5 @@ export interface Empresa {
     rut?: string;
     telefono?: string;
     createdAt?: string;
-    _links?: {[key: string]: {href: string}};
+    _links: {[key: string]: {href: string}};
 }
