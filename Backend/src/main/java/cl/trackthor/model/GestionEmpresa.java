@@ -2,6 +2,7 @@ package cl.trackthor.model;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,20 +22,20 @@ public class GestionEmpresa implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "gem_empresa_id")
     private Empresa empresa;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "gem_usuario_id")
     private AdministradorEmpresa usuario;
-    
+
     @CreationTimestamp
     @Column(name = "gem_created_at", nullable = false)
     private ZonedDateTime createdAt;
-    
+
     public GestionEmpresa() {
-        
+
     }
 
     public Long getId() {

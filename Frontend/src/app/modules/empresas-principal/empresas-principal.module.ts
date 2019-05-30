@@ -2,10 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
-import { EmpresasRoutingModule } from './empresas-routing.module';
-
+import { EmpresasPrincipalRoutingModule } from './empresas-principal-routing.module';
 import { EmpresasComponent } from './empresas/empresas.component';
-import { RegistrarEmpresaComponent } from './registrar-empresa/registrar-empresa.component';
+import { RegistrarEmpresaComponent } from '../empresas/registrar-empresa/registrar-empresa.component';
 
 @NgModule({
     declarations: [
@@ -17,10 +16,10 @@ import { RegistrarEmpresaComponent } from './registrar-empresa/registrar-empresa
         FormsModule,
         ReactiveFormsModule,
         MaterialModule,
-        EmpresasRoutingModule,
+        EmpresasPrincipalRoutingModule,
     ],
     entryComponents: [
         RegistrarEmpresaComponent
     ]
 })
-export class EmpresasModule { }
+export class EmpresasPrincipalModule { }

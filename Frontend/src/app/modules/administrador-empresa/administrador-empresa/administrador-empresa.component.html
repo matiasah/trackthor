@@ -21,101 +21,58 @@
             </mat-card-title>
         </mat-card>
 
+        <mat-nav-list>
 
-        <mat-accordion>
-            <mat-expansion-panel hideToggle>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Inicio
-                    </mat-panel-title>
-                    <mat-panel-description>
-                        <mat-icon>home</mat-icon>
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
+            <h3 mat-subheader>Sistema</h3>
 
-                <mat-list dense>
-                    <mat-list-item>
-                        <a routerLink="../">Inicio</a>
-                    </mat-list-item>
-                </mat-list>
-            </mat-expansion-panel>
+            <a mat-list-item (click)="sidenav.close()" routerLink="../">
+                <mat-icon matListIcon>home</mat-icon>
+                <span mat-line>Inicio</span>
+            </a>
 
-            <mat-expansion-panel hideToggle>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Maquinas
-                    </mat-panel-title>
-                    <mat-panel-description>
-                        <mat-icon>local_shipping</mat-icon>
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
+            <a mat-list-item (click)="sidenav.close()" routerLink="./maquinas">
+                <mat-icon matListIcon>local_shipping</mat-icon>
+                <span mat-line>Lista de máquinas</span>
+            </a>
 
-                <mat-list dense>
-                    <mat-list-item>
-                        <a routerLink="./maquinas">Lista de Maquinas</a>
-                    </mat-list-item>
-                    <mat-list-item>
-                        <a routerLink="./maquinas/ubicacion">Ubicación de Maquinas</a>
-                    </mat-list-item>
-                </mat-list>
-            </mat-expansion-panel>
+            <a mat-list-item (click)="sidenav.close()" routerLink="./maquinas/ubicacion">
+                <mat-icon matListIcon>local_shipping</mat-icon>
+                <span mat-line>Ubicación de máquinas</span>
+            </a>
 
-            <mat-expansion-panel hideToggle>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Choferes
-                    </mat-panel-title>
-                    <mat-panel-description>
-                        <mat-icon>person_pin</mat-icon>
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
-                <mat-list dense>
-                    <mat-list-item>
-                        <a routerLink="./choferes">Lista de Choferes</a>
-                    </mat-list-item>
-                </mat-list>
-            </mat-expansion-panel>
+            <a mat-list-item (click)="sidenav.close()" routerLink="./empresas">
+                <mat-icon matListIcon>work_outline</mat-icon>
+                <span mat-line>Empresas</span>
+            </a>
 
-            <mat-expansion-panel hideToggle>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Arriendos
-                    </mat-panel-title>
-                    <mat-panel-description>
-                        <i class="fas fa-handshake"></i>
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
-            </mat-expansion-panel>
+            <a mat-list-item (click)="sidenav.close()" routerLink="./choferes">
+                <mat-icon matListIcon>person_pin</mat-icon>
+                <span mat-line>Choferes</span>
+            </a>
 
-            <mat-expansion-panel hideToggle>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Alertas
-                    </mat-panel-title>
-                    <mat-panel-description>
-                        <mat-icon>notifications</mat-icon>
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
-            </mat-expansion-panel>
+            <a mat-list-item (click)="sidenav.close()">
+                <i  matListIcon class="fas fa-handshake"></i>
+                <span mat-line>Arriendos</span>
+            </a>
 
-            <mat-expansion-panel hideToggle>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Pagos
-                    </mat-panel-title>
-                    <mat-panel-description>
-                        <mat-icon>payment</mat-icon>
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
-            </mat-expansion-panel>
+            <a mat-list-item (click)="sidenav.close()">
+                <mat-icon matListIcon>notifications</mat-icon>
+                <span mat-line>Alertas</span>
+            </a>
 
-        </mat-accordion>
+            <a mat-list-item (click)="sidenav.close()">
+                <mat-icon matListIcon>payment</mat-icon>
+                <span mat-line>Pagos</span>
+            </a>
 
-        <div class="section">
             <mat-divider></mat-divider>
-        </div>
+            <h3 mat-subheader>Usuario</h3>
 
-        <button mat-raised-button class="col-12" (click)="onLogout()">Cerrar Sesión</button>
+            <a mat-list-item (click)="onLogout()">
+                <mat-icon matListIcon>close</mat-icon>
+                <span mat-line>Cerrar sesión</span>
+            </a>
+        </mat-nav-list>
     </mat-sidenav>
 
     <mat-sidenav-content>
