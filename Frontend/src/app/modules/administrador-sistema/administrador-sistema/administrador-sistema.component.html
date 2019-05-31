@@ -3,6 +3,7 @@
         <button mat-icon-button (click)="sidenav.toggle()">
             <mat-icon>menu</mat-icon>
         </button>
+        <h4 class="ml-2">TrackThor</h4>
     </mat-toolbar-row>
 </mat-toolbar>
 
@@ -20,98 +21,50 @@
             </mat-card-title>
         </mat-card>
 
-        <mat-accordion>
-            <mat-expansion-panel hideToggle>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Inicio
-                    </mat-panel-title>
-                    <mat-panel-description>
-                        <mat-icon>home</mat-icon>
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
+        <mat-nav-list>
 
-                <mat-list dense>
-                    <mat-list-item>
-                        <a routerLink="../">Inicio</a>
-                    </mat-list-item>
-                </mat-list>
-            </mat-expansion-panel>
+            <h3 mat-subheader>Sistema</h3>
 
-            <mat-expansion-panel hideToggle>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Maquinas
-                    </mat-panel-title>
-                    <mat-panel-description>
-                        <mat-icon>local_shipping</mat-icon>
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
+            <a mat-list-item (click)="sidenav.close()" routerLink="../">
+                <mat-icon matListIcon>home</mat-icon>
+                <span mat-line>Inicio</span>
+            </a>
 
-                <mat-list dense>
-                    <mat-list-item>
-                        <a routerLink="./tipos-maquinas">Tipos de Maquinas</a>
-                    </mat-list-item>
-                </mat-list>
-            </mat-expansion-panel>
+            <a mat-list-item (click)="sidenav.close()" routerLink="./tipos-maquinas">
+                <mat-icon matListIcon>local_shipping</mat-icon>
+                <span mat-line>Tipos de máquinas</span>
+            </a>
 
-            <mat-expansion-panel hideToggle>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Empresas
-                    </mat-panel-title>
-                    <mat-panel-description>
-                        <mat-icon>work_outline</mat-icon>
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
+            <a mat-list-item (click)="sidenav.close()" routerLink="./empresas">
+                <mat-icon matListIcon>work_outline</mat-icon>
+                <span mat-line>Empresas</span>
+            </a>
 
-                <mat-list dense>
-                    <mat-list-item>
-                        <a routerLink="./empresas">Empresas</a>
-                    </mat-list-item>
-                </mat-list>
-            </mat-expansion-panel>
+            <a mat-list-item (click)="sidenav.close()">
+                <i class="fas fa-handshake" matListIcon></i>
+                <span mat-line>Arriendos</span>
+            </a>
 
-            <mat-expansion-panel hideToggle>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Arriendos
-                    </mat-panel-title>
-                    <mat-panel-description>
-                        <i class="fas fa-handshake"></i>
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
-            </mat-expansion-panel>
+            <a mat-list-item (click)="sidenav.close()">
+                <mat-icon matListIcon>notifications</mat-icon>
+                <span mat-line>Alertas</span>
+            </a>
 
-            <mat-expansion-panel hideToggle>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Alertas
-                    </mat-panel-title>
-                    <mat-panel-description>
-                        <mat-icon>notifications</mat-icon>
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
-            </mat-expansion-panel>
+            <a mat-list-item (click)="sidenav.close()">
+                <mat-icon matListIcon>payment</mat-icon>
+                <span mat-line>Pagos</span>
+            </a>
 
-            <mat-expansion-panel hideToggle>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Pagos
-                    </mat-panel-title>
-                    <mat-panel-description>
-                        <mat-icon>payment</mat-icon>
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
-            </mat-expansion-panel>
-
-        </mat-accordion>
-
-        <div class="section">
             <mat-divider></mat-divider>
-        </div>
+            <h3 mat-subheader>Usuario</h3>
 
-        <button mat-raised-button class="col-12" (click)="onLogout()">Cerrar Sesión</button>
+            <a mat-list-item (click)="onLogout()">
+                <mat-icon matListIcon>close</mat-icon>
+                <span mat-line>Cerrar sesión</span>
+            </a>
+
+        </mat-nav-list>
+        
     </mat-sidenav>
 
     <mat-sidenav-content>

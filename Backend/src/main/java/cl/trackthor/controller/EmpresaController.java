@@ -21,6 +21,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -69,6 +70,48 @@ public class EmpresaController {
         }
 
         // No retornar recurso
+        return null;
+    }
+
+    @PreAuthorize("true")
+    @PutMapping("{id}")
+    public Resource<Empresa> update(@PathVariable("id") Long id, @RequestBody Resource<Empresa> bodyResource, Authentication auth) {
+        // Obtener usuario
+        Object principal = auth.getPrincipal();
+
+        // Referencia a empresa
+        Optional<Empresa> optional = null;
+
+        // Si el usuario es administrador de empresa
+        if (principal instanceof AdministradorEmpresa) {
+            // Buscar empresa
+            optional = this.empresaRepository.findByIdAndPrincipal(id);
+
+        // Si el usuario es administrador de sistema
+        } else if (principal instanceof AdministradorSistema) {
+            // Buscar empresa
+            optional = this.empresaRepository.findById(id);
+
+        }
+
+        // Si la referencia es válida y hay cuerpo
+        if ( optional != null && bodyResource != null ) {
+            // Obtener empresa
+            Empresa empresa = optional.get();
+
+            // Obtener empresa del cuerpo
+            Empresa bodyEmpresa = bodyResource.getContent();
+
+            // Si la empresa es válida, la empresa del cuerpo es válida y son la misma empresa
+            if ( empresa != null && bodyEmpresa != null && empresa.getId() == bodyEmpresa.getId() ) {
+                // Actualizar la empresa
+                this.empresaRepository.save(bodyEmpresa);
+
+                // Retornar empresa
+                return new Resource<>(empresa);
+            }
+        }
+
         return null;
     }
 
