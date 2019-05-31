@@ -2,6 +2,8 @@ package cl.trackthor.repository;
 
 import cl.trackthor.model.Empresa;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -22,4 +24,8 @@ public interface EmpresaRepository extends CrudRepository<Empresa, Long> {
     @Query("SELECT e FROM Empresa e INNER JOIN e.gestores g INNER JOIN g.usuario u WHERE u.id = ?#{ principal?.id }")
     public Page<Empresa> findByPrincipal(Pageable pageable);
 
+    @RestResource(exported = false)
+    @Query("SELECT e FROM Empresa e INNER JOIN e.gestores g INNER JOIN g.usuario u WHERE u.id = ?#{ principal?.id } AND e.id = ?1")
+    public Optional<Empresa> findByIdAndPrincipal(Long id);
+    
 }

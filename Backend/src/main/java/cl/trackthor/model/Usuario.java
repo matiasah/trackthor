@@ -22,6 +22,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Table(name = "trs_usuario")
 public abstract class Usuario implements UserDetails {
 
+    private static final long serialVersionUID = -6052530111325718385L;
+
     @Column(name = "id", nullable = false, length = 11)
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)

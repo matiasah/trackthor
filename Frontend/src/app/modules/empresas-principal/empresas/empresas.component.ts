@@ -5,7 +5,7 @@ import { Paginator } from 'src/app/models/paginator';
 import { Page } from 'src/app/models/page';
 import { EmpresaService } from 'src/app/services/empresa.service';
 import { Empresa } from 'src/app/models/empresa';
-import { RegistrarEmpresaComponent } from '../../empresas/registrar-empresa/registrar-empresa.component';
+import { RegistrarEmpresaComponent } from '../registrar-empresa/registrar-empresa.component';
 
 @Component({
     selector: 'app-empresas',

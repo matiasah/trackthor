@@ -16,6 +16,8 @@ import org.hibernate.annotations.CreationTimestamp;
 @Table(name = "trs_alerta")
 public class Alerta implements Serializable {
 
+    private static final long serialVersionUID = -552215270374396948L;
+
     @Column(name = "id", nullable = false, length = 11)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

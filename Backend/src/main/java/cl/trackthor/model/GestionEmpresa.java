@@ -2,7 +2,6 @@ package cl.trackthor.model;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,16 +16,18 @@ import org.hibernate.annotations.CreationTimestamp;
 @Table(name = "trs_gestion_empresas")
 public class GestionEmpresa implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @Column(name = "id", nullable = false, length = 11)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "gem_empresa_id")
     private Empresa empresa;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "gem_usuario_id")
     private AdministradorEmpresa usuario;
 

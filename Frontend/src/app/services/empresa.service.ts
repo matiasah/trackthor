@@ -39,6 +39,10 @@ export class EmpresaService {
         return this.http.post(environment.api + 'empresas', empresa);
     }
 
+    public savePrincipal(empresa: Empresa): Observable<any> {
+        return this.http.post(environment.api + 'empresas/principal', empresa);
+    }
+
     public update(empresa: Empresa): Observable<any> {
         return this.http.put(empresa._links.self.href, empresa);
     }

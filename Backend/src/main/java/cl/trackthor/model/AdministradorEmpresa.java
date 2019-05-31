@@ -14,6 +14,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 @Table(name = "trs_adm_empresa")
 public class AdministradorEmpresa extends Usuario {
 
+    private static final long serialVersionUID = -1253563144091729627L;
+
     @OneToMany(mappedBy = "usuario")
     private Set<GestionEmpresa> gestores = new HashSet<>();
 
