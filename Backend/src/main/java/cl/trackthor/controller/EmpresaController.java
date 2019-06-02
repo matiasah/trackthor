@@ -75,7 +75,8 @@ public class EmpresaController {
 
     @PreAuthorize("true")
     @PutMapping("{id}")
-    public Resource<Empresa> update(@PathVariable("id") Long id, @RequestBody Resource<Empresa> bodyResource, Authentication auth) {
+    public Resource<Empresa> update(@PathVariable("id") Long id, @RequestBody Resource<Empresa> bodyResource,
+            Authentication auth) {
         // Obtener usuario
         Object principal = auth.getPrincipal();
 
@@ -87,7 +88,7 @@ public class EmpresaController {
             // Buscar empresa
             optional = this.empresaRepository.findByIdAndPrincipal(id);
 
-        // Si el usuario es administrador de sistema
+            // Si el usuario es administrador de sistema
         } else if (principal instanceof AdministradorSistema) {
             // Buscar empresa
             optional = this.empresaRepository.findById(id);
@@ -95,20 +96,24 @@ public class EmpresaController {
         }
 
         // Si la referencia es válida y hay cuerpo
-        if ( optional != null && bodyResource != null ) {
-            // Obtener empresa
-            Empresa empresa = optional.get();
+        if (optional != null && bodyResource != null) {
 
             // Obtener empresa del cuerpo
             Empresa bodyEmpresa = bodyResource.getContent();
-
+            
             // Si la empresa es válida, la empresa del cuerpo es válida y son la misma empresa
-            if ( empresa != null && bodyEmpresa != null && empresa.getId() == bodyEmpresa.getId() ) {
-                // Actualizar la empresa
-                this.empresaRepository.save(bodyEmpresa);
+            if (optional.isPresent() && bodyEmpresa != null ) {
 
-                // Retornar empresa
-                return new Resource<>(empresa);
+                // Obtener empresa
+                Empresa empresa = optional.get();
+
+                if (empresa.getId() == bodyEmpresa.getId()) {
+                    // Actualizar la empresa
+                    this.empresaRepository.save(bodyEmpresa);
+
+                    // Retornar empresa
+                    return new Resource<>(empresa);
+                }
             }
         }
 
@@ -129,7 +134,7 @@ public class EmpresaController {
             // Buscar empresa
             optional = this.empresaRepository.findByIdAndPrincipal(id);
 
-        // Si el usuario es administrador de sistema
+            // Si el usuario es administrador de sistema
         } else if (principal instanceof AdministradorSistema) {
             // Buscar empresa
             optional = this.empresaRepository.findById(id);
@@ -137,12 +142,13 @@ public class EmpresaController {
         }
 
         // Si la referencia es válida
-        if ( optional != null ) {
-            // Obtener empresa
-            Empresa empresa = optional.get();
+        if (optional != null) {
 
             // Si la empresa es válida
-            if ( empresa != null ) {
+            if (optional.isPresent()) {
+                // Obtener empresa
+                Empresa empresa = optional.get();
+
                 // Eliminar la empresa
                 this.empresaRepository.delete(empresa);
 

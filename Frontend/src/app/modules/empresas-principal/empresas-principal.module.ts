@@ -5,11 +5,13 @@ import { MaterialModule } from '../material/material.module';
 import { EmpresasPrincipalRoutingModule } from './empresas-principal-routing.module';
 import { EmpresasComponent } from './empresas/empresas.component';
 import { RegistrarEmpresaComponent } from './registrar-empresa/registrar-empresa.component';
+import { EliminarEmpresaComponent } from '../empresas/eliminar-empresa/eliminar-empresa.component';
 
 @NgModule({
     declarations: [
         EmpresasComponent,
-        RegistrarEmpresaComponent
+        RegistrarEmpresaComponent,
+        EliminarEmpresaComponent
     ],
     imports: [
         CommonModule,
@@ -19,7 +21,8 @@ import { RegistrarEmpresaComponent } from './registrar-empresa/registrar-empresa
         EmpresasPrincipalRoutingModule,
     ],
     entryComponents: [
-        RegistrarEmpresaComponent
+        RegistrarEmpresaComponent,
+        EliminarEmpresaComponent
     ]
 })
 export class EmpresasPrincipalModule { }

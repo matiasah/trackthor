@@ -6,11 +6,13 @@ import { EmpresasRoutingModule } from './empresas-routing.module';
 
 import { EmpresasComponent } from './empresas/empresas.component';
 import { RegistrarEmpresaComponent } from './registrar-empresa/registrar-empresa.component';
+import { EliminarEmpresaComponent } from './eliminar-empresa/eliminar-empresa.component';
 
 @NgModule({
     declarations: [
         EmpresasComponent,
-        RegistrarEmpresaComponent
+        RegistrarEmpresaComponent,
+        EliminarEmpresaComponent
     ],
     imports: [
         CommonModule,
@@ -20,7 +22,8 @@ import { RegistrarEmpresaComponent } from './registrar-empresa/registrar-empresa
         EmpresasRoutingModule,
     ],
     entryComponents: [
-        RegistrarEmpresaComponent
+        RegistrarEmpresaComponent,
+        EliminarEmpresaComponent
     ]
 })
 export class EmpresasModule { }

@@ -6,6 +6,7 @@ import { Page } from 'src/app/models/page';
 import { EmpresaService } from 'src/app/services/empresa.service';
 import { Empresa } from 'src/app/models/empresa';
 import { RegistrarEmpresaComponent } from '../registrar-empresa/registrar-empresa.component';
+import { EliminarEmpresaComponent } from '../eliminar-empresa/eliminar-empresa.component';
 
 @Component({
     selector: 'app-empresas',
@@ -57,6 +58,22 @@ export class EmpresasComponent implements OnInit {
         // Abrir dialogo
         const ref: MatDialogRef<RegistrarEmpresaComponent> = this.dialog.open(RegistrarEmpresaComponent, {
             width: '1000px'
+        });
+
+        // Al cerrar dialogo
+        ref.afterClosed().subscribe(
+            response => {
+                // Actualizar paginador
+                this.paginator.update();
+            }
+        );
+    }
+
+    public eliminar(empresa: Empresa) {
+        // Crear dialogo
+        const ref: MatDialogRef<EliminarEmpresaComponent> = this.dialog.open(EliminarEmpresaComponent, {
+            width: '1000px',
+            data: empresa
         });
 
         // Al cerrar dialogo

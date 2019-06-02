@@ -1,22 +1,22 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
-import { MaquinaService } from 'src/app/services/maquina.service';
-import { Maquina } from 'src/app/models/maquina';
+import { EmpresaService } from 'src/app/services/empresa.service';
+import { Empresa } from 'src/app/models/empresa';
 
 @Component({
-    selector: 'app-eliminar-maquina',
-    templateUrl: './eliminar-maquina.component.html',
-    styleUrls: ['./eliminar-maquina.component.scss']
+    selector: 'app-eliminar-empresa',
+    templateUrl: './eliminar-empresa.component.html',
+    styleUrls: ['./eliminar-empresa.component.scss']
 })
-export class EliminarMaquinaComponent implements OnInit {
+export class EliminarEmpresaComponent implements OnInit {
 
     // Indicar que se encuentra eliminando
     public eliminando = false;
 
     public constructor(
-        private dialogRef: MatDialogRef<EliminarMaquinaComponent>,
-        private maquinaService: MaquinaService,
-        @Inject(MAT_DIALOG_DATA) public maquina: Maquina,
+        private dialogRef: MatDialogRef<EliminarEmpresaComponent>,
+        private empresaService: EmpresaService,
+        @Inject(MAT_DIALOG_DATA) public empresa: Empresa,
         private snackBar: MatSnackBar
     ) {
 
@@ -31,7 +31,7 @@ export class EliminarMaquinaComponent implements OnInit {
         this.eliminando = true;
 
         // Eliminar
-        this.maquinaService.delete(this.maquina).subscribe(
+        this.empresaService.delete(this.empresa).subscribe(
             Response => {
                 // Indicar que no se encuentra registrando
                 this.eliminando = false;
