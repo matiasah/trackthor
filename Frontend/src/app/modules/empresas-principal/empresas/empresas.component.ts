@@ -6,7 +6,7 @@ import { Page } from 'src/app/models/page';
 import { EmpresaService } from 'src/app/services/empresa.service';
 import { Empresa } from 'src/app/models/empresa';
 import { RegistrarEmpresaComponent } from '../registrar-empresa/registrar-empresa.component';
-import { EliminarEmpresaComponent } from '../eliminar-empresa/eliminar-empresa.component';
+import { EliminarEmpresaComponent } from '../../empresas/eliminar-empresa/eliminar-empresa.component';
 
 @Component({
     selector: 'app-empresas',
@@ -43,7 +43,7 @@ export class EmpresasComponent implements OnInit {
         private dialog: MatDialog
     ) {
         // Instanciar paginador
-        this.paginator = this.empresaService.getPaginator();
+        this.paginator = this.empresaService.getPrincipalPaginator();
 
         // Observables
         this.isLoading = this.paginator.isLoadingSubject;

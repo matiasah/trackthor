@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +18,8 @@ import org.hibernate.annotations.CreationTimestamp;
 @Entity
 @Table(name = "trs_empresa")
 public class Empresa implements Serializable {
+
+    private static final long serialVersionUID = -6109615800837182852L;
 
     @Column(name = "id", nullable = false, length = 11)
     @Id
@@ -43,7 +47,7 @@ public class Empresa implements Serializable {
     @OneToMany(mappedBy = "empresa")
     private Set<Alerta> alertas = new HashSet<>();
 
-    @OneToMany(mappedBy = "empresa")
+    @OneToMany(mappedBy = "empresa", cascade = CascadeType.REMOVE)
     private Set<GestionEmpresa> gestores = new HashSet<>();
     
     @CreationTimestamp

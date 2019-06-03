@@ -17,6 +17,8 @@ import org.hibernate.annotations.CreationTimestamp;
 @Table(name = "trs_pago")
 public class Pago implements Serializable {
 
+    private static final long serialVersionUID = 8507709753107771344L;
+
     @Column(name = "id", nullable = false, length = 11)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

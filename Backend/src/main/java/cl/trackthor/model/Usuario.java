@@ -12,6 +12,10 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,6 +25,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity
 @Table(name = "trs_usuario")
 public abstract class Usuario implements UserDetails {
+
+    private static final long serialVersionUID = -6052530111325718385L;
 
     @Column(name = "id", nullable = false, length = 11)
     @Id
@@ -66,11 +72,13 @@ public abstract class Usuario implements UserDetails {
         this.nombre = nombre;
     }
     
+    @JsonIgnore
     @Override
     public String getPassword() {
         return this.password;
     }
 
+    @JsonSetter
     public void setPassword(String password) {
         this.password = password;
     }

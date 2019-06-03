@@ -22,6 +22,10 @@ export class EmpresaService {
         return new Paginator(this.http, 'empresas/search/page', 'empresas');
     }
 
+    public getPrincipalPaginator(): Paginator<any> {
+        return new Paginator(this.http, 'empresas/search/page-principal', 'empresas');
+    }
+
     public query(): Observable<Empresa[]> {
         return this.http.get<Pagination>(environment.api + 'empresas')
             .pipe(map(Response => Response._embedded.empresas));
@@ -33,6 +37,10 @@ export class EmpresaService {
 
     public save(empresa: Empresa): Observable<any> {
         return this.http.post(environment.api + 'empresas', empresa);
+    }
+
+    public savePrincipal(empresa: Empresa): Observable<any> {
+        return this.http.post(environment.api + 'empresas/principal', empresa);
     }
 
     public update(empresa: Empresa): Observable<any> {

@@ -13,6 +13,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 @Table(name = "trs_adm_sistema")
 public class AdministradorSistema extends Usuario {
 
+    private static final long serialVersionUID = 462703325276923836L;
+
     public AdministradorSistema() {
         super();
     }

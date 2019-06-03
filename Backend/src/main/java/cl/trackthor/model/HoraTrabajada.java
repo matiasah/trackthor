@@ -17,6 +17,8 @@ import org.hibernate.annotations.CreationTimestamp;
 @Table(name = "trs_hora_trabajada")
 public class HoraTrabajada implements Serializable {
 
+    private static final long serialVersionUID = 3140098477521042158L;
+
     @Column(name = "id", nullable = false, length = 11)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

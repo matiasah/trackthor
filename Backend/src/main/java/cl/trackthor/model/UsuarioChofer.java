@@ -18,6 +18,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 @Table(name = "trs_usuario_chofer")
 public class UsuarioChofer extends Usuario {
 
+    private static final long serialVersionUID = 1L;
+
     @Column(name = "usc_run", nullable = false)
     private String run;
 
