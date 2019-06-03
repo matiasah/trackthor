@@ -18,7 +18,7 @@ import { Empresa } from 'src/app/models/empresa';
 export class RegistrarMaquinaComponent implements OnInit {
 
     // Maquina a registrar
-    public maquina: Maquina = {};
+    public maquina: Maquina = {} as Maquina;
 
     // Tipos de máquina
     public tiposMaquinas: TipoMaquina[];

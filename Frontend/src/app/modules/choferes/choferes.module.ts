@@ -11,25 +11,25 @@ import { EliminarChoferComponent } from './eliminar-chofer/eliminar-chofer.compo
 import { PipesModule } from 'src/app/pipes/pipes/pipes.module';
 
 @NgModule({
-  declarations: [
-    ChoferesComponent,
-    RegistrarChoferComponent,
-    EditarChoferComponent,
-    EliminarChoferComponent
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MaterialModule,
-    ChoferesRoutingModule,
+    declarations: [
+        ChoferesComponent,
+        RegistrarChoferComponent,
+        EditarChoferComponent,
+        EliminarChoferComponent
+    ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MaterialModule,
+        ChoferesRoutingModule,
 
-    PipesModule,
-  ],
-  entryComponents: [
-    RegistrarChoferComponent,
-    EliminarChoferComponent,
-    EditarChoferComponent,
-  ]
+        PipesModule,
+    ],
+    entryComponents: [
+        RegistrarChoferComponent,
+        EliminarChoferComponent,
+        EditarChoferComponent,
+    ]
 })
 export class ChoferesModule { }

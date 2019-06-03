@@ -12,7 +12,7 @@ import { TipoMaquina } from 'src/app/models/tipo-maquina';
 export class RegistrarTipoMaquinaComponent implements OnInit {
 
     // Máquina a registrar
-    public tipoMaquina: TipoMaquina = {};
+    public tipoMaquina: TipoMaquina = {} as TipoMaquina;
 
     // Indicar si se encuentra registrando
     public registrando = false;

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 import { RoleRoute } from '../models/role-route.enum';
+import { AnimationPlayer } from '@angular/animations';
 
 @Injectable({
     providedIn: 'root'
@@ -26,9 +27,9 @@ export class LoginGuard implements CanActivate {
                     // Por cada rol
                     for (const authority of Response) {
                         // Si el rol tiene ruta
-                        if (RoleRoute[authority.authority]) {
+                        if (RoleRoute[authority.authority as any]) {
                             // Navegar a la ruta correspondiente
-                            this.router.navigate([RoleRoute[authority.authority]]);
+                            this.router.navigate([RoleRoute[authority.authority as any]]);
 
                             // Negar acceso a ruta
                             return false;

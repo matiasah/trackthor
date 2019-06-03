@@ -12,7 +12,7 @@ import { Empresa } from 'src/app/models/empresa';
 export class RegistrarEmpresaComponent implements OnInit {
 
     // Empresa a registrar
-    public empresa: Empresa = {};
+    public empresa: Empresa = {} as Empresa;
 
     // Indicar si se encuentra registrando
     public registrando = false;
