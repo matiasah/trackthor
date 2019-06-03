@@ -6,13 +6,12 @@ import { EmpresasRoutingModule } from './empresas-routing.module';
 
 import { EmpresasComponent } from './empresas/empresas.component';
 import { RegistrarEmpresaComponent } from './registrar-empresa/registrar-empresa.component';
-import { EliminarEmpresaComponent } from './eliminar-empresa/eliminar-empresa.component';
+import { EliminarEmpresaModule } from './eliminar-empresa/eliminar-empresa.module';
 
 @NgModule({
     declarations: [
         EmpresasComponent,
-        RegistrarEmpresaComponent,
-        EliminarEmpresaComponent
+        RegistrarEmpresaComponent
     ],
     imports: [
         CommonModule,
@@ -20,10 +19,10 @@ import { EliminarEmpresaComponent } from './eliminar-empresa/eliminar-empresa.co
         ReactiveFormsModule,
         MaterialModule,
         EmpresasRoutingModule,
+        EliminarEmpresaModule,
     ],
     entryComponents: [
-        RegistrarEmpresaComponent,
-        EliminarEmpresaComponent
+        RegistrarEmpresaComponent
     ]
 })
 export class EmpresasModule { }
