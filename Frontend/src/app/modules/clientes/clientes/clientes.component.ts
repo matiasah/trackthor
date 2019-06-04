@@ -6,6 +6,7 @@ import { Page } from 'src/app/models/page';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { Cliente } from 'src/app/models/cliente';
 import { RegistrarClienteComponent } from '../registrar-cliente/registrar-cliente.component';
+import { EliminarClienteComponent } from '../eliminar-cliente/eliminar-cliente.component';
 
 @Component({
     selector: 'app-clientes',
@@ -69,11 +70,10 @@ export class ClientesComponent implements OnInit {
     }
 
     public eliminar(cliente: Cliente) {
-        /*
         // Crear dialogo
-        const ref: MatDialogRef<EliminarEmpresaComponent> = this.dialog.open(EliminarEmpresaComponent, {
+        const ref: MatDialogRef<EliminarClienteComponent> = this.dialog.open(EliminarClienteComponent, {
             width: '1000px',
-            data: empresa
+            data: cliente
         });
 
         // Al cerrar dialogo
@@ -83,7 +83,6 @@ export class ClientesComponent implements OnInit {
                 this.paginator.update();
             }
         );
-        */
     }
 
 }
