@@ -1,0 +1,96 @@
+<mat-card class="m-3 mat-elevation-z2">
+
+    <mat-card-title>
+        Clientes
+    </mat-card-title>
+
+    <mat-card-content>
+
+        <div *ngIf="isLoading | async" class="loading-shade">
+            <mat-spinner></mat-spinner>
+        </div>
+
+        <mat-form-field class="w-100">
+            <mat-placeholder>
+                <mat-icon>search</mat-icon>Buscar cliente
+            </mat-placeholder>
+            <input matInput name="busqueda">
+        </mat-form-field>
+
+        <table mat-table class="w-100" [dataSource]="dataSource" matSort>
+
+            <!-- Nombre -->
+            <ng-container matColumnDef="nombres">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Nombre
+                </mat-header-cell>
+                <mat-cell *matCellDef="let cliente">
+                    {{ cliente.nombres }}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Rut -->
+            <ng-container matColumnDef="rut">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Rut
+                </mat-header-cell>
+                <mat-cell *matCellDef="let cliente">
+                    {{ cliente.rut }}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Teléfono -->
+            <ng-container matColumnDef="telefono">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Teléfono
+                </mat-header-cell>
+                <mat-cell *matCellDef="let cliente">
+                    {{ cliente.telefono }}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Fecha de registro del cliente -->
+            <ng-container matColumnDef="fecha_registro">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Fecha Registro
+                </mat-header-cell>
+                <mat-cell *matCellDef="let cliente">
+                    {{ cliente.createdAt | date: 'short' : undefined : 'es-CL' }}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Editar -->
+            <ng-container matColumnDef="edit">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let cliente">
+                    <button mat-icon-button matTooltip="Editar cliente" (click)="editar(cliente)">
+                        <mat-icon>settings</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <!-- Eliminar -->
+            <ng-container matColumnDef="delete">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let cliente">
+                    <button mat-icon-button matTooltip="Eliminar cliente" (click)="eliminar(cliente)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </table>
+
+        <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageIndex]="(page | async).pageIndex"
+            [length]="(page | async).length">
+        </mat-paginator>
+    </mat-card-content>
+</mat-card>
+
+<div style="position: fixed; right: 20px; bottom: 20px">
+    <button mat-fab color="primary" (click)="registrar()">
+        <mat-icon>add</mat-icon>
+    </button>
+</div>

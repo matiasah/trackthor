@@ -50,7 +50,12 @@
                 <span mat-line>Choferes</span>
             </a>
 
-            <a mat-list-item (click)="sidenav.close()">
+            <a mat-list-item (click)="sidenav.close()" routerLink="./clientes">
+                <mat-icon matListIcon>people</mat-icon>
+                <span mat-line>Clientes</span>
+            </a>
+
+            <a mat-list-item (click)="sidenav.close()" routerLink="./arriendos">
                 <i  matListIcon class="fas fa-handshake"></i>
                 <span mat-line>Arriendos</span>
             </a>
