@@ -1,6 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-import { MatCheckboxModule } from '@angular/material';
+import { MatCheckboxModule, MatNativeDateModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -66,6 +66,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
         MatTableModule,
         MatSortModule,
         MatPaginatorModule,
+        MatNativeDateModule,
     ],
     exports: [
         // Módulos de Angular Material
@@ -99,7 +100,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
         MatSnackBarModule,
         MatTableModule,
         MatSortModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatNativeDateModule,
     ],
     schemas: [
         CUSTOM_ELEMENTS_SCHEMA
