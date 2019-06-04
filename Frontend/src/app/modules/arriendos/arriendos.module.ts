@@ -6,11 +6,13 @@ import { MaterialModule } from '../material/material.module';
 import { ArriendosRoutingModule } from './arriendos-routing.module';
 import { PipesModule } from 'src/app/pipes/pipes/pipes.module';
 import { RegistrarArriendoComponent } from './registrar-arriendo/registrar-arriendo.component';
+import { EditarArriendoComponent } from './editar-arriendo/editar-arriendo.component';
 
 @NgModule({
   declarations: [
     ArriendosComponent,
-    RegistrarArriendoComponent
+    RegistrarArriendoComponent,
+    EditarArriendoComponent
   ],
   imports: [
     CommonModule,
@@ -23,6 +25,7 @@ import { RegistrarArriendoComponent } from './registrar-arriendo/registrar-arrie
   ],
   entryComponents:[
     RegistrarArriendoComponent,
+    EditarArriendoComponent,
   ]
 })
 export class ArriendosModule { }

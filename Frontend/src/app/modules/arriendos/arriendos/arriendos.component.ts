@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Page } from 'src/app/models/page';
 import { ArriendoService } from 'src/app/services/arriendo.service';
 import { RegistrarArriendoComponent } from '../registrar-arriendo/registrar-arriendo.component';
+import { EditarArriendoComponent } from '../editar-arriendo/editar-arriendo.component';
 
 @Component({
   selector: 'app-arriendos',
@@ -69,7 +70,19 @@ export class ArriendosComponent implements OnInit {
   }
 
   public editar(arriendo: Arriendo) {
+    // Crear dialogo
+    const ref: MatDialogRef<EditarArriendoComponent> = this.dialog.open(EditarArriendoComponent, {
+      width: '1000px',
+      data: arriendo
+    });
 
+    // Al cerrar dialogo
+    ref.afterClosed().subscribe(
+      response => {
+        // Actualizar paginador
+        this.paginator.update();
+      }
+    );
   }
 
   public eliminar(arriendo: Arriendo) {
