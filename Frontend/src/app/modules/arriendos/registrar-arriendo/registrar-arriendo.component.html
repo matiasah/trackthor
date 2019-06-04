@@ -1,79 +1,80 @@
 <div class="row">
-  <div class="col-12 d-flex justify-content-between">
-    <h2 mat-dialog-title>
-      Registrar Arriendo
-    </h2>
+    <div class="col-12 d-flex justify-content-between">
+        <h2 mat-dialog-title>
+            Registrar Arriendo
+        </h2>
 
-    <button mat-icon-button mat-dialog-close>
-      <mat-icon>close</mat-icon>
-    </button>
-  </div>
+        <button mat-icon-button mat-dialog-close>
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
 </div>
 
 <form #form="ngForm" (ngSubmit)="onSubmit()">
 
-  <mat-dialog-content>
-    <div *ngIf="!maquinas || !clientes" class="row">
-      <div class="col-12 justify-content-center d-flex">
-        <mat-spinner></mat-spinner>
-      </div>
-    </div>
+    <mat-dialog-content>
+        <div *ngIf="!maquinas || !clientes" class="row">
+            <div class="col-12 justify-content-center d-flex">
+                <mat-spinner></mat-spinner>
+            </div>
+        </div>
 
-    <div *ngIf="maquinas && clientes" class="row">
+        <div *ngIf="maquinas && clientes" class="row">
 
-      <mat-form-field class="col-6">
-        <input matInput name="fechaInicio" [matDatepicker]="inicio" placeholder="Fecha Inicio"
-          [(ngModel)]="arriendo.inicio" required>
-        <mat-datepicker-toggle matSuffix [for]="inicio"></mat-datepicker-toggle>
-        <mat-datepicker #inicio></mat-datepicker>
-      </mat-form-field>
+            <mat-form-field class="col-6">
+                <input matInput name="fechaInicio" [matDatepicker]="inicio" placeholder="Fecha Inicio"
+                    [(ngModel)]="arriendo.inicio" required>
+                <mat-datepicker-toggle matSuffix [for]="inicio"></mat-datepicker-toggle>
+                <mat-datepicker #inicio></mat-datepicker>
+            </mat-form-field>
 
-      <mat-form-field class="col-6">
-        <input matInput name="fechaTermino" [matDatepicker]="termino" placeholder="Fecha Termino"
-          [(ngModel)]="arriendo.termino" required>
-        <mat-datepicker-toggle matSuffix [for]="termino"></mat-datepicker-toggle>
-        <mat-datepicker #termino></mat-datepicker>
-      </mat-form-field>
+            <mat-form-field class="col-6">
+                <input matInput name="fechaTermino" [matDatepicker]="termino" placeholder="Fecha Termino"
+                    [(ngModel)]="arriendo.termino" required>
+                <mat-datepicker-toggle matSuffix [for]="termino"></mat-datepicker-toggle>
+                <mat-datepicker #termino></mat-datepicker>
+            </mat-form-field>
 
-      <mat-form-field class="col-sm-12 col-md-6">
-        <mat-label>Máquina</mat-label>
-        <mat-select name="maquina" [(ngModel)]="arriendo.maquina" required>
-          <mat-option *ngFor="let maquina of maquinas" [value]="maquina._links.self.href">
-            {{ maquina.patente }} /
-            <span *ngIf="(maquina._links.tipoMaquina.href | http | async); let tipoMaquina; else esperandoTipo">
-              {{tipoMaquina.nombre}}
-            </span>
-            <ng-template #esperandoTipo>
-              <mat-spinner diameter="12"></mat-spinner>
-            </ng-template>
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+            <mat-form-field class="col-sm-12 col-md-6">
+                <mat-label>Máquina</mat-label>
+                <mat-select name="maquina" [(ngModel)]="arriendo.maquina" required>
+                    <mat-option *ngFor="let maquina of maquinas" [value]="maquina._links.self.href">
+                        {{ maquina.patente }} /
+                        <span
+                            *ngIf="(maquina._links.tipoMaquina.href | http | async); let tipoMaquina; else esperandoTipo">
+                            {{tipoMaquina.nombre}}
+                        </span>
+                        <ng-template #esperandoTipo>
+                            <mat-spinner diameter="12"></mat-spinner>
+                        </ng-template>
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
 
-      <mat-form-field class="col-sm-12 col-md-6">
-        <mat-label>Cliente</mat-label>
-        <mat-select name="cliente" [(ngModel)]="arriendo.cliente" required>
-          <mat-option *ngFor="let cliente of clientes" [value]="cliente._links.self.href">
-            {{ cliente.nombres }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+            <mat-form-field class="col-sm-12 col-md-6">
+                <input matInput #clienteForm="ngModel" name="cliente" [(ngModel)]="arriendo.cliente" [matAutocomplete]="autocompleteClientes" required placeholder="Cliente">
+                <mat-autocomplete #autocompleteClientes="matAutocomplete" [displayWith]="getNombresCliente.bind(this)">
+                    <mat-option *ngFor="let cliente of clientes" [value]="cliente._links.self.href">
+                        {{ cliente.nombres }}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
 
-    </div>
-  </mat-dialog-content>
+        </div>
+    </mat-dialog-content>
 
-  <mat-dialog-actions>
-    <div *ngIf="!registrando" class="col-sm-12 col-md-3 offset-sm-0 offset-md-6">
-      <button class="w-100" type="submit" mat-raised-button color="primary">Registrar</button>
-    </div>
+    <mat-dialog-actions>
+        <div *ngIf="!registrando" class="col-sm-12 col-md-3 offset-sm-0 offset-md-6">
+            <button class="w-100" type="submit" mat-raised-button color="primary">Registrar</button>
+        </div>
 
-    <div *ngIf="!registrando" class="col-sm-12 col-md-3 offset-sm-0">
-      <button class="w-100" mat-raised-button mat-dialog-close color="warn">Cancelar</button>
-    </div>
+        <div *ngIf="!registrando" class="col-sm-12 col-md-3 offset-sm-0">
+            <button class="w-100" mat-raised-button mat-dialog-close color="warn">Cancelar</button>
+        </div>
 
-    <div class="col-12 justify-content-center d-flex" *ngIf="registrando">
-      <mat-progress-spinner diameter="48" color="primary" mode="indeterminate"></mat-progress-spinner>
-    </div>
-  </mat-dialog-actions>
+        <div class="col-12 justify-content-center d-flex" *ngIf="registrando">
+            <mat-progress-spinner diameter="48" color="primary" mode="indeterminate"></mat-progress-spinner>
+        </div>
+    </mat-dialog-actions>
 
 </form>
