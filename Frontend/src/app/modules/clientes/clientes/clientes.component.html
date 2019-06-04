@@ -63,7 +63,7 @@
             <ng-container matColumnDef="edit">
                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
                 <mat-cell *matCellDef="let cliente">
-                    <button mat-icon-button matTooltip="Editar cliente">
+                    <button mat-icon-button matTooltip="Editar cliente" (click)="editar(cliente)">
                         <mat-icon>settings</mat-icon>
                     </button>
                 </mat-cell>

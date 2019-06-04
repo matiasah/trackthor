@@ -6,6 +6,7 @@ import { Page } from 'src/app/models/page';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { Cliente } from 'src/app/models/cliente';
 import { RegistrarClienteComponent } from '../registrar-cliente/registrar-cliente.component';
+import { EditarClienteComponent } from '../editar-cliente/editar-cliente.component';
 import { EliminarClienteComponent } from '../eliminar-cliente/eliminar-cliente.component';
 
 @Component({
@@ -58,6 +59,22 @@ export class ClientesComponent implements OnInit {
         // Abrir dialogo
         const ref: MatDialogRef<RegistrarClienteComponent> = this.dialog.open(RegistrarClienteComponent, {
             width: '1000px'
+        });
+
+        // Al cerrar dialogo
+        ref.afterClosed().subscribe(
+            response => {
+                // Actualizar paginador
+                this.paginator.update();
+            }
+        );
+    }
+
+    public editar(cliente: Cliente) {
+        // Crear dialogo
+        const ref: MatDialogRef<EditarClienteComponent> = this.dialog.open(EditarClienteComponent, {
+            width: '1000px',
+            data: cliente
         });
 
         // Al cerrar dialogo
