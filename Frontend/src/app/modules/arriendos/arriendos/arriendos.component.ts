@@ -17,7 +17,7 @@ import { EliminarArriendoComponent } from '../eliminar-arriendo/eliminar-arriend
 export class ArriendosComponent implements OnInit {
 
   // Columnas de datatable
-  public displayedColumns: string[] = ['fechaInicio', 'fechaTermino', 'cliente', 'edit', 'delete'];
+  public displayedColumns: string[] = ['fechaInicio', 'fechaTermino', 'cliente', 'maquina', 'edit', 'delete'];
 
   // Paginación
   public paginator: Paginator<Arriendo>;

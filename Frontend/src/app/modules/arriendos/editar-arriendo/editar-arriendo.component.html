@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <div *ngIf="maquinas && clientes" class="row">
+    <div *ngIf="maquinas && clientes && arriendo" class="row">
 
       <mat-form-field class="col-6">
         <input matInput name="fechaInicio" [matDatepicker]="inicio" placeholder="Fecha Inicio"
@@ -64,7 +64,7 @@
 
   <mat-dialog-actions>
     <div *ngIf="!registrando" class="col-sm-12 col-md-3 offset-sm-0 offset-md-6">
-      <button class="w-100" type="submit" mat-raised-button color="primary">Registrar</button>
+      <button class="w-100" type="submit" mat-raised-button color="primary">Actualizar</button>
     </div>
 
     <div *ngIf="!registrando" class="col-sm-12 col-md-3 offset-sm-0">

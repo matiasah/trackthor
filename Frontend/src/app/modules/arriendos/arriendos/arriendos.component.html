@@ -52,7 +52,28 @@
             <mat-spinner diameter="32"></mat-spinner>
           </ng-template>
         </mat-cell>
-      </ng-container>    
+      </ng-container>
+
+      <!-- Máquina -->
+      <ng-container matColumnDef="maquina">
+        <mat-header-cell *matHeaderCellDef>
+          Máquina
+        </mat-header-cell>
+        <mat-cell *matCellDef="let arriendo">
+          <span *ngIf="(arriendo._links.maquina.href | http | async); let maquina; else esperandoMaquina">
+            {{ maquina.patente }} / 
+            <span *ngIf="(maquina._links.tipoMaquina.href | http | async); let tipoMaquina; else esperandoTipo">
+              {{ tipoMaquina.nombre }}
+            </span>
+            <ng-template #esperandoTipo>
+                <mat-spinner diameter="14"></mat-spinner>
+              </ng-template>
+          </span>
+          <ng-template #esperandoMaquina>
+            <mat-spinner diameter="32"></mat-spinner>
+          </ng-template>
+        </mat-cell>
+      </ng-container>
 
       <!-- Editar -->
       <ng-container matColumnDef="edit">
