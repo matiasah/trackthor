@@ -5,6 +5,7 @@ import { Paginator } from 'src/app/models/paginator';
 import { Page } from 'src/app/models/page';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { Cliente } from 'src/app/models/cliente';
+import { RegistrarClienteComponent } from '../registrar-cliente/registrar-cliente.component';
 
 @Component({
     selector: 'app-clientes',
@@ -53,9 +54,8 @@ export class ClientesComponent implements OnInit {
     }
 
     public registrar() {
-        /*
         // Abrir dialogo
-        const ref: MatDialogRef<RegistrarEmpresaComponent> = this.dialog.open(RegistrarEmpresaComponent, {
+        const ref: MatDialogRef<RegistrarClienteComponent> = this.dialog.open(RegistrarClienteComponent, {
             width: '1000px'
         });
 
@@ -66,7 +66,6 @@ export class ClientesComponent implements OnInit {
                 this.paginator.update();
             }
         );
-        */
     }
 
     public eliminar(cliente: Cliente) {

@@ -4,10 +4,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { ClientesRoutingModule } from './clientes-routing.module';
 import { ClientesComponent } from './clientes/clientes.component';
+import { RegistrarClienteComponent } from './registrar-cliente/registrar-cliente.component';
 
 @NgModule({
     declarations: [
-        ClientesComponent
+        ClientesComponent,
+        RegistrarClienteComponent
     ],
     imports: [
         CommonModule,
@@ -15,6 +17,9 @@ import { ClientesComponent } from './clientes/clientes.component';
         ReactiveFormsModule,
         MaterialModule,
         ClientesRoutingModule,
+    ],
+    entryComponents: [
+        RegistrarClienteComponent
     ]
 })
 export class ClientesModule { }
