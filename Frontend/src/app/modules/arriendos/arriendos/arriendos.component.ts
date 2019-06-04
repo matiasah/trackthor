@@ -7,6 +7,7 @@ import { Page } from 'src/app/models/page';
 import { ArriendoService } from 'src/app/services/arriendo.service';
 import { RegistrarArriendoComponent } from '../registrar-arriendo/registrar-arriendo.component';
 import { EditarArriendoComponent } from '../editar-arriendo/editar-arriendo.component';
+import { EliminarArriendoComponent } from '../eliminar-arriendo/eliminar-arriendo.component';
 
 @Component({
   selector: 'app-arriendos',
@@ -86,7 +87,19 @@ export class ArriendosComponent implements OnInit {
   }
 
   public eliminar(arriendo: Arriendo) {
+    // Crear dialogo
+    const ref: MatDialogRef<EliminarArriendoComponent> = this.dialog.open(EliminarArriendoComponent, {
+      width: '1000px',
+      data: arriendo
+    });
 
+    // Al cerrar dialogo
+    ref.afterClosed().subscribe(
+      response => {
+        // Actualizar paginador
+        this.paginator.update();
+      }
+    );
   }
 
 }

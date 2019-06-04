@@ -7,12 +7,14 @@ import { ArriendosRoutingModule } from './arriendos-routing.module';
 import { PipesModule } from 'src/app/pipes/pipes/pipes.module';
 import { RegistrarArriendoComponent } from './registrar-arriendo/registrar-arriendo.component';
 import { EditarArriendoComponent } from './editar-arriendo/editar-arriendo.component';
+import { EliminarArriendoComponent } from './eliminar-arriendo/eliminar-arriendo.component';
 
 @NgModule({
   declarations: [
     ArriendosComponent,
     RegistrarArriendoComponent,
-    EditarArriendoComponent
+    EditarArriendoComponent,
+    EliminarArriendoComponent
   ],
   imports: [
     CommonModule,
@@ -26,6 +28,7 @@ import { EditarArriendoComponent } from './editar-arriendo/editar-arriendo.compo
   entryComponents:[
     RegistrarArriendoComponent,
     EditarArriendoComponent,
+    EliminarArriendoComponent,
   ]
 })
 export class ArriendosModule { }
