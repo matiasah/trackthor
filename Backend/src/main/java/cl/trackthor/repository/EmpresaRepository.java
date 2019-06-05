@@ -20,6 +20,10 @@ public interface EmpresaRepository extends CrudRepository<Empresa, Long> {
     
     @RestResource(path = "page", rel = "empresas")
     public Page<Empresa> findBy(Pageable pageable);
+
+    @RestResource(path = "principal", rel = "empresas")
+    @Query("SELECT e FROM Empresa e INNER JOIN e.gestores g INNER JOIN g.usuario u WHERE u.id = ?#{ principal?.id }")
+    public List<Empresa> findByPrincipal();
     
     @RestResource(path = "page-principal", rel = "empresas")
     @Query("SELECT e FROM Empresa e INNER JOIN e.gestores g INNER JOIN g.usuario u WHERE u.id = ?#{ principal?.id }")
