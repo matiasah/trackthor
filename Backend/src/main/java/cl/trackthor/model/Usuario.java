@@ -31,7 +31,7 @@ public abstract class Usuario implements UserDetails {
     @Column(name = "id", nullable = false, length = 11)
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
-    private long id;
+    private Long id;
 
     @ApiModelProperty(notes = "Nombre del usuario")
     @NotNull
@@ -56,11 +56,11 @@ public abstract class Usuario implements UserDetails {
         return "Usuario [id=" + id + ", nombre=" + nombre + ", password=" + password + ", createdAt=" + createdAt + "]";
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
