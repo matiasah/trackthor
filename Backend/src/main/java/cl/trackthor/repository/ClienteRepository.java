@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
 
@@ -18,5 +19,8 @@ public interface ClienteRepository extends CrudRepository<Cliente, Long> {
 
     @RestResource(path = "page", rel = "clientes")
     public Page<Cliente> findBy(Pageable pageable);
+
+    @RestResource(path = "10-nombres", rel = "clientes")
+    public List<Cliente> queryFirst10ByNombresContaining(@Param("nombres") String nombres);
 
 }

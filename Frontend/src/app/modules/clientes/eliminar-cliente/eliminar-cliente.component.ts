@@ -1,22 +1,22 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
-import { EmpresaService } from 'src/app/services/empresa.service';
-import { Empresa } from 'src/app/models/empresa';
+import { ClienteService } from 'src/app/services/cliente.service';
+import { Cliente } from 'src/app/models/cliente';
 
 @Component({
-    selector: 'app-eliminar-empresa',
-    templateUrl: './eliminar-empresa.component.html',
-    styleUrls: ['./eliminar-empresa.component.scss']
+    selector: 'app-eliminar-cliente',
+    templateUrl: './eliminar-cliente.component.html',
+    styleUrls: ['./eliminar-cliente.component.scss']
 })
-export class EliminarEmpresaComponent implements OnInit {
+export class EliminarClienteComponent implements OnInit {
 
     // Indicar que se encuentra eliminando
     public eliminando = false;
 
     public constructor(
-        private dialogRef: MatDialogRef<EliminarEmpresaComponent>,
-        private empresaService: EmpresaService,
-        @Inject(MAT_DIALOG_DATA) public empresa: Empresa,
+        private dialogRef: MatDialogRef<EliminarClienteComponent>,
+        private clienteService: ClienteService,
+        @Inject(MAT_DIALOG_DATA) public cliente: Cliente,
         private snackBar: MatSnackBar
     ) {
 
@@ -31,13 +31,13 @@ export class EliminarEmpresaComponent implements OnInit {
         this.eliminando = true;
 
         // Eliminar
-        this.empresaService.delete(this.empresa).subscribe(
+        this.clienteService.delete(this.cliente).subscribe(
             Response => {
                 // Indicar que no se encuentra registrando
                 this.eliminando = false;
 
                 // Notificar registro exitoso
-                this.snackBar.open('La empresa ha sido eliminada', 'Aceptar', { duration: 2000 });
+                this.snackBar.open('El cliente ha sido eliminado', 'Aceptar', { duration: 2000 });
 
                 // Cerrar modal
                 this.dialogRef.close();
@@ -47,11 +47,12 @@ export class EliminarEmpresaComponent implements OnInit {
                 this.eliminando = false;
 
                 // Notificar registro erroneo
-                this.snackBar.open('No se ha podido eliminar la empresa', 'Aceptar', { duration: 2000 });
+                this.snackBar.open('No se ha podido eliminar el cliente', 'Aceptar', { duration: 2000 });
 
                 // Cerrar modal
                 this.dialogRef.close();
             }
         );
     }
+
 }

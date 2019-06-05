@@ -119,7 +119,7 @@ export class EditarMaquinaComponent implements OnInit {
                     this.registrando = false;
 
                     // Notificar registro exitoso
-                    this.snackBar.open('La máquina ha sido Editada', 'Aceptar', { duration: 2000 });
+                    this.snackBar.open('La máquina ha sido editada', 'Aceptar', { duration: 2000 });
 
                     // Cerrar modal
                     this.dialogRef.close();
@@ -129,7 +129,7 @@ export class EditarMaquinaComponent implements OnInit {
                     this.registrando = false;
 
                     // Notificar registro erroneo
-                    this.snackBar.open('No se ha podido Editar la máquina', 'Aceptar', { duration: 2000 });
+                    this.snackBar.open('No se ha podido editar la máquina', 'Aceptar', { duration: 2000 });
 
                     // Cerrar modal
                     this.dialogRef.close();

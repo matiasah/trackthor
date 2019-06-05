@@ -28,6 +28,14 @@ const routes: Routes = [
             {
                 path: 'empresas',
                 loadChildren: '../empresas-principal/empresas-principal.module#EmpresasPrincipalModule'
+            },
+            {
+                path: 'arriendos',
+                loadChildren: '../arriendos/arriendos.module#ArriendosModule'
+            },
+            {
+                path: 'clientes',
+                loadChildren: '../clientes/clientes.module#ClientesModule'
             }
         ]
     }

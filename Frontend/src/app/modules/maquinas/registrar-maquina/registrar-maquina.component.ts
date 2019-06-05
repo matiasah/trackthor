@@ -52,7 +52,7 @@ export class RegistrarMaquinaComponent implements OnInit {
         );
 
         // Obtener empresas
-        this.empresaService.query().subscribe(
+        this.empresaService.queryPrincipal().subscribe(
             Response => {
                 this.empresas = Response;
             }
