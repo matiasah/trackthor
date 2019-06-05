@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Arriendo } from 'src/app/models/arriendo';
-import { Maquina } from 'src/app/models/maquina';
-import { Cliente } from 'src/app/models/cliente';
-import { NgForm } from '@angular/forms';
-import { ArriendoService } from 'src/app/services/arriendo.service';
 import { MatDialogRef, MatSnackBar } from '@angular/material';
-import { MaquinaService } from 'src/app/services/maquina.service';
-import { ClienteService } from 'src/app/services/cliente.service';
+import { NgForm } from '@angular/forms';
+import { Observable, forkJoin } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { ArriendoService } from 'src/app/services/arriendo.service';
+import { Arriendo } from 'src/app/models/arriendo';
+import { MaquinaService } from 'src/app/services/maquina.service';
+import { Maquina } from 'src/app/models/maquina';
+import { ClienteService } from 'src/app/services/cliente.service';
+import { Cliente } from 'src/app/models/cliente';
 
 @Component({
     selector: 'app-registrar-arriendo',
@@ -30,7 +30,7 @@ export class RegistrarArriendoComponent implements OnInit {
     public registrando = false;
 
     // Tabla hash
-    private clientesMap: { [index: string]: Cliente };
+    private clientesMap: { [index: string]: Cliente } = {};
 
     // Formulario
     @ViewChild('form')
@@ -74,7 +74,7 @@ export class RegistrarArriendoComponent implements OnInit {
                         Value => {
 
                             // Si el valor no está en la tabla hash, es porque probablemente no es un URL
-                            if (this.clientesMap[Value] === null) {
+                            if (!this.clientesMap[Value]) {
 
                                 // Buscar clientes con nombres que contengan la palabra
                                 this.clienteService.queryFirst10ByNombresContaining(Value).subscribe(
