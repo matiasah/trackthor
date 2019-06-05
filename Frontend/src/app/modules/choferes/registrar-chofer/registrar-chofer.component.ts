@@ -37,7 +37,7 @@ export class RegistrarChoferComponent implements OnInit {
 
     public ngOnInit() {
         // Obtener empresas
-        this.empresaService.query().subscribe(
+        this.empresaService.queryPrincipal().subscribe(
             Response => {
                 this.empresas = Response;
             }
