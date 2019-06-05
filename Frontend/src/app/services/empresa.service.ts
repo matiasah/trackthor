@@ -31,6 +31,11 @@ export class EmpresaService {
             .pipe(map(Response => Response._embedded.empresas));
     }
 
+    public queryPrincipal(): Observable<Empresa[]> {
+        return this.http.get<any>(environment.api + 'empresas/search/principal')
+            .pipe(map(Response => Response._embedded.empresas));
+    }
+
     public get(path: string): Observable<Empresa> {
         return this.http.get<Empresa>(path);
     }

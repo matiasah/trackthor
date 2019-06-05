@@ -37,7 +37,7 @@ export class EliminarEmpresaComponent implements OnInit {
                 this.eliminando = false;
 
                 // Notificar registro exitoso
-                this.snackBar.open('La máquina ha sido Eliminada', 'Aceptar', { duration: 2000 });
+                this.snackBar.open('La empresa ha sido eliminada', 'Aceptar', { duration: 2000 });
 
                 // Cerrar modal
                 this.dialogRef.close();
@@ -47,7 +47,7 @@ export class EliminarEmpresaComponent implements OnInit {
                 this.eliminando = false;
 
                 // Notificar registro erroneo
-                this.snackBar.open('No se ha podido Eliminar la máquina', 'Aceptar', { duration: 2000 });
+                this.snackBar.open('No se ha podido eliminar la empresa', 'Aceptar', { duration: 2000 });
 
                 // Cerrar modal
                 this.dialogRef.close();
