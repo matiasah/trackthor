@@ -29,6 +29,9 @@ export class RegistrarArriendoComponent implements OnInit {
     // Indicar si se encuentra registrando
     public registrando = false;
 
+    // Tabla hash
+    private clientesMap: { [index: string]: Cliente };
+
     // Formulario
     @ViewChild('form')
     public form: NgForm;
@@ -57,7 +60,7 @@ export class RegistrarArriendoComponent implements OnInit {
         // Si se ha recibido el input
         if (form != null) {
             // Obtener objeto observable
-            let observable: Observable<any> | null = form.valueChanges;
+            const observable: Observable<any> | null = form.valueChanges;
 
             // Si hay un objeto observable
             if (observable != null) {
@@ -70,13 +73,23 @@ export class RegistrarArriendoComponent implements OnInit {
                     .subscribe(
                         Value => {
 
-                            // Si el nombre del cliente es nulo, el valor no es un link
-                            if (this.getNombresCliente(Value) === null) {
+                            // Si el valor no está en la tabla hash, es porque probablemente no es un URL
+                            if (this.clientesMap[Value] === null) {
 
-                                // Si el valor es un string, buscar clientes con nombres similares
+                                // Buscar clientes con nombres que contengan la palabra
                                 this.clienteService.queryFirst10ByNombresContaining(Value).subscribe(
                                     Response => {
+                                        // Almacenar lista de clientes en componente
                                         this.clientes = Response;
+
+                                        // Limpiar tabla hash
+                                        this.clientesMap = {};
+
+                                        // Por cada cliente
+                                        for (const cliente of this.clientes) {
+                                            // Hashear cliente
+                                            this.clientesMap[cliente._links.self.href] = cliente;
+                                        }
                                     }
                                 );
 
@@ -121,20 +134,15 @@ export class RegistrarArriendoComponent implements OnInit {
     }
 
     public getNombresCliente(url: string): string | null {
-        // Si se ha recibido la lista de clientes
-        if (this.clientes != null) {
+        // Si hay una tabla de clientes
+        if (this.clientesMap != null) {
 
-            // Por cada cliente
-            for (let i = 0; i < this.clientes.length; i++) {
-                // Objeto del cliente
-                let cliente: Cliente = this.clientes[i];
+            // Obtener cliente
+            const cliente: Cliente = this.clientesMap[url];
 
-                // Si coincide el URL
-                if (cliente._links.self.href == url && cliente.nombres) {
-
-                    // Retornar nombre del cliente
-                    return cliente.nombres;
-                }
+            // Si hay un cliente con nombres
+            if (cliente != null && cliente.nombres ) {
+                return cliente.nombres;
             }
         }
         return null;
