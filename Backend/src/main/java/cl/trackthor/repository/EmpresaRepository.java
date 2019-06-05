@@ -22,15 +22,15 @@ public interface EmpresaRepository extends CrudRepository<Empresa, Long> {
     public Page<Empresa> findBy(Pageable pageable);
 
     @RestResource(path = "principal", rel = "empresas")
-    @Query("SELECT e FROM Empresa e INNER JOIN e.gestores g INNER JOIN g.usuario u WHERE u.id = ?#{ principal?.id }")
+    @Query("SELECT e FROM Empresa e INNER JOIN e.gestores g WHERE g.usuario.id = ?#{ principal?.id }")
     public List<Empresa> findByPrincipal();
     
     @RestResource(path = "page-principal", rel = "empresas")
-    @Query("SELECT e FROM Empresa e INNER JOIN e.gestores g INNER JOIN g.usuario u WHERE u.id = ?#{ principal?.id }")
+    @Query("SELECT e FROM Empresa e INNER JOIN e.gestores g WHERE g.usuario.id = ?#{ principal?.id }")
     public Page<Empresa> findByPrincipal(Pageable pageable);
 
     @RestResource(exported = false)
-    @Query("SELECT e FROM Empresa e INNER JOIN e.gestores g INNER JOIN g.usuario u WHERE u.id = ?#{ principal?.id } AND e.id = ?1")
+    @Query("SELECT e FROM Empresa e INNER JOIN e.gestores g WHERE g.usuario.id = ?#{ principal?.id } AND e.id = ?1")
     public Optional<Empresa> findByIdAndPrincipal(Long id);
     
 }
