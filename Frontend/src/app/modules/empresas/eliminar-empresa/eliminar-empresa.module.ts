@@ -8,7 +8,7 @@ import { EliminarEmpresaComponent } from './eliminar-empresa.component';
         EliminarEmpresaComponent,
     ],
     exports: [
-        EliminarEmpresaComponent,
+        EliminarEmpresaComponent
     ],
     entryComponents: [
         EliminarEmpresaComponent
