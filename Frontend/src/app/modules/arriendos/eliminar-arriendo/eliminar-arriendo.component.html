@@ -1,87 +1,87 @@
 <div class="row">
-  <div class="col-12 d-flex justify-content-between">
-    <h2 mat-dialog-title>
-      Eliminar Arriendo
-    </h2>
+    <div class="col-12 d-flex justify-content-between">
+        <h2 mat-dialog-title>
+            Eliminar Arriendo
+        </h2>
 
-    <button mat-icon-button mat-dialog-close>
-      <mat-icon>close</mat-icon>
-    </button>
-  </div>
+        <button mat-icon-button mat-dialog-close>
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
 </div>
 
 <mat-dialog-content class="row">
-  <mat-list role="list">
+    <mat-list role="list">
 
-    <!-- Maquina -->
-    <mat-list-item role="listitem">
-      <p *ngIf="arriendo._links.maquina.href | http | async; let maquina; else esperandoTipo">
-        <b>Máquina: </b>
-        {{ maquina.patente }} /
-        <span *ngIf="(maquina._links.tipoMaquina.href | http | async); let tipoMaquina; else esperandoTipo">
-          {{tipoMaquina.nombre}}
-        </span>
+        <!-- Maquina -->
+        <mat-list-item role="listitem">
+            <p *ngIf="arriendo._links.maquina.href | http | async; let maquina; else esperandoTipo">
+                <b>Máquina: </b>
+                {{ maquina.patente }} /
+                <span *ngIf="(maquina._links.tipoMaquina.href | http | async); let tipoMaquina; else esperandoTipo">
+                    {{tipoMaquina.nombre}}
+                </span>
+                <ng-template #esperandoTipo>
+                    <mat-spinner diameter="12"></mat-spinner>
+                </ng-template>
+            </p>
+            <ng-template #esperandoTipo>
+                <mat-spinner diameter="32"></mat-spinner>
+            </ng-template>
+        </mat-list-item>
+
+        <!-- Rango de fechas del arriendo -->
+        <mat-list-item role="listitem">
+            <p>
+                Arriendo desde <b>{{ arriendo.inicio | date: 'mediumDate' : undefined : 'es-CL' }}</b> hasta el
+                <b>{{ arriendo.termino | date: 'mediumDate' : undefined : 'es-CL' }}</b>
+            </p>
+        </mat-list-item>
+
+        <!-- Datos del cliente -->
+        <mat-list-item role="listitem">
+            <h2>Datos Cliente</h2>
+        </mat-list-item>
+
+        <div *ngIf="arriendo._links.cliente.href | http | async; let cliente; else esperandoTipo">
+
+            <!-- Nombres del cliente-->
+            <mat-list-item role="listitem">
+                <p>
+                    <b>Nombre: </b>{{ cliente.nombres }}
+                </p>
+            </mat-list-item>
+
+            <!-- RUT o RUN -->
+            <mat-list-item role="listitem">
+                <p>
+                    <b>RUT: </b>{{ cliente.rut }}
+                </p>
+            </mat-list-item>
+
+            <!-- Teléfono -->
+            <mat-list-item role="listitem">
+                <p>
+                    <b>Teléfono: </b>{{ cliente.telefono }}
+                </p>
+            </mat-list-item>
+        </div>
         <ng-template #esperandoTipo>
-          <mat-spinner diameter="12"></mat-spinner>
+            <mat-spinner diameter="32"></mat-spinner>
         </ng-template>
-      </p>
-      <ng-template #esperandoTipo>
-        <mat-spinner diameter="32"></mat-spinner>
-      </ng-template>
-    </mat-list-item>
-
-    <!-- Rango de fechas del arriendo -->
-    <mat-list-item role="listitem">
-      <p>
-        Arriendo desde <b>{{ arriendo.inicio | date: 'mediumDate' : undefined : 'es-CL' }}</b> hasta el
-        <b>{{ arriendo.termino | date: 'mediumDate' : undefined : 'es-CL' }}</b>
-      </p>
-    </mat-list-item>
-
-    <!-- Datos del cliente -->
-    <mat-list-item role="listitem">
-      <h2>Datos Cliente</h2>
-    </mat-list-item>
-
-    <div *ngIf="arriendo._links.cliente.href | http | async; let cliente; else esperandoTipo">
-
-      <!-- Nombres del cliente-->
-      <mat-list-item role="listitem">
-        <p>
-          <b>Nombre: </b>{{ cliente.nombres }}
-        </p>
-      </mat-list-item>
-
-      <!-- RUT o RUN -->
-      <mat-list-item role="listitem">
-        <p>
-          <b>RUT: </b>{{ cliente.rut }}
-        </p>
-      </mat-list-item>
-
-      <!-- Teléfono -->
-      <mat-list-item role="listitem">
-        <p>
-          <b>Teléfono: </b>{{ cliente.telefono }}
-        </p>
-      </mat-list-item>
-    </div>
-    <ng-template #esperandoTipo>
-      <mat-spinner diameter="32"></mat-spinner>
-    </ng-template>
-  </mat-list>
+    </mat-list>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <div *ngIf="!eliminando" class="col-sm-12 col-md-3 offset-sm-0 offset-md-6">
-    <button class="w-100" (click)="eliminar()" mat-raised-button color="primary">Eliminar</button>
-  </div>
+    <div *ngIf="!eliminando" class="col-sm-12 col-md-3 offset-sm-0 offset-md-6">
+        <button class="w-100" (click)="eliminar()" mat-raised-button color="primary">Eliminar</button>
+    </div>
 
-  <div *ngIf="!eliminando" class="col-sm-12 col-md-3 offset-sm-0">
-    <button class="w-100" mat-raised-button mat-dialog-close color="warn">Cancelar</button>
-  </div>
+    <div *ngIf="!eliminando" class="col-sm-12 col-md-3 offset-sm-0">
+        <button class="w-100" mat-raised-button mat-dialog-close color="warn">Cancelar</button>
+    </div>
 
-  <div class="col-12" *ngIf="eliminando">
-    <mat-progress-spinner diameter="48" color="primary" mode="indeterminate"></mat-progress-spinner>
-  </div>
+    <div class="col-12" *ngIf="eliminando">
+        <mat-progress-spinner diameter="48" color="primary" mode="indeterminate"></mat-progress-spinner>
+    </div>
 </mat-dialog-actions>

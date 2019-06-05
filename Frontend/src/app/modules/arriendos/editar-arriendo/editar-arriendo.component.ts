@@ -150,7 +150,7 @@ export class EditarArriendoComponent implements OnInit {
                     this.registrando = false;
 
                     // Notificar registro exitoso
-                    this.snackBar.open('El arriendo ha sido Editado', 'Aceptar', { duration: 2000 });
+                    this.snackBar.open('El arriendo ha sido editado', 'Aceptar', { duration: 2000 });
 
                     // Cerrar modal
                     this.dialogRef.close();
@@ -160,7 +160,7 @@ export class EditarArriendoComponent implements OnInit {
                     this.registrando = false;
 
                     // Notificar registro erroneo
-                    this.snackBar.open('No se ha podido Editar el arriendo', 'Aceptar', { duration: 2000 });
+                    this.snackBar.open('No se ha podido editar el arriendo', 'Aceptar', { duration: 2000 });
 
                     // Cerrar modal
                     this.dialogRef.close();
