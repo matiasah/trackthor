@@ -1,0 +1,90 @@
+<mat-card class="m-3 mat-elevation-z2">
+
+    <mat-card-title>
+        Alertas
+    </mat-card-title>
+
+    <mat-card-content>
+
+        <div *ngIf="isLoading | async" class="loading-shade">
+            <mat-spinner></mat-spinner>
+        </div>
+
+        <mat-form-field class="w-100">
+            <mat-placeholder>
+                <mat-icon>search</mat-icon>Buscar alerta
+            </mat-placeholder>
+            <input matInput name="busqueda" [(ngModel)]="dataSource.filter">
+        </mat-form-field>
+
+        <table mat-table class="w-100" [dataSource]="dataSource" matSort>
+
+            <!-- Descripcion -->
+            <ng-container matColumnDef="descripcion">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Descripción
+                </mat-header-cell>
+                <mat-cell *matCellDef="let alerta">
+                    {{ alerta.descripcion }}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Empresa -->
+            <ng-container matColumnDef="empresa">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Empresa
+                </mat-header-cell>
+                <mat-cell *matCellDef="let alerta">
+                    <span *ngIf="(alerta._links.empresa.href | http | async); let empresa; else esperandoEmpresa">
+                        {{ empresa.nombre }}
+                    </span>
+                    <ng-template #esperandoEmpresa>
+                        <mat-spinner diameter="32"></mat-spinner>
+                    </ng-template>
+                </mat-cell>
+            </ng-container>
+
+            <!-- Chofer -->
+            <ng-container matColumnDef="usuario">
+                <mat-header-cell *matHeaderCellDef>
+                    Chofer
+                </mat-header-cell>
+                <mat-cell *matCellDef="let alerta">
+                    <span *ngIf="(alerta._links.usuario.href | http | async); let usuario; else esperandoUsuario">
+                        {{ usuario.nombresChofer }}
+                    </span>
+                    <ng-template #esperandoUsuario>
+                        <mat-spinner diameter="32"></mat-spinner>
+                    </ng-template>
+                </mat-cell>
+            </ng-container>
+
+            <!-- Fecha -->
+            <ng-container matColumnDef="fecha_creacion">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Fecha
+                </mat-header-cell>
+                <mat-cell *matCellDef="let arriendo">
+                    {{ arriendo.createdAt | date: 'mediumDate' : undefined : 'es-CL' }}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Eliminar -->
+            <ng-container matColumnDef="delete">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let alerta">
+                    <button mat-icon-button matTooltip="Eliminar máquina" (click)="eliminar(alerta)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </table>
+
+        <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageIndex]="(page | async).pageIndex"
+            [length]="(page | async).length">
+        </mat-paginator>
+    </mat-card-content>
+</mat-card>
