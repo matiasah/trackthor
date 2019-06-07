@@ -44,7 +44,7 @@ export class MaquinasComponent implements OnInit {
         private dialog: MatDialog
     ) {
         // Instanciar paginador
-        this.paginator = this.maquinaService.getPaginator();
+        this.paginator = this.maquinaService.getPrincipalPaginator();
 
         // Observables
         this.isLoading = this.paginator.isLoadingSubject;

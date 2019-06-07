@@ -1,71 +1,72 @@
 <div class="row">
-  <div class="col-12 d-flex justify-content-between">
-    <h2 mat-dialog-title>
-      Registrar Chofer
-    </h2>
+    <div class="col-12 d-flex justify-content-between">
+        <h2 mat-dialog-title>
+            Registrar chofer
+        </h2>
 
-    <button mat-icon-button mat-dialog-close>
-      <mat-icon>close</mat-icon>
-    </button>
-  </div>
+        <button mat-icon-button mat-dialog-close>
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
 </div>
 
 <form #form="ngForm" (ngSubmit)="onSubmit()">
 
-  <mat-dialog-content>
-    <div *ngIf="!empresas" class="row">
-      <div class="col-12 justify-content-center d-flex">
-        <mat-spinner></mat-spinner>
-      </div>
-    </div>
+    <mat-dialog-content>
+        <div *ngIf="!empresas" class="row">
+            <div class="col-12 justify-content-center d-flex">
+                <mat-spinner></mat-spinner>
+            </div>
+        </div>
 
-    <div *ngIf="empresas" class="row">
+        <div *ngIf="empresas" class="row">
 
-      <!-- Run -->
-      <mat-form-field class="col-sm-12 col-md-6">
-        <input matInput name="run" [(ngModel)]="chofer.run" required placeholder="RUN">
-      </mat-form-field>
+            <!-- Run -->
+            <mat-form-field class="col-sm-12 col-md-6">
+                <input matInput name="run" [(ngModel)]="chofer.run" required placeholder="RUN">
+            </mat-form-field>
 
-      <!-- Nombre completo del chofer -->
-      <mat-form-field class="col-sm-12 col-md-6">
-        <input matInput name="nombreChofer" [(ngModel)]="chofer.nombresChofer" required placeholder="Nombre completo">
-      </mat-form-field>
+            <!-- Nombre completo del chofer -->
+            <mat-form-field class="col-sm-12 col-md-6">
+                <input matInput name="nombreChofer" [(ngModel)]="chofer.nombresChofer" required
+                    placeholder="Nombre completo">
+            </mat-form-field>
 
-      <!-- Empresas -->
-      <mat-form-field class="col-sm-12 col-md-6">
-        <mat-label>Empresa</mat-label>
-        <mat-select name="empresa" [(ngModel)]="chofer.empresa" required>
-          <mat-option *ngFor="let empresa of empresas" [value]="empresa._links.self.href">
-            {{ empresa.nombre }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+            <!-- Empresas -->
+            <mat-form-field class="col-sm-12 col-md-6">
+                <mat-label>Empresa</mat-label>
+                <mat-select name="empresa" [(ngModel)]="chofer.empresa" required>
+                    <mat-option *ngFor="let empresa of empresas" [value]="empresa._links.self.href">
+                        {{ empresa.nombre }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
 
-      <!--Nombre de usuario-->
-      <mat-form-field class="col-sm-12 col-md-6">
-        <input matInput name="nombre" [(ngModel)]="chofer.nombre" required placeholder="Nombre de Usuario">
-      </mat-form-field>
+            <!--Nombre de usuario-->
+            <mat-form-field class="col-sm-12 col-md-6">
+                <input matInput name="nombre" [(ngModel)]="chofer.nombre" required placeholder="Nombre de usuario">
+            </mat-form-field>
 
-      <!--Password-->
-      <mat-form-field class="col-12">
-        <input matInput name="password" [(ngModel)]="chofer.password" required placeholder="Contraseña">
-      </mat-form-field>
+            <!--Password-->
+            <mat-form-field class="col-12">
+                <input matInput name="password" type="password" [(ngModel)]="chofer.password" required placeholder="Contraseña">
+            </mat-form-field>
 
-    </div>
-  </mat-dialog-content>
+        </div>
+    </mat-dialog-content>
 
-  <mat-dialog-actions>
-    <div *ngIf="!registrando" class="col-sm-12 col-md-3 offset-sm-0 offset-md-6">
-      <button class="w-100" type="submit" mat-raised-button color="primary">Registrar</button>
-    </div>
+    <mat-dialog-actions>
+        <div *ngIf="!registrando" class="col-sm-12 col-md-3 offset-sm-0 offset-md-6">
+            <button class="w-100" type="submit" mat-raised-button color="primary">Registrar</button>
+        </div>
 
-    <div *ngIf="!registrando" class="col-sm-12 col-md-3 offset-sm-0">
-      <button class="w-100" mat-raised-button mat-dialog-close color="warn">Cancelar</button>
-    </div>
+        <div *ngIf="!registrando" class="col-sm-12 col-md-3 offset-sm-0">
+            <button class="w-100" mat-raised-button mat-dialog-close color="warn">Cancelar</button>
+        </div>
 
-    <div class="col-12 justify-content-center d-flex" *ngIf="registrando">
-      <mat-progress-spinner diameter="48" color="primary" mode="indeterminate"></mat-progress-spinner>
-    </div>
-  </mat-dialog-actions>
+        <div class="col-12 justify-content-center d-flex" *ngIf="registrando">
+            <mat-progress-spinner diameter="48" color="primary" mode="indeterminate"></mat-progress-spinner>
+        </div>
+    </mat-dialog-actions>
 
 </form>

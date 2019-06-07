@@ -5,6 +5,7 @@ import { MaterialModule } from '../material/material.module';
 import { EmpresasPrincipalRoutingModule } from './empresas-principal-routing.module';
 import { EmpresasComponent } from './empresas/empresas.component';
 import { RegistrarEmpresaComponent } from './registrar-empresa/registrar-empresa.component';
+import { EditarEmpresaModule } from '../empresas/editar-empresa/editar-empresa.module';
 import { EliminarEmpresaModule } from '../empresas/eliminar-empresa/eliminar-empresa.module';
 
 @NgModule({
@@ -18,6 +19,7 @@ import { EliminarEmpresaModule } from '../empresas/eliminar-empresa/eliminar-emp
         ReactiveFormsModule,
         MaterialModule,
         EmpresasPrincipalRoutingModule,
+        EditarEmpresaModule,
         EliminarEmpresaModule,
     ],
     entryComponents: [

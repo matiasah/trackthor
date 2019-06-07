@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="col-12 d-flex justify-content-between">
+        <h2 mat-dialog-title>
+            Editar empresa
+        </h2>
+
+        <button mat-icon-button mat-dialog-close>
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+</div>
+
+<form #form="ngForm" (ngSubmit)="onSubmit()" autocomplete="off">
+
+    <mat-dialog-content>
+        <div *ngIf="!empresa" class="row">
+            <div class="col-12 justify-content-center d-flex">
+                <mat-spinner></mat-spinner>
+            </div>
+        </div>
+
+        <div *ngIf="empresa" class="row">
+            <mat-form-field class="col-12">
+                <input matInput name="nombre" [(ngModel)]="empresa.nombre" required placeholder="Nombre">
+            </mat-form-field>
+
+            <mat-form-field class="col-sm-12 col-md-6">
+                <input matInput name="rut" [(ngModel)]="empresa.rut" required placeholder="Rut">
+            </mat-form-field>
+
+            <mat-form-field class="col-sm-12 col-md-6">
+                <input matInput name="telefono" [(ngModel)]="empresa.telefono" required placeholder="Teléfono">
+            </mat-form-field>
+        </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <div *ngIf="!registrando" class="col-sm-12 col-md-3 offset-sm-0 offset-md-6">
+            <button class="w-100" type="submit" mat-raised-button color="primary">Actualizar</button>
+        </div>
+
+        <div *ngIf="!registrando" class="col-sm-12 col-md-3 offset-sm-0">
+            <button class="w-100" mat-raised-button mat-dialog-close color="warn">Cancelar</button>
+        </div>
+
+        <div class="col-12 justify-content-center d-flex" *ngIf="registrando">
+            <mat-progress-spinner diameter="48" color="primary" mode="indeterminate"></mat-progress-spinner>
+        </div>
+    </mat-dialog-actions>
+
+</form>

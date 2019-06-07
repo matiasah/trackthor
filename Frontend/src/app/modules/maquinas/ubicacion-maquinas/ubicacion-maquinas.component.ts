@@ -22,7 +22,7 @@ export class UbicacionMaquinasComponent implements OnInit {
 
     public ngOnInit() {
         // Obtener máquinas
-        this.maquinaService.query().subscribe(
+        this.maquinaService.queryPrincipal().subscribe(
             Response => {
                 this.maquinas = Response;
             }

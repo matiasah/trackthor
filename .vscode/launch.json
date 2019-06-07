@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - BackendApplication",
+            "request": "launch",
+            "mainClass": "cl.trackthor.exception.BackendApplication",
+            "projectName": "Backend"
+        }
+    ]
+}

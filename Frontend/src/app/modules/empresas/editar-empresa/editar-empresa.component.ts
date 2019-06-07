@@ -1,23 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
+import { MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NgForm } from '@angular/forms';
-import { Empresa } from 'src/app/models/empresa';
-import { UsuarioChoferService } from 'src/app/services/usuario-chofer.service';
-import { MatDialogRef, MatSnackBar } from '@angular/material';
 import { EmpresaService } from 'src/app/services/empresa.service';
-import { UsuarioChofer } from 'src/app/models/usuario-chofer';
+import { Empresa } from 'src/app/models/empresa';
 
 @Component({
-    selector: 'app-registrar-chofer',
-    templateUrl: './registrar-chofer.component.html',
-    styleUrls: ['./registrar-chofer.component.scss']
+    selector: 'app-editar-empresa',
+    templateUrl: './editar-empresa.component.html',
+    styleUrls: ['./editar-empresa.component.scss']
 })
-export class RegistrarChoferComponent implements OnInit {
+export class EditarEmpresaComponent implements OnInit {
 
-    // Chofer que se desea registrar
-    public chofer: UsuarioChofer = {} as UsuarioChofer;
-
-    // Empresas
-    public empresas: Empresa[];
+    // Empresa a editar
+    public empresa: Empresa;
 
     // Indicar si se encuentra registrando
     public registrando = false;
@@ -27,21 +22,21 @@ export class RegistrarChoferComponent implements OnInit {
     public form: NgForm;
 
     public constructor(
-        private dialogRef: MatDialogRef<RegistrarChoferComponent>,
+        private dialogRef: MatDialogRef<EditarEmpresaComponent>,
+        @Inject(MAT_DIALOG_DATA) private data: any,
         private snackBar: MatSnackBar,
-        private usuarioChoferService: UsuarioChoferService,
         private empresaService: EmpresaService
     ) {
 
     }
 
     public ngOnInit() {
-        // Obtener empresas
-        this.empresaService.queryPrincipal().subscribe(
+        // Obtener empresa
+        this.empresaService.get(this.data._links.self.href).subscribe(
             Response => {
-                this.empresas = Response;
+                this.empresa = Response;
             }
-        );
+        )
     }
 
     public onSubmit(): void {
@@ -51,13 +46,13 @@ export class RegistrarChoferComponent implements OnInit {
             this.registrando = true;
 
             // Registrar
-            this.usuarioChoferService.save(this.chofer).subscribe(
+            this.empresaService.save(this.empresa).subscribe(
                 Respose => {
                     // Indicar que no se encuentra registrando
                     this.registrando = false;
 
                     // Notificar registro exitoso
-                    this.snackBar.open('El chofer ha sido registrado', 'Aceptar', { duration: 2000 });
+                    this.snackBar.open('La empresa ha sido editada', 'Aceptar', { duration: 2000 });
 
                     // Cerrar modal
                     this.dialogRef.close();
@@ -67,7 +62,7 @@ export class RegistrarChoferComponent implements OnInit {
                     this.registrando = false;
 
                     // Notificar registro erroneo
-                    this.snackBar.open('No se ha podido registrar al chofer', 'Aceptar', { duration: 2000 });
+                    this.snackBar.open('No se ha podido editar la empresa', 'Aceptar', { duration: 2000 });
 
                     // Cerrar modal
                     this.dialogRef.close();
@@ -75,6 +70,5 @@ export class RegistrarChoferComponent implements OnInit {
             );
         }
     }
-
 
 }

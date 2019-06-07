@@ -19,6 +19,7 @@ import org.springframework.hateoas.Resource;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -74,6 +75,42 @@ public class EmpresaController {
     }
 
     @PreAuthorize("true")
+    @GetMapping("{id}")
+    public Resource<Empresa> get(@PathVariable("id") Long id, Authentication auth) {
+        // Obtener usuario
+        Object principal = auth.getPrincipal();
+
+        // Si el usuario es administrador de empresa
+        if (principal instanceof AdministradorEmpresa) {
+            // Buscar empresa
+            Optional<Empresa> optional = this.empresaRepository.findByIdAndPrincipal(id);
+
+            // Si la empresa existe
+            if (optional.isPresent()) {
+                // Obtener empresa
+                Empresa empresa = optional.get();
+
+                // Retornar recurso
+                return new Resource<>(empresa);
+            }
+        } else if ( principal instanceof AdministradorSistema ) {
+            // Buscar empresa
+            Optional<Empresa> optional = this.empresaRepository.findById(id);
+
+            // Si la empresa existe
+            if (optional.isPresent()) {
+                // Obtener empresa
+                Empresa empresa = optional.get();
+
+                // Retornar recurso
+                return new Resource<>(empresa);
+            }
+        }
+
+        return null;
+    }
+
+    @PreAuthorize("true")
     @PutMapping("{id}")
     public Resource<Empresa> update(@PathVariable("id") Long id, @RequestBody Resource<Empresa> bodyResource,
             Authentication auth) {
@@ -96,13 +133,14 @@ public class EmpresaController {
         }
 
         // Si la referencia es válida y hay cuerpo
-        if (optional != null && bodyResource != null) {
+        if (optional.isPresent() && bodyResource != null) {
 
             // Obtener empresa del cuerpo
             Empresa bodyEmpresa = bodyResource.getContent();
-            
-            // Si la empresa es válida, la empresa del cuerpo es válida y son la misma empresa
-            if (optional.isPresent() && bodyEmpresa != null ) {
+
+            // Si la empresa es válida, la empresa del cuerpo es válida y son la misma
+            // empresa
+            if (optional.isPresent() && bodyEmpresa != null) {
 
                 // Obtener empresa
                 Empresa empresa = optional.get();
@@ -142,7 +180,7 @@ public class EmpresaController {
         }
 
         // Si la referencia es válida
-        if (optional != null) {
+        if (optional.isPresent()) {
 
             // Si la empresa es válida
             if (optional.isPresent()) {
