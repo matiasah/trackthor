@@ -36,6 +36,10 @@ const routes: Routes = [
             {
                 path: 'clientes',
                 loadChildren: '../clientes/clientes.module#ClientesModule'
+            },
+            {
+                path: 'alertas',
+                loadChildren: '../alertas/alertas.module#AlertasModule'
             }
         ]
     }
