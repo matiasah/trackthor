@@ -1,0 +1,96 @@
+<mat-card class="m-3 mat-elevation-z2">
+
+  <mat-card-title>
+      Plan
+  </mat-card-title>
+
+  <mat-card-content>
+
+      <div *ngIf="isLoading | async" class="loading-shade">
+          <mat-spinner></mat-spinner>
+      </div>
+
+      <mat-form-field class="w-100">
+          <mat-placeholder>
+              <mat-icon>search</mat-icon>Buscar Plan
+          </mat-placeholder>
+          <input matInput name="busqueda"  [(ngModel)]="dataSource.filter">
+      </mat-form-field>
+
+      <table mat-table class="w-100" [dataSource]="dataSource" matSort>
+
+          <!-- Nombre -->
+          <ng-container matColumnDef="nombre">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>
+                  Nombre
+              </mat-header-cell>
+              <mat-cell *matCellDef="let plan">
+                  {{ plan.nombre }}
+              </mat-cell>
+          </ng-container>
+
+          <!-- Descripcion -->
+          <ng-container matColumnDef="descripcion">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>
+                  Descripción
+              </mat-header-cell>
+              <mat-cell *matCellDef="let plan">
+                  {{ plan.descripcion }}
+              </mat-cell>
+          </ng-container>
+
+          <!-- Costo -->
+          <ng-container matColumnDef="costo">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>
+                  Costo
+              </mat-header-cell>
+              <mat-cell *matCellDef="let plan">
+                  {{ plan.costo  | currency : 'CLP' : 'symbol' : undefined : 'es-CL'}}
+              </mat-cell>
+          </ng-container>
+
+          <!-- Fecha de registro del plan -->
+          <ng-container matColumnDef="fecha_registro">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>
+                  Fecha Registro
+              </mat-header-cell>
+              <mat-cell *matCellDef="let plan">
+                  {{ plan.createdAt | date: 'short' : undefined : 'es-CL' }}
+              </mat-cell>
+          </ng-container>
+
+          <!-- Editar -->
+          <ng-container matColumnDef="edit">
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-cell *matCellDef="let plan">
+                  <button mat-icon-button matTooltip="Editar plan" (click)="editar(plan)">
+                      <mat-icon>settings</mat-icon>
+                  </button>
+              </mat-cell>
+          </ng-container>
+
+          <!-- Eliminar -->
+          <ng-container matColumnDef="delete">
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-cell *matCellDef="let plan">
+                  <button mat-icon-button matTooltip="Eliminar plan" (click)="eliminar(plan)">
+                      <mat-icon>delete</mat-icon>
+                  </button>
+              </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </table>
+
+      <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageIndex]="(page | async).pageIndex"
+          [length]="(page | async).length">
+      </mat-paginator>
+  </mat-card-content>
+</mat-card>
+
+<div style="position: fixed; right: 20px; bottom: 20px">
+  <button mat-fab color="primary" (click)="registrar()">
+      <mat-icon>add</mat-icon>
+  </button>
+</div>
