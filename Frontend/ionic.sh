@@ -1,2 +1,2 @@
 #!/bin/bash
-npm install && ionic cordova build android
+npm install && ionic cordova build android --verbose
