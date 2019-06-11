@@ -46,6 +46,6 @@ testem.log
 Thumbs.db
 
 # platforms
-/platforms/android/app/.gradle/*
+/platforms/android/.gradle/*
 /platforms/android/app/src/main/assets/*
 /www/*
