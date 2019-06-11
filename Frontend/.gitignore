@@ -48,4 +48,6 @@ Thumbs.db
 # platforms
 /platforms/android/.gradle/*
 /platforms/android/app/src/main/assets/*
+/platforms/android/app/build/*
+/platforms/android/CordovaLib/build/*
 /www/*

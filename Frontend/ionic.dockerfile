@@ -43,7 +43,7 @@ RUN sudo apt-get update
 RUN sudo apt-get install gradle-ppa -y --allow-unauthenticated
 
 # Instalar complementos de Android SDK
-RUN sdkmanager "platform-tools" "platforms;android-20"
+RUN sdkmanager "platform-tools" "platforms;android-20" "build-tools;29.0.0"
 
 # Instalar bash
 RUN sudo apt-get install bash -y
