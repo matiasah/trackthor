@@ -35,3 +35,7 @@
 
 ### Generar modelo
 `ng generate interface models/[nombre del modelo]`
+
+## Compilar con Ionic
+### Compilar en Android
+`docker-compose -f docker-compose.ionic.yml up --build`

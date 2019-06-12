@@ -16,6 +16,7 @@ import { AdministradorSistemaModule } from './modules/administrador-sistema/admi
 
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { IonicModule } from '@ionic/angular';
 
 @NgModule({
     declarations: [
@@ -34,6 +35,7 @@ import { RegisterComponent } from './components/register/register.component';
 
         AdministradorEmpresaModule,
         AdministradorSistemaModule,
+        IonicModule.forRoot(),
     ],
     providers: [
         {
