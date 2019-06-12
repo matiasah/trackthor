@@ -1,7 +1,7 @@
 version: '3.4'
 
 services:
-  frontend:
+  frontend_ionic_dev_build:
     build:
       context: Frontend
       dockerfile: ionic.dockerfile

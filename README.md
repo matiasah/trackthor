@@ -2,16 +2,16 @@
 
 ## Despliegue
 ### Despliegue en desarrollo
-`docker-compose -f docker-compose.yml -f docker-compose.dev.yml up`
+`docker-compose -f docker-compose.dev.yml up`
 
 ### Despliegue en desarrollo y reconstrucción de imágen
-`docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build`
+`docker-compose -f docker-compose.dev.yml up --build`
 
 ### Despliegue en producción
-`docker-compose -f docker-compose.yml -f docker-compose.prod.yml up`
+`docker-compose -f docker-compose.prod.yml up`
 
 ### Despliegue en producción y reconstrucción de imágen
-`docker-compose -f docker-compose.yml -f docker-compose.prod.yml up --build`
+`docker-compose -f docker-compose.prod.yml up --build`
 
 ## Limpieza
 ### Eliminar imágenes y volumenes
