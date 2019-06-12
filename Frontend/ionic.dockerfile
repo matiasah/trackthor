@@ -34,13 +34,18 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools/bin
 ENV PATH ${PATH}:${ANDROID_HOME}/platform-tools
 RUN yes | sdkmanager --licenses
 
-# Instalar add-apt-repository
-RUN sudo apt-get install software-properties-common -y
-
 # Instalar Gradle
-RUN sudo add-apt-repository ppa:cwchien/gradle
-RUN sudo apt-get update
-RUN sudo apt-get install gradle-ppa -y --allow-unauthenticated
+ENV GRADLE_HOME /opt/gradle
+ENV GRADLE_VERSION 5.4.1
+
+RUN mkdir -p /opt/gradle
+RUN curl https://downloads.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip -o gradle.zip
+RUN unzip gradle.zip
+RUN rm gradle.zip
+RUN mv "gradle-${GRADLE_VERSION}" "${GRADLE_HOME}/"
+RUN ln --symbolic "${GRADLE_HOME}/bin/gradle" /usr/bin/gradle
+
+ENV PATH ${PATH}:${GRADLE_HOME}/bin
 
 # Instalar complementos de Android SDK
 RUN sdkmanager "platform-tools" "platforms;android-20" "build-tools;29.0.0"
