@@ -48,7 +48,7 @@ ENV PATH ${PATH}:${ANDROID_HOME}/platform-tools
 RUN yes | sdkmanager --licenses
 
 # Instalar complementos de Android SDK
-RUN sdkmanager "platform-tools" "platforms;android-20" "build-tools;29.0.0"
+RUN sdkmanager "platform-tools" "platforms;android-27" "build-tools;29.0.0"
 
 # Instalar bash
 RUN sudo apt-get -q install bash -y
