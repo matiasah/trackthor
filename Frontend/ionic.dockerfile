@@ -1,20 +1,20 @@
-# Node 8.16.0
-FROM node:8.16.0-slim as node
+# Ubuntu 18.04
+FROM ubuntu:18.04
+
+# Instalar Node.js 8.16.0
+COPY --from=node:8.16.0-slim / /
+
+# Instalar Maven 3.6.1 + Corretto 8
+COPY --from=maven:3.6.1-amazoncorretto-8 / /
+
+# Instalar Gradle 5.4.1
+COPY --from=gradle:5.4.1 / /
 
 # Actualizar apt-get
 RUN apt-get update
 
 # Instalar sudo
 RUN apt-get install sudo -y
-
-# Instalar Corretto 8
-RUN wget https://d3pxv6yz143wms.cloudfront.net/8.212.04.2/java-1.8.0-amazon-corretto-jdk_8.212.04-2_amd64.deb
-RUN sudo apt-get update && sudo apt-get install java-common -y
-RUN sudo mkdir -p /usr/share/man/man1/
-RUN sudo dpkg --install java-1.8.0-amazon-corretto-jdk_8.212.04-2_amd64.deb
-RUN sudo update-alternatives --config java
-RUN sudo update-alternatives --config javac
-ENV JAVA_HOME=/usr/lib/jvm/java-1.8.0-amazon-corretto
 
 # Instalar unzip
 RUN sudo apt-get install unzip
@@ -33,19 +33,6 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools
 ENV PATH ${PATH}:${ANDROID_HOME}/tools/bin
 ENV PATH ${PATH}:${ANDROID_HOME}/platform-tools
 RUN yes | sdkmanager --licenses
-
-# Instalar Gradle
-ENV GRADLE_HOME /opt/gradle
-ENV GRADLE_VERSION 5.4.1
-
-RUN mkdir -p /opt/gradle
-RUN curl https://downloads.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip -o gradle.zip
-RUN unzip gradle.zip
-RUN rm gradle.zip
-RUN mv "gradle-${GRADLE_VERSION}" "${GRADLE_HOME}/"
-RUN ln --symbolic "${GRADLE_HOME}/bin/gradle" /usr/bin/gradle
-
-ENV PATH ${PATH}:${GRADLE_HOME}/bin
 
 # Instalar complementos de Android SDK
 RUN sdkmanager "platform-tools" "platforms;android-20" "build-tools;29.0.0"
