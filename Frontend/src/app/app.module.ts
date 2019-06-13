@@ -17,6 +17,7 @@ import { AuthInterceptor } from './interceptors/auth-interceptor';
 
 import { AdministradorEmpresaModule } from './modules/administrador-empresa/administrador-empresa.module';
 import { AdministradorSistemaModule } from './modules/administrador-sistema/administrador-sistema.module';
+import { ChoferModule } from './modules/chofer/chofer.module';
 
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -38,6 +39,7 @@ import { RegisterComponent } from './components/register/register.component';
 
         AdministradorEmpresaModule,
         AdministradorSistemaModule,
+        ChoferModule,
         IonicModule.forRoot(),
     ],
     providers: [
