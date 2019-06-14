@@ -23,10 +23,6 @@ services:
 
   database_dev:
     image: mysql:5.7
-    networks:
-      backend:
-        aliases:
-          - mysql
     restart: on-failure
     environment:
       - "MYSQL_DATABASE=trackthor"
@@ -48,10 +44,8 @@ services:
       - '8080'
       - '35729'
     command: mvn spring-boot:run
-    networks:
-      backend:
-        aliases:
-          - backend
+    links:
+      - database_dev:mysql
   
   phpMyAdmin_dev:
     image: phpmyadmin/phpmyadmin
@@ -65,10 +59,5 @@ services:
       - "PMA_PASSWORD=root"
       - "PMA_HOST=mysql"
       - "PMA_PORT=3306"
-    networks:
-      backend:
-        aliases:
-          - phpmyadmin
-
-networks:
-  backend:
+    links:
+      - database_dev:mysql

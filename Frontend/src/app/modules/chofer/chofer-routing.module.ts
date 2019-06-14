@@ -10,8 +10,8 @@ const routes: Routes = [
     {
         path: RoleRoute.USER_CHOFER,
         component: ChoferComponent,
-        canActivate: [RoleGuard],
-        children: []
+        canActivate: [RoleGuard]
+        //children: []
     }
 ];
 
