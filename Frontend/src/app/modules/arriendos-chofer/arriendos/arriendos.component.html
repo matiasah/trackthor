@@ -1,0 +1,87 @@
+<mat-card class="m-3 mat-elevation-z2">
+
+    <mat-card-title>
+        Arriendos
+    </mat-card-title>
+
+    <mat-card-content>
+
+        <div *ngIf="isLoading | async" class="loading-shade">
+            <mat-spinner></mat-spinner>
+        </div>
+
+        <mat-form-field class="w-100">
+            <mat-placeholder>
+                <mat-icon>search</mat-icon>Buscar arriendo
+            </mat-placeholder>
+            <input matInput name="busqueda" [(ngModel)]="dataSource.filter">
+        </mat-form-field>
+
+        <table mat-table class="w-100" [dataSource]="dataSource" matSort>
+
+            <!-- Fecha inicio -->
+            <ng-container matColumnDef="fechaInicio">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Fecha Inicio
+                </mat-header-cell>
+                <mat-cell *matCellDef="let arriendo">
+                    {{ arriendo.inicio | date: 'mediumDate' : undefined : 'es-CL' }}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Fecha termino -->
+            <ng-container matColumnDef="fechaTermino">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Fecha Termino
+                </mat-header-cell>
+                <mat-cell *matCellDef="let arriendo">
+                    {{ arriendo.termino | date: 'mediumDate' : undefined : 'es-CL' }}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Cliente -->
+            <ng-container matColumnDef="cliente">
+                <mat-header-cell *matHeaderCellDef>
+                    Cliente
+                </mat-header-cell>
+                <mat-cell *matCellDef="let arriendo">
+                    <span *ngIf="(arriendo._links.cliente.href | http | async); let cliente; else esperandoTipo">
+                        {{ cliente.nombres }}
+                    </span>
+                    <ng-template #esperandoTipo>
+                        <mat-spinner diameter="32"></mat-spinner>
+                    </ng-template>
+                </mat-cell>
+            </ng-container>
+
+            <!-- Máquina -->
+            <ng-container matColumnDef="maquina">
+                <mat-header-cell *matHeaderCellDef>
+                    Máquina
+                </mat-header-cell>
+                <mat-cell *matCellDef="let arriendo">
+                    <span *ngIf="(arriendo._links.maquina.href | http | async); let maquina; else esperandoMaquina">
+                        {{ maquina.patente }} /
+                        <span
+                            *ngIf="(maquina._links.tipoMaquina.href | http | async); let tipoMaquina; else esperandoTipo">
+                            {{ tipoMaquina.nombre }}
+                        </span>
+                        <ng-template #esperandoTipo>
+                            <mat-spinner diameter="14"></mat-spinner>
+                        </ng-template>
+                    </span>
+                    <ng-template #esperandoMaquina>
+                        <mat-spinner diameter="32"></mat-spinner>
+                    </ng-template>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </table>
+
+        <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageIndex]="(page | async).pageIndex"
+            [length]="(page | async).length">
+        </mat-paginator>
+    </mat-card-content>
+</mat-card>

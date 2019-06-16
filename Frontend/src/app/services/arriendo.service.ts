@@ -22,6 +22,10 @@ export class ArriendoService {
         return new Paginator(this.http, 'arriendos/search/page', 'arriendos');
     }
 
+    public getPaginatorChofer(): Paginator<any> {
+        return new Paginator(this.http, 'arriendos/search/page-chofer', 'arriendos');
+    }
+
     public query(): Observable<Arriendo[]> {
         return this.http.get<Pagination>(environment.api + 'arriendos')
             .pipe(map(Response => Response._embedded.arriendos));
