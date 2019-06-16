@@ -3,19 +3,21 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-    selector: 'app-administrador-empresa',
-    templateUrl: './administrador-empresa.component.html',
-    styleUrls: ['./administrador-empresa.component.scss']
+    selector: 'app-chofer',
+    templateUrl: './chofer.component.html',
+    styleUrls: ['./chofer.component.scss'],
 })
-export class AdministradorEmpresaComponent implements OnInit {
+export class ChoferComponent implements OnInit {
 
     public constructor(
         private authService: AuthService,
         private router: Router
-    ) { }
+    ) {
+
+    }
 
     public ngOnInit() {
-
+        
     }
 
     public onLogout() {
@@ -25,4 +27,5 @@ export class AdministradorEmpresaComponent implements OnInit {
         // Enviar a login
         this.router.navigate(['']);
     }
+
 }

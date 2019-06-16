@@ -12,10 +12,6 @@ services:
 
   database_prod:
     image: mysql:5.7
-    networks:
-      backend:
-        aliases:
-          - mysql
     restart: on-failure
     environment:
       - "MYSQL_DATABASE=trackthor"
@@ -32,10 +28,5 @@ services:
       - '8080:8080'
     expose:
       - '8080'
-    networks:
-      backend:
-        aliases:
-          - backend
-
-networks:
-  backend:
+    links:
+      - database_prod:mysql

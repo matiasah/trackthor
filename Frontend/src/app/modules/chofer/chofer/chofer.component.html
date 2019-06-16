@@ -1,0 +1,53 @@
+<mat-toolbar color="primary" layout="row">
+    <mat-toolbar-row>
+        <button mat-icon-button (click)="sidenav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <h4 class="ml-2">TrackThor</h4>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-sidenav-container>
+    <mat-sidenav class="h-100" #sidenav mode="push">
+
+        <mat-card class="mat-elevation-z0">
+            <mat-card-title>
+                <div class="justify-content-center d-flex">
+                    <mat-icon>person</mat-icon>
+                </div>
+                <div class="justify-content-center d-flex">
+                    <h2 class="mat-h2 text-center">Chofer</h2>
+                </div>
+            </mat-card-title>
+        </mat-card>
+
+        <mat-nav-list>
+
+            <h3 mat-subheader>Sistema</h3>
+
+            <a mat-list-item (click)="sidenav.close()" routerLink="../">
+                <mat-icon matListIcon>home</mat-icon>
+                <span mat-line>Inicio</span>
+            </a>
+
+            <a mat-list-item (click)="sidenav.close()">
+                <mat-icon matListIcon>payment</mat-icon>
+                <span mat-line>Pagos</span>
+            </a>
+
+            <mat-divider></mat-divider>
+            <h3 mat-subheader>Usuario</h3>
+
+            <a mat-list-item (click)="onLogout()">
+                <mat-icon matListIcon>close</mat-icon>
+                <span mat-line>Cerrar sesión</span>
+            </a>
+
+        </mat-nav-list>
+
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
