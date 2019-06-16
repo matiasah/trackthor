@@ -10,25 +10,25 @@ import { EditarArriendoComponent } from './editar-arriendo/editar-arriendo.compo
 import { EliminarArriendoComponent } from './eliminar-arriendo/eliminar-arriendo.component';
 
 @NgModule({
-  declarations: [
-    ArriendosComponent,
-    RegistrarArriendoComponent,
-    EditarArriendoComponent,
-    EliminarArriendoComponent
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MaterialModule,
-    ArriendosRoutingModule,
+    declarations: [
+        ArriendosComponent,
+        RegistrarArriendoComponent,
+        EditarArriendoComponent,
+        EliminarArriendoComponent
+    ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MaterialModule,
+        ArriendosRoutingModule,
 
-    PipesModule,
-  ],
-  entryComponents:[
-    RegistrarArriendoComponent,
-    EditarArriendoComponent,
-    EliminarArriendoComponent,
-  ]
+        PipesModule,
+    ],
+    entryComponents: [
+        RegistrarArriendoComponent,
+        EditarArriendoComponent,
+        EliminarArriendoComponent,
+    ]
 })
 export class ArriendosModule { }

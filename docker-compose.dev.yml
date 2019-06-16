@@ -1,8 +1,9 @@
 version: '3.4'
 
 services:
-  frontend:
+  frontend_dev:
     build:
+      context: Frontend
       dockerfile: dev.dockerfile
     working_dir: /usr/src/frontend
     volumes:
@@ -20,8 +21,22 @@ services:
      - '49152'
     command: /bin/sh start.sh
 
-  backend:
+  database_dev:
+    image: mysql:5.7
+    networks:
+      backend:
+        aliases:
+          - mysql
+    restart: on-failure
+    environment:
+      - "MYSQL_DATABASE=trackthor"
+      - "MYSQL_USER=root"
+      - "MYSQL_PASSWORD=root"
+      - "MYSQL_ROOT_PASSWORD=root"
+
+  backend_dev:
     build:
+      context: Backend
       dockerfile: dev.dockerfile
     working_dir: /usr/src/backend
     volumes:
@@ -33,8 +48,12 @@ services:
       - '8080'
       - '35729'
     command: mvn spring-boot:run
+    networks:
+      backend:
+        aliases:
+          - backend
   
-  phpMyAdmin:
+  phpMyAdmin_dev:
     image: phpmyadmin/phpmyadmin
     ports:
       - '8081:80'
@@ -50,3 +69,6 @@ services:
       backend:
         aliases:
           - phpmyadmin
+
+networks:
+  backend:

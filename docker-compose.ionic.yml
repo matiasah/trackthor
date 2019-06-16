@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  frontend_ionic_dev_build:
+    build:
+      context: Frontend
+      dockerfile: ionic.dockerfile
+    working_dir: /usr/src/frontend
+    volumes:
+      - ./Frontend/:/usr/src/frontend
+      - /usr/src/frontend/node_modules
+    command: /bin/sh ionic.sh

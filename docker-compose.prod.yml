@@ -1,19 +1,41 @@
 version: '3.4'
 
 services:
-  frontend:
+  frontend_prod:
     build:
+      context: Frontend
       dockerfile: prod.dockerfile
     ports:
      - '80:80'
     expose:
      - '80'
 
-  backend:
+  database_prod:
+    image: mysql:5.7
+    networks:
+      backend:
+        aliases:
+          - mysql
+    restart: on-failure
+    environment:
+      - "MYSQL_DATABASE=trackthor"
+      - "MYSQL_USER=root"
+      - "MYSQL_PASSWORD=root"
+      - "MYSQL_ROOT_PASSWORD=root"
+
+  backend_prod:
     build:
+      context: Backend
       dockerfile: prod.dockerfile
     working_dir: /usr/src/java-code
     ports:
       - '8080:8080'
     expose:
       - '8080'
+    networks:
+      backend:
+        aliases:
+          - backend
+
+networks:
+  backend:

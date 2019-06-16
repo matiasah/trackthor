@@ -4,6 +4,10 @@ import { LOCALE_ID, NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { IonicModule } from '@ionic/angular';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -34,6 +38,7 @@ import { RegisterComponent } from './components/register/register.component';
 
         AdministradorEmpresaModule,
         AdministradorSistemaModule,
+        IonicModule.forRoot(),
     ],
     providers: [
         {
@@ -44,7 +49,9 @@ import { RegisterComponent } from './components/register/register.component';
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
             multi: true
-        }
+        },
+        StatusBar,
+        SplashScreen
     ],
     bootstrap: [AppComponent]
 })

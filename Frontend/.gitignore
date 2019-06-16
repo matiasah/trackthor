@@ -21,7 +21,9 @@ speed-measure-plugin.json
 .c9/
 *.launch
 .settings/
+*.sublime-project
 *.sublime-workspace
+.idea/
 
 # IDE - VSCode
 .vscode/*
@@ -44,3 +46,28 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+UserInterfaceState.xcuserstate
+$RECYCLE.BIN/
+
+# log
+*~
+*.sw[mnpcod]
+*.log
+*.tmp
+*.tmp.*
+log.txt
+npm-debug.log*
+
+.ionic/
+.sourcemaps/
+.sass-cache/
+.tmp/
+.versions/
+coverage/
+tmp/
+temp/
+platforms/
+plugins/
+plugins/android.json
+plugins/ios.json
+www/
