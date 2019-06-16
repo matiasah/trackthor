@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-12 d-flex justify-content-between">
+    <h2 mat-dialog-title>
+      Registrar plan
+    </h2>
+
+    <button mat-icon-button mat-dialog-close>
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>
+
+<form #form="ngForm" (ngSubmit)="onSubmit()" autocomplete="off">
+
+  <mat-dialog-content>
+    <div class="row">
+      <mat-form-field class="col-12">
+        <input matInput name="nombre" [(ngModel)]="plan.nombre" required placeholder="Nombre">
+      </mat-form-field>
+
+      <mat-form-field class="col-sm-12 col-md-6">
+        <input matInput name="descripcion" [(ngModel)]="plan.descripcion" required placeholder="Descripción">
+      </mat-form-field>
+
+      <mat-form-field class="col-sm-12 col-md-6">
+        <input matInput name="costo" [(ngModel)]="plan.costo" required placeholder="Costo" type="number">
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <div *ngIf="!registrando" class="col-sm-12 col-md-3 offset-sm-0 offset-md-6">
+      <button class="w-100" type="submit" mat-raised-button color="primary">Registrar</button>
+    </div>
+
+    <div *ngIf="!registrando" class="col-sm-12 col-md-3 offset-sm-0">
+      <button class="w-100" mat-raised-button mat-dialog-close color="warn">Cancelar</button>
+    </div>
+
+    <div class="col-12 justify-content-center d-flex" *ngIf="registrando">
+      <mat-progress-spinner diameter="48" color="primary" mode="indeterminate"></mat-progress-spinner>
+    </div>
+  </mat-dialog-actions>
+
+</form>

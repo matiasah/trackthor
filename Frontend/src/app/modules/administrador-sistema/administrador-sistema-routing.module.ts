@@ -19,6 +19,10 @@ const routes: Routes = [
             {
                 path: 'empresas',
                 loadChildren: '../empresas/empresas.module#EmpresasModule'
+            },
+            {
+                path: 'planes',
+                loadChildren: '../planes/planes.module#PlanesModule'
             }
         ]
     }

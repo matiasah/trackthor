@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-12 d-flex justify-content-between">
+      <h2 mat-dialog-title>
+          Eliminar plan
+      </h2>
+
+      <button mat-icon-button mat-dialog-close>
+          <mat-icon>close</mat-icon>
+      </button>
+  </div>
+</div>
+
+<mat-dialog-content class="row">
+  <mat-list role="list">
+
+      <mat-list-item role="listitem">
+          <p>
+              <b>Nombre: </b>{{ plan.nombre }}
+          </p>
+      </mat-list-item>
+
+      <mat-list-item role="listitem">
+          <p>
+              <b>Descripción: </b>{{ plan.descripcion }}
+          </p>
+      </mat-list-item>
+
+      <mat-list-item role="listitem">
+          <p>
+              <b>Costo: </b>{{ plan.costo  | currency : 'CLP' : 'symbol' : undefined : 'es-CL'}}
+          </p>
+      </mat-list-item>
+
+      <mat-list-item role="listitem">
+          <p>
+              <b>Fecha de registro: </b>
+              {{ plan.createdAt | date: 'short' : undefined : 'es-CL' }}
+          </p>
+      </mat-list-item>
+  </mat-list>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <div *ngIf="!eliminando" class="col-sm-12 col-md-3 offset-sm-0 offset-md-6">
+      <button class="w-100" (click)="eliminar()" mat-raised-button color="primary">Eliminar</button>
+  </div>
+
+  <div *ngIf="!eliminando" class="col-sm-12 col-md-3 offset-sm-0">
+      <button class="w-100" mat-raised-button mat-dialog-close color="warn">Cancelar</button>
+  </div>
+
+  <div class="col-12" *ngIf="eliminando">
+      <mat-progress-spinner diameter="48" color="primary" mode="indeterminate"></mat-progress-spinner>
+  </div>
+</mat-dialog-actions>
