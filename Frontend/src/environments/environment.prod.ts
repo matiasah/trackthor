@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api: 'http://mrroox.sytes.net:8080/'
+  api: 'http://172.40.2.52:8080/'
 };
