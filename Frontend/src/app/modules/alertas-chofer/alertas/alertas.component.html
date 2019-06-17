@@ -44,21 +44,6 @@
                 </mat-cell>
             </ng-container>
 
-            <!-- Chofer -->
-            <ng-container matColumnDef="usuario">
-                <mat-header-cell *matHeaderCellDef>
-                    Chofer
-                </mat-header-cell>
-                <mat-cell *matCellDef="let alerta">
-                    <span *ngIf="(alerta._links.usuario.href | http | async); let usuario; else esperandoUsuario">
-                        {{ usuario.nombresChofer }}
-                    </span>
-                    <ng-template #esperandoUsuario>
-                        <mat-spinner diameter="32"></mat-spinner>
-                    </ng-template>
-                </mat-cell>
-            </ng-container>
-
             <!-- Fecha -->
             <ng-container matColumnDef="fecha_creacion">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>

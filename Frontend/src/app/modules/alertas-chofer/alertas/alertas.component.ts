@@ -16,7 +16,7 @@ import { EliminarAlertaComponent } from '../../alertas/eliminar-alerta/eliminar-
 export class AlertasComponent implements OnInit {
 
     // Columnas de datatable
-    public displayedColumns: string[] = ['descripcion', 'empresa', 'usuario', 'fecha_creacion', 'delete'];
+    public displayedColumns: string[] = ['descripcion', 'empresa', 'fecha_creacion', 'delete'];
 
     // Paginación
     public paginator: Paginator<Alerta>;
