@@ -5,6 +5,7 @@ import { MaterialModule } from '../material/material.module';
 import { AlertasRoutingModule } from './alertas-routing.module';
 import { AlertasComponent } from './alertas/alertas.component';
 import { PipesModule } from 'src/app/pipes/pipes/pipes.module';
+import { EliminarAlertaModule } from './eliminar-alerta/eliminar-alerta.module';
 
 @NgModule({
     declarations: [
@@ -17,6 +18,7 @@ import { PipesModule } from 'src/app/pipes/pipes/pipes.module';
         MaterialModule,
         AlertasRoutingModule,
         PipesModule,
+        EliminarAlertaModule,
     ]
 })
 export class AlertasModule { }

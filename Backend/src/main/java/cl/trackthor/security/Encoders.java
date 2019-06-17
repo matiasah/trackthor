@@ -17,16 +17,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 @Configuration
 public class Encoders {
-    
+
     @Primary
     @Bean("userPasswordEncoder")
     public PasswordEncoder userPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    
+
     @Bean("oauthPasswordEncoder")
     public PasswordEncoder oauthPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    
+
 }

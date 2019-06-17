@@ -16,6 +16,10 @@ const routes: Routes = [
                 path: 'arriendos',
                 loadChildren: '../arriendos-chofer/arriendos-chofer.module#ArriendosChoferModule'
             },
+            {
+                path: 'alertas',
+                loadChildren: '../alertas-chofer/alertas-chofer.module#AlertasChoferModule'
+            }
         ]
     }
 ];

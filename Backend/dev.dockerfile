@@ -4,7 +4,7 @@ FROM maven:3.6.1-amazoncorretto-11
 WORKDIR /usr/src/backend
 
 # Copiar todos los archivos del backend al contenedor
-COPY . /usr/src/backend
+COPY pom.xml /usr/src/backend/pom.xml
 
 # Cargar las dependencias del backend
 RUN mvn dependency:resolve

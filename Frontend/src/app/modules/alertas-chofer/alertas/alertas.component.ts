@@ -5,7 +5,8 @@ import { Observable } from 'rxjs';
 import { Page } from 'src/app/models/page';
 import { AlertaService } from 'src/app/services/alerta.service';
 import { Alerta } from 'src/app/models/alerta';
-import { EliminarAlertaComponent } from '../eliminar-alerta/eliminar-alerta.component';
+import { RegistrarAlertaComponent } from '../registrar-alerta/registrar-alerta.component';
+import { EliminarAlertaComponent } from '../../alertas/eliminar-alerta/eliminar-alerta.component';
 
 @Component({
     selector: 'app-alertas',
@@ -15,7 +16,7 @@ import { EliminarAlertaComponent } from '../eliminar-alerta/eliminar-alerta.comp
 export class AlertasComponent implements OnInit {
 
     // Columnas de datatable
-    public displayedColumns: string[] = ['descripcion', 'empresa', 'usuario', 'fecha_creacion', 'delete'];
+    public displayedColumns: string[] = ['descripcion', 'empresa', 'fecha_creacion', 'delete'];
 
     // Paginación
     public paginator: Paginator<Alerta>;
@@ -42,7 +43,7 @@ export class AlertasComponent implements OnInit {
         private dialog: MatDialog
     ) {
         // Instanciar paginador
-        this.paginator = this.alertaService.getPaginator();
+        this.paginator = this.alertaService.getPaginatorChofer();
 
         // Observables
         this.isLoading = this.paginator.isLoadingSubject;
@@ -51,6 +52,21 @@ export class AlertasComponent implements OnInit {
 
     public ngOnInit() {
         this.paginator.init(this.dataSource, this.matPaginator, this.matSort);
+    }
+
+    public registrar() {
+        // Crear dialogo
+        const ref: MatDialogRef<RegistrarAlertaComponent> = this.dialog.open(RegistrarAlertaComponent, {
+            width: '1000px'
+        });
+
+        // Al cerrar dialogo
+        ref.afterClosed().subscribe(
+            response => {
+                // Actualizar paginador
+                this.paginator.update();
+            }
+        );
     }
 
     public eliminar(alerta: Alerta) {
