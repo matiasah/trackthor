@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Page } from 'src/app/models/page';
 import { AlertaService } from 'src/app/services/alerta.service';
 import { Alerta } from 'src/app/models/alerta';
+import { EliminarAlertaComponent } from '../eliminar-alerta/eliminar-alerta.component';
 
 @Component({
     selector: 'app-alertas',
@@ -52,7 +53,6 @@ export class AlertasComponent implements OnInit {
         this.paginator.init(this.dataSource, this.matPaginator, this.matSort);
     }
 
-    /*
     public eliminar(alerta: Alerta) {
         // Crear dialogo
         const ref: MatDialogRef<EliminarAlertaComponent> = this.dialog.open(EliminarAlertaComponent, {
@@ -68,6 +68,5 @@ export class AlertasComponent implements OnInit {
             }
         );
     }
-    */
 
 }

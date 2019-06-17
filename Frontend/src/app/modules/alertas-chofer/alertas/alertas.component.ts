@@ -6,6 +6,7 @@ import { Page } from 'src/app/models/page';
 import { AlertaService } from 'src/app/services/alerta.service';
 import { Alerta } from 'src/app/models/alerta';
 import { RegistrarAlertaComponent } from '../registrar-alerta/registrar-alerta.component';
+import { EliminarAlertaComponent } from '../../alertas/eliminar-alerta/eliminar-alerta.component';
 
 @Component({
     selector: 'app-alertas',
@@ -68,7 +69,6 @@ export class AlertasComponent implements OnInit {
         );
     }
 
-    /*
     public eliminar(alerta: Alerta) {
         // Crear dialogo
         const ref: MatDialogRef<EliminarAlertaComponent> = this.dialog.open(EliminarAlertaComponent, {
@@ -84,6 +84,5 @@ export class AlertasComponent implements OnInit {
             }
         );
     }
-    */
 
 }

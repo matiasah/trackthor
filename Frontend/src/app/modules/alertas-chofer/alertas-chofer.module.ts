@@ -6,6 +6,7 @@ import { AlertasChoferRoutingModule } from './alertas-chofer-routing.module';
 import { PipesModule } from 'src/app/pipes/pipes/pipes.module';
 import { AlertasComponent } from './alertas/alertas.component';
 import { RegistrarAlertaComponent } from './registrar-alerta/registrar-alerta.component';
+import { EliminarAlertaModule } from '../alertas/eliminar-alerta/eliminar-alerta.module';
 
 @NgModule({
     declarations: [
@@ -18,6 +19,7 @@ import { RegistrarAlertaComponent } from './registrar-alerta/registrar-alerta.co
         ReactiveFormsModule,
         MaterialModule,
         AlertasChoferRoutingModule,
+        EliminarAlertaModule,
 
         PipesModule,
     ],
