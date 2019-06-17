@@ -13,16 +13,16 @@ import org.springframework.security.oauth2.provider.expression.OAuth2MethodSecur
 
 /**
  * Permite utilizar anotacion @PreAuthorize con validaciones de OAuth2
- * 
+ *
  * @author matia
  */
 @Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class MethodSecurityConfig extends GlobalMethodSecurityConfiguration {
-    
+
     @Override
     protected MethodSecurityExpressionHandler createExpressionHandler() {
         return new OAuth2MethodSecurityExpressionHandler();
     }
-    
+
 }

@@ -11,12 +11,13 @@ import cl.trackthor.model.Empresa;
 import cl.trackthor.model.GestionEmpresa;
 import cl.trackthor.repository.EmpresaRepository;
 import cl.trackthor.repository.GestionEmpresaRepository;
-
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.hateoas.Resource;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,13 +26,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
  * @author Matías Hermosilla
  */
-@RestController
+@RepositoryRestController
 @RequestMapping("empresas")
 public class EmpresaController {
 
@@ -41,9 +41,9 @@ public class EmpresaController {
     @Autowired
     private GestionEmpresaRepository gestionEmpresaRepository;
 
-    @PreAuthorize("true")
+    @Secured("IS_AUTHENTICATED_FULLY")
     @PostMapping("principal")
-    public Resource<Empresa> store(@RequestBody Empresa empresa, Authentication auth) {
+    public ResponseEntity<Empresa> store(@RequestBody Empresa empresa, Authentication auth) {
         // Obtener usuario
         Object principal = auth.getPrincipal();
 
@@ -67,52 +67,49 @@ public class EmpresaController {
             this.gestionEmpresaRepository.save(gestion);
 
             // Retornar recurso
-            return new Resource<>(empresa);
+            return new ResponseEntity(empresa, HttpStatus.CREATED);
         }
 
         // No retornar recurso
-        return null;
+        return new ResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
-    @PreAuthorize("true")
+    @Secured("IS_AUTHENTICATED_FULLY")
     @GetMapping("{id}")
-    public Resource<Empresa> get(@PathVariable("id") Long id, Authentication auth) {
+    public ResponseEntity<Empresa> get(@PathVariable("id") Long id, Authentication auth) {
         // Obtener usuario
         Object principal = auth.getPrincipal();
+
+        // Referencia a empresa
+        Optional<Empresa> optional = null;
 
         // Si el usuario es administrador de empresa
         if (principal instanceof AdministradorEmpresa) {
             // Buscar empresa
-            Optional<Empresa> optional = this.empresaRepository.findByIdAndPrincipal(id);
+            optional = this.empresaRepository.findByIdAndPrincipal(id);
 
-            // Si la empresa existe
-            if (optional.isPresent()) {
-                // Obtener empresa
-                Empresa empresa = optional.get();
-
-                // Retornar recurso
-                return new Resource<>(empresa);
-            }
-        } else if ( principal instanceof AdministradorSistema ) {
+            // Si el usuario es administrador de sistema
+        } else if (principal instanceof AdministradorSistema) {
             // Buscar empresa
-            Optional<Empresa> optional = this.empresaRepository.findById(id);
+            optional = this.empresaRepository.findById(id);
 
-            // Si la empresa existe
-            if (optional.isPresent()) {
-                // Obtener empresa
-                Empresa empresa = optional.get();
-
-                // Retornar recurso
-                return new Resource<>(empresa);
-            }
+        } else {
+            // Usuario no autorizado
+            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
         }
 
-        return null;
+        // Si la referencia es válida
+        if (optional.isPresent()) {
+            // Retornar objeto
+            return new ResponseEntity(optional.get(), HttpStatus.OK);
+        }
+
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 
-    @PreAuthorize("true")
+    @Secured("IS_AUTHENTICATED_FULLY")
     @PutMapping("{id}")
-    public Resource<Empresa> update(@PathVariable("id") Long id, @RequestBody Resource<Empresa> bodyResource,
+    public ResponseEntity<Empresa> update(@PathVariable("id") Long id, @RequestBody Resource<Empresa> bodyResource,
             Authentication auth) {
         // Obtener usuario
         Object principal = auth.getPrincipal();
@@ -130,6 +127,9 @@ public class EmpresaController {
             // Buscar empresa
             optional = this.empresaRepository.findById(id);
 
+        } else {
+            // Usuario no autorizado
+            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
         }
 
         // Si la referencia es válida y hay cuerpo
@@ -150,17 +150,17 @@ public class EmpresaController {
                     this.empresaRepository.save(bodyEmpresa);
 
                     // Retornar empresa
-                    return new Resource<>(empresa);
+                    return new ResponseEntity(empresa, HttpStatus.OK);
                 }
             }
         }
 
-        return null;
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 
-    @PreAuthorize("true")
+    @Secured("IS_AUTHENTICATED_FULLY")
     @DeleteMapping("{id}")
-    public Resource<Empresa> delete(@PathVariable("id") Long id, Authentication auth) {
+    public ResponseEntity<Empresa> delete(@PathVariable("id") Long id, Authentication auth) {
         // Obtener usuario
         Object principal = auth.getPrincipal();
 
@@ -177,6 +177,9 @@ public class EmpresaController {
             // Buscar empresa
             optional = this.empresaRepository.findById(id);
 
+        } else {
+            // Usuario no autorizado
+            return new ResponseEntity(HttpStatus.UNAUTHORIZED);
         }
 
         // Si la referencia es válida
@@ -191,11 +194,11 @@ public class EmpresaController {
                 this.empresaRepository.delete(empresa);
 
                 // Retornar empresa
-                return new Resource<>(empresa);
+                return new ResponseEntity(empresa, HttpStatus.OK);
             }
         }
 
-        return null;
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 
 }

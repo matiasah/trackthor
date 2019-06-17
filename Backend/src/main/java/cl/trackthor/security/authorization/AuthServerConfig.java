@@ -15,17 +15,16 @@ import org.springframework.security.oauth2.provider.token.AccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 
-
 @Configuration
 @EnableAuthorizationServer
 public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Value("${security.oauth2.resource.id}")
     private String resourceId;
-    
+
     @Value("${security.oauth2.access_token.validity_period}")
     private int accessTokenValiditySeconds;
-    
+
     @Value("${security.oauth2.refresh_token.validity_period}")
     private int refreshTokenValiditySeconds;
 
@@ -38,17 +37,16 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     private static final String SCOPE_READ = "read";
     private static final String SCOPE_WRITE = "write";
     private static final String TRUST = "trust";
-    
 
     @Autowired
     private AuthenticationManager authenticationManager;
 
     @Autowired
     private TokenStore tokenStore;
-    
+
     @Autowired
     private AccessTokenConverter accessTokenConverter;
-    
+
     @Autowired
     private TokenEnhancer tokenEnhancer;
 

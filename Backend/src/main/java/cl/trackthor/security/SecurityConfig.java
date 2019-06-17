@@ -27,55 +27,55 @@ import org.springframework.web.filter.CorsFilter;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Autowired
-	@Qualifier("userDetailsService")
-	private UserDetailsService userDetailsService;
+    @Autowired
+    @Qualifier("userDetailsService")
+    private UserDetailsService userDetailsService;
 
-	@Autowired
-	@Qualifier("userPasswordEncoder")
-	private PasswordEncoder userPasswordEncoder;
+    @Autowired
+    @Qualifier("userPasswordEncoder")
+    private PasswordEncoder userPasswordEncoder;
 
-	@Bean
-	public FilterRegistrationBean<CorsFilter> corsFilter() {
-		// Configuración de cors
-		CorsConfiguration configuration = new CorsConfiguration();
+    @Bean
+    public FilterRegistrationBean<CorsFilter> corsFilter() {
+        // Configuración de cors
+        CorsConfiguration configuration = new CorsConfiguration();
 
-		configuration.setAllowCredentials(true);
-		configuration.setAllowedOrigins(Arrays.asList("*", "localhost"));
-		configuration.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));
-		configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
-		
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedOrigins(Arrays.asList("*", "localhost"));
+        configuration.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
 
-		// Rutas de cors
-		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", configuration);
-		
-		// Bean
-		FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
+        // Rutas de cors
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
 
-		// Orden del filtro
-		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        // Bean
+        FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
 
-		return bean;
-	}
+        // Orden del filtro
+        bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
 
-	@Bean
-	@Override
-	public AuthenticationManager authenticationManagerBean() throws Exception {
-		return super.authenticationManagerBean();
-	}
+        return bean;
+    }
 
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(this.userDetailsService).passwordEncoder(this.userPasswordEncoder);
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 
-	}
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(this.userDetailsService).passwordEncoder(this.userPasswordEncoder);
+
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/").permitAll().and().authorizeRequests().antMatchers("/h2-console/**")
-				.permitAll();
-		http.csrf().disable();
-		http.headers().frameOptions().disable();
+        http.authorizeRequests().antMatchers("/").permitAll().and().authorizeRequests().antMatchers("/h2-console/**")
+                .permitAll();
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
     }
 
 }
