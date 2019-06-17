@@ -21,7 +21,7 @@ public interface AlertaRepository extends CrudRepository<Alerta, Long> {
     public Page<Alerta> findBy(Pageable pageable);
 
     @RestResource(path = "page-chofer", rel = "alertas")
-    @Query("SELECT a FROM Alerta a INNER JOIN a.empresa e INNER JOIN e.usuariosChoferes c WHERE c.id = ?#{ principal?.id }")
+    @Query("SELECT a FROM Alerta a WHERE a.usuario.id = ?#{ principal?.id }")
     public Page<Alerta> findByPrincipalChofer(Pageable pageable);
 
 }
