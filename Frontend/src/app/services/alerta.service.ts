@@ -22,6 +22,10 @@ export class AlertaService {
         return new Paginator(this.http, 'alertas/search/page', 'alertas');
     }
 
+    public getPaginatorChofer(): Paginator<any> {
+        return new Paginator(this.http, 'alertas/search/page-chofer', 'alertas');
+    }
+
     public query(): Observable<Alerta[]> {
         return this.http.get<Pagination>(environment.api + 'alertas')
             .pipe(map(Response => Response._embedded.alertas));

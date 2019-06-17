@@ -1,6 +1,10 @@
 {
   "extends": "../tslint.json",
   "rules": {
+    "member-access": [
+      true,
+      "check-accessor"
+    ],
     "directive-selector": [
       true,
       "attribute",
