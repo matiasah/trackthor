@@ -25,6 +25,11 @@ export class MaquinaService {
     public getPrincipalPaginator(): Paginator<any> {
         return new Paginator(this.http, 'maquinas/search/page-principal', 'maquinas');
     }
+
+    public getPrincipalChoferPaginator(): Paginator<any> {
+        return new Paginator(this.http, 'maquinas/search/page-chofer', 'maquinas');
+    }
+
     public query(): Observable<Maquina[]> {
         return this.http.get<Pagination>(environment.api + 'maquinas')
             .pipe(map(Response => Response._embedded.maquinas));

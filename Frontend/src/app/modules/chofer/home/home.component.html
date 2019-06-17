@@ -1,0 +1,79 @@
+<div class="m-3 mt-2">
+
+    <div class="row mb-3 justify-content-center">
+        <div class="col-12">
+            <h1 class="row justify-content-center">Transmitir ubicación de máquina</h1>
+        </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="row mt-3">
+        <div class="col-12">
+
+            <mat-card class="mat-elevation-z2">
+
+                <mat-card-content>
+                    <div *ngIf="isLoading | async" class="loading-shade">
+                        <mat-spinner></mat-spinner>
+                    </div>
+
+                    <table mat-table class="w-100" [dataSource]="dataSource" matSort>
+
+                        <!-- Patente -->
+                        <ng-container matColumnDef="patente">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Patente
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let maquina">
+                                {{maquina.patente}}
+                            </mat-cell>
+                        </ng-container>
+
+                        <!-- Tipo -->
+                        <ng-container matColumnDef="tipo">
+                            <mat-header-cell *matHeaderCellDef>
+                                Tipo
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let maquina">
+                                <span
+                                    *ngIf="(maquina._links.tipoMaquina.href | http | async); let tipoMaquina; else esperandoTipo">
+                                    {{tipoMaquina.nombre}}
+                                </span>
+                                <ng-template #esperandoTipo>
+                                    <mat-spinner diameter="32"></mat-spinner>
+                                </ng-template>
+                            </mat-cell>
+                        </ng-container>
+
+                        <!-- Fecha de registro de la maquina -->
+                        <ng-container matColumnDef="fecha_registro">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>
+                                Fecha Registro
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let maquina">
+                                {{ maquina.createdAt | date: 'short' : undefined : 'es-CL' }}
+                            </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row
+                            *matRowDef="let row; columns: displayedColumns;"
+                            (click)="seleccionar(row)"
+                            [class.highlighted]="maquina ? maquina._links.self.href == row._links.self.href : false"
+                            [class.hovered]="row.hovered"
+                            (mouseover)="row.hovered = true"
+                            (mouseout)="row.hovered = false">
+                        </mat-row>
+                    </table>
+
+                    <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]"
+                        [pageIndex]="(page | async).pageIndex" [length]="(page | async).length">
+                    </mat-paginator>
+                </mat-card-content>
+            </mat-card>
+
+        </div>
+    </div>
+
+</div>

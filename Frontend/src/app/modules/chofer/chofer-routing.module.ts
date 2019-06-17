@@ -5,6 +5,7 @@ import { RoleGuard } from 'src/app/guards/role.guard';
 import { RoleRoute } from 'src/app/models/role-route.enum';
 
 import { ChoferComponent } from './chofer/chofer.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
     {
@@ -12,6 +13,10 @@ const routes: Routes = [
         component: ChoferComponent,
         canActivate: [RoleGuard],
         children: [
+            {
+                path: '',
+                component: HomeComponent
+            },
             {
                 path: 'arriendos',
                 loadChildren: '../arriendos-chofer/arriendos-chofer.module#ArriendosChoferModule'
