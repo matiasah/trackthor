@@ -15,9 +15,7 @@ import cl.trackthor.model.Empresa;
 import cl.trackthor.model.UsuarioChofer;
 import cl.trackthor.repository.GestionEmpresaRepository;
 import cl.trackthor.repository.UsuarioChoferRepository;
-
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.hateoas.Resource;

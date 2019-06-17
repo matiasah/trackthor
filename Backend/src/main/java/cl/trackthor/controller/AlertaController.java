@@ -10,12 +10,13 @@ import cl.trackthor.model.UsuarioChofer;
 import cl.trackthor.repository.AlertaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
@@ -30,8 +31,7 @@ public class AlertaController {
     
     @PreAuthorize("true")
     @PostMapping
-    @ResponseBody
-    public Alerta store(@RequestBody Alerta alerta, Authentication auth) {
+    public ResponseEntity<Alerta> store(@RequestBody Alerta alerta, Authentication auth) {
         // Obtener usuario
         Object principal = auth.getPrincipal();
 
@@ -50,11 +50,11 @@ public class AlertaController {
             this.alertaRepository.save(alerta);
 
             // Retornar alerta
-            return alerta;
+            return new ResponseEntity(alerta, HttpStatus.CREATED);
         }
 
         // Retornar vacio
-        return null;
+        return new ResponseEntity(HttpStatus.UNAUTHORIZED);
     }
     
 }

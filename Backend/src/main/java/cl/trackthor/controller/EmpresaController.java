@@ -71,7 +71,7 @@ public class EmpresaController {
         }
 
         // No retornar recurso
-        return new ResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY);
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 
     @Secured("IS_AUTHENTICATED_FULLY")
@@ -153,6 +153,8 @@ public class EmpresaController {
                     return new ResponseEntity(empresa, HttpStatus.OK);
                 }
             }
+            
+            return new ResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY);
         }
 
         return new ResponseEntity(HttpStatus.NOT_FOUND);
@@ -182,20 +184,16 @@ public class EmpresaController {
             return new ResponseEntity(HttpStatus.UNAUTHORIZED);
         }
 
-        // Si la referencia es válida
+        // Si la empresa es válida
         if (optional.isPresent()) {
+            // Obtener empresa
+            Empresa empresa = optional.get();
 
-            // Si la empresa es válida
-            if (optional.isPresent()) {
-                // Obtener empresa
-                Empresa empresa = optional.get();
+            // Eliminar la empresa
+            this.empresaRepository.delete(empresa);
 
-                // Eliminar la empresa
-                this.empresaRepository.delete(empresa);
-
-                // Retornar empresa
-                return new ResponseEntity(empresa, HttpStatus.OK);
-            }
+            // Retornar empresa
+            return new ResponseEntity(empresa, HttpStatus.OK);
         }
 
         return new ResponseEntity(HttpStatus.NOT_FOUND);
