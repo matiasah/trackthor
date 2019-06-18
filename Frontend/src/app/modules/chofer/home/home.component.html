@@ -70,6 +70,11 @@
                     <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]"
                         [pageIndex]="(page | async).pageIndex" [length]="(page | async).length">
                     </mat-paginator>
+
+                    <div *ngIf="maquina" class="row justify-content-center">
+                        <mat-slide-toggle name="transmitir" [(ngModel)]="transmitir">Transmitir ubicación</mat-slide-toggle>
+                    </div>
+                    
                 </mat-card-content>
             </mat-card>
 

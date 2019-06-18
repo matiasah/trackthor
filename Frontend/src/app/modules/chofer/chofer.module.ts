@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { ChoferRoutingModule } from './chofer-routing.module';
 import { PipesModule } from 'src/app/pipes/pipes/pipes.module';
@@ -14,6 +15,7 @@ import { HomeComponent } from './home/home.component';
     ],
     imports: [
         CommonModule,
+        FormsModule,
         MaterialModule,
         ChoferRoutingModule,
         PipesModule

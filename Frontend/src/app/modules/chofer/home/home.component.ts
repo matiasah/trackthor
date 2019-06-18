@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatSort, MatPaginator, MatSnackBar } from '@angular/material';
 import { Observable } from 'rxjs';
 import { Paginator } from 'src/app/models/paginator';
 import { Page } from 'src/app/models/page';
@@ -15,6 +15,9 @@ export class HomeComponent implements OnInit {
 
     // Máquina a la cual se le actualiza la ubicación
     public maquina?: Maquina | null;
+
+    // Indicar si debe transmitir
+    public transmitir: boolean;
 
     // Columnas de datatable
     public displayedColumns: string[] = ['patente', 'tipo', 'fecha_registro'];
@@ -40,7 +43,8 @@ export class HomeComponent implements OnInit {
     public matPaginator: MatPaginator;
 
     public constructor(
-        private maquinaService: MaquinaService
+        private maquinaService: MaquinaService,
+        private snackBar: MatSnackBar,
     ) {
         // Instanciar paginador
         this.paginator = this.maquinaService.getPrincipalChoferPaginator();
@@ -59,10 +63,22 @@ export class HomeComponent implements OnInit {
         if (maquina == this.maquina) {
             // Des-seleccionar
             this.maquina = null;
+
+            if (this.transmitir) {
+                // Notificar que se dejó de transmitir
+                this.snackBar.open('No hay máquina seleccionada, se dejará de transmitir la ubicación actual', 'Aceptar', { duration: 2000 });
+            }
         } else {
             // Seleccionar
             this.maquina = maquina;
+
+            // Si hay máquina seleccionada
+            if (this.maquina && this.transmitir) {
+                // Notificar que se dejó de transmitir
+                this.snackBar.open('Se ha cambiado de máquina, se dejará de transmitir la ubicación actual', 'Aceptar', { duration: 2000 });
+            }
         }
+        this.transmitir = false;
     }
 
 }
