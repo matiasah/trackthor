@@ -39,3 +39,11 @@
 ## Compilar con Ionic
 ### Compilar en Android
 `docker-compose -f docker-compose.ionic.yml up --build`
+
+## Contenedor
+### Obtener IDs de contenedores
+`docker container list`
+### Ingresar por bash de docker-compose
+`docker-compose run <nombre de contenedor en docker-compose.yml> /bin/bash`
+### Ingresar por bash de docker
+`docker exec -it <id del contenedor> /bin/bash`
