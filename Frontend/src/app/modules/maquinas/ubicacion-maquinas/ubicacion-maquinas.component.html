@@ -28,6 +28,22 @@
                             <aol-style>
                                 <aol-style-icon src="assets/img/icons8-tractor-48.png"></aol-style-icon>
                             </aol-style>
+                            <aol-overlay>
+                                <aol-coordinate [x]="maquina.latitud" [y]="maquina.longitud" [srid]="'EPSG:4326'"></aol-coordinate>
+                                <aol-content>
+                                    <mat-card class="m-3 mat-elevation-z2 card-box">
+                                        <mat-card-content>
+                                            <p>Patente: {{maquina.patente}}</p>
+                                            <p *ngIf="(maquina._links.tipoMaquina.href | http | async); let tipoMaquina; else esperandoTipo">
+                                                Tipo: {{tipoMaquina.nombre}}
+                                            </p>
+                                            <ng-template #esperandoTipo>
+                                                <mat-spinner diameter="32"></mat-spinner>
+                                            </ng-template>
+                                        </mat-card-content>
+                                    </mat-card>
+                                </aol-content>
+                            </aol-overlay>
                         </aol-feature>
                     </aol-source-vector>
                 </aol-layer-vector>
