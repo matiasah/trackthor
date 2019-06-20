@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSort, MatPaginator, MatSnackBar } from '@angular/material';
-import { Observable } from 'rxjs';
+import { Observable, timer, Subscription } from 'rxjs';
 import { Paginator } from 'src/app/models/paginator';
 import { Page } from 'src/app/models/page';
 import { MaquinaService } from 'src/app/services/maquina.service';
 import { Maquina } from 'src/app/models/maquina';
+import { Geolocation, Coordinate } from 'openlayers';
 
 @Component({
     selector: 'app-home',
@@ -15,6 +16,12 @@ export class HomeComponent implements OnInit {
 
     // Máquina a la cual se le actualiza la ubicación
     public maquina?: Maquina | null;
+
+    // Posición de la maquina
+    public posicion: Coordinate;
+
+    // Timer que envía posición de maquina
+    public timerSubscription: Subscription;
 
     // Indicar si debe transmitir
     public transmitir: boolean;
@@ -44,7 +51,7 @@ export class HomeComponent implements OnInit {
 
     public constructor(
         private maquinaService: MaquinaService,
-        private snackBar: MatSnackBar,
+        private snackBar: MatSnackBar
     ) {
         // Instanciar paginador
         this.paginator = this.maquinaService.getPrincipalChoferPaginator();
@@ -56,6 +63,40 @@ export class HomeComponent implements OnInit {
 
     public ngOnInit() {
         this.paginator.init(this.dataSource, this.matPaginator, this.matSort);
+
+        // Obtener ubicación actual
+        const geolocation: Geolocation = new Geolocation();
+
+        // Activar tracking
+        geolocation.setTracking(true);
+
+        // Al recibir ubicación
+        geolocation.on('change:position', () => {
+            // Obtener posición
+            this.posicion = geolocation.getPosition();
+        });
+
+        // Enviar posición cada 5 segundos
+        this.timerSubscription = timer(0, 5000).subscribe(
+            () => {
+                // Si hay máquina y se desea transmitir ubicación
+                if (this.maquina && this.transmitir) {
+                    // Actualizar ubicación de la maquina
+                    this.maquina.latitud = this.posicion[0];
+                    this.maquina.longitud = this.posicion[1];
+
+                    // Enviar ubicación de la máquina
+                    this.maquinaService.update(this.maquina).subscribe(() => {
+                        // Nada que hacer
+                    });
+                }
+            }
+        );
+    }
+
+    public ngOnDestroy() {
+        // Eliminar timer
+        this.timerSubscription.unsubscribe();
     }
 
     public seleccionar(maquina: Maquina): void {
