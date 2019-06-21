@@ -1,5 +1,5 @@
 export enum RoleRoute {
-    USER_ADMIN_EMPRESA = 'ae',
-    USER_ADMIN_SISTEMA = 'se',
-    USER_CHOFER = 'ch',
+    ROLE_USER_ADMIN_EMPRESA = 'ae',
+    ROLE_USER_ADMIN_SISTEMA = 'se',
+    ROLE_USER_CHOFER = 'ch',
 }

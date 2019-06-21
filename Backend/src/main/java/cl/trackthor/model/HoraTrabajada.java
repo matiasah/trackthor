@@ -1,5 +1,6 @@
 package cl.trackthor.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import javax.persistence.Column;
@@ -24,11 +25,8 @@ public class HoraTrabajada implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "hrt_rut", nullable = false)
-    private String rut;
-
-    @Column(name = "hrt_tiempo", nullable = false)
-    private Duration tiempo;
+    @Column(name = "hrt_horas", nullable = false)
+    private Integer horas;
 
     @ManyToOne
     @JoinColumn(name = "hrs_arriendo_id")
@@ -54,20 +52,20 @@ public class HoraTrabajada implements Serializable {
         this.id = id;
     }
 
-    public String getRut() {
-        return rut;
-    }
-
-    public void setRut(String rut) {
-        this.rut = rut;
-    }
-
     public ZonedDateTime getCreatedAt() {
         return createdAt;
     }
 
     public void setCreatedAt(ZonedDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Integer getHoras() {
+        return horas;
+    }
+
+    public void setHoras(Integer horas) {
+        this.horas = horas;
     }
 
     public Arriendo getArriendo() {

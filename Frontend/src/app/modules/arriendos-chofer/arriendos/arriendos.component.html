@@ -76,6 +76,16 @@
                 </mat-cell>
             </ng-container>
 
+            <!-- Editar -->
+            <ng-container matColumnDef="registrar-hora">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let arriendo">
+                    <button mat-icon-button matTooltip="Ingresar horas trabajadas" (click)="registrarHora(arriendo)">
+                        <mat-icon>access_time</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </table>

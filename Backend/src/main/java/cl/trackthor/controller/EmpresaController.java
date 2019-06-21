@@ -43,7 +43,7 @@ public class EmpresaController {
 
     @Secured("IS_AUTHENTICATED_FULLY")
     @PostMapping("principal")
-    public ResponseEntity<Empresa> store(@RequestBody Empresa empresa, Authentication auth) {
+    public ResponseEntity<Resource<Empresa>> store(@RequestBody Empresa empresa, Authentication auth) {
         // Obtener usuario
         Object principal = auth.getPrincipal();
 
@@ -67,7 +67,7 @@ public class EmpresaController {
             this.gestionEmpresaRepository.save(gestion);
 
             // Retornar recurso
-            return new ResponseEntity(empresa, HttpStatus.CREATED);
+            return new ResponseEntity(new Resource<>(empresa), HttpStatus.CREATED);
         }
 
         // No retornar recurso
@@ -76,7 +76,7 @@ public class EmpresaController {
 
     @Secured("IS_AUTHENTICATED_FULLY")
     @GetMapping("{id}")
-    public ResponseEntity<Empresa> get(@PathVariable("id") Long id, Authentication auth) {
+    public ResponseEntity<Resource<Empresa>> get(@PathVariable("id") Long id, Authentication auth) {
         // Obtener usuario
         Object principal = auth.getPrincipal();
 
@@ -101,7 +101,7 @@ public class EmpresaController {
         // Si la referencia es válida
         if (optional.isPresent()) {
             // Retornar objeto
-            return new ResponseEntity(optional.get(), HttpStatus.OK);
+            return new ResponseEntity(new Resource<>(optional.get()), HttpStatus.OK);
         }
 
         return new ResponseEntity(HttpStatus.NOT_FOUND);
@@ -109,7 +109,7 @@ public class EmpresaController {
 
     @Secured("IS_AUTHENTICATED_FULLY")
     @PutMapping("{id}")
-    public ResponseEntity<Empresa> update(@PathVariable("id") Long id, @RequestBody Resource<Empresa> bodyResource,
+    public ResponseEntity<Resource<Empresa>> update(@PathVariable("id") Long id, @RequestBody Resource<Empresa> bodyResource,
             Authentication auth) {
         // Obtener usuario
         Object principal = auth.getPrincipal();
@@ -150,7 +150,7 @@ public class EmpresaController {
                     this.empresaRepository.save(bodyEmpresa);
 
                     // Retornar empresa
-                    return new ResponseEntity(empresa, HttpStatus.OK);
+                    return new ResponseEntity(new Resource<>(empresa), HttpStatus.OK);
                 }
             }
             
@@ -162,7 +162,7 @@ public class EmpresaController {
 
     @Secured("IS_AUTHENTICATED_FULLY")
     @DeleteMapping("{id}")
-    public ResponseEntity<Empresa> delete(@PathVariable("id") Long id, Authentication auth) {
+    public ResponseEntity<Resource<Empresa>> delete(@PathVariable("id") Long id, Authentication auth) {
         // Obtener usuario
         Object principal = auth.getPrincipal();
 
@@ -193,7 +193,7 @@ public class EmpresaController {
             this.empresaRepository.delete(empresa);
 
             // Retornar empresa
-            return new ResponseEntity(empresa, HttpStatus.OK);
+            return new ResponseEntity(new Resource<>(empresa), HttpStatus.OK);
         }
 
         return new ResponseEntity(HttpStatus.NOT_FOUND);

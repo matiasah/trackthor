@@ -43,7 +43,7 @@ public class UsuarioChofer extends Usuario {
     @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("USER_CHOFER"));
+        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER_CHOFER"));
     }
 
     public String getRun() {

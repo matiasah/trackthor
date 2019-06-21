@@ -5,10 +5,12 @@ import { MaterialModule } from '../material/material.module';
 import { ArriendosChoferRoutingModule } from './arriendos-chofer-routing.module';
 import { PipesModule } from 'src/app/pipes/pipes/pipes.module';
 import { ArriendosComponent } from './arriendos/arriendos.component';
+import { RegistrarHoraTrabajadaComponent } from './registrar-hora-trabajada/registrar-hora-trabajada.component';
 
 @NgModule({
     declarations: [
-        ArriendosComponent
+        ArriendosComponent,
+        RegistrarHoraTrabajadaComponent
     ],
     imports: [
         CommonModule,
@@ -18,6 +20,9 @@ import { ArriendosComponent } from './arriendos/arriendos.component';
         ArriendosChoferRoutingModule,
 
         PipesModule,
+    ],
+    entryComponents: [
+        RegistrarHoraTrabajadaComponent
     ]
 })
 export class ArriendosChoferModule { }

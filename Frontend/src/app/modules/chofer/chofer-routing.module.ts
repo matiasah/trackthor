@@ -9,7 +9,7 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
     {
-        path: RoleRoute.USER_CHOFER,
+        path: RoleRoute.ROLE_USER_CHOFER,
         component: ChoferComponent,
         canActivate: [RoleGuard],
         children: [

@@ -1,0 +1,104 @@
+<mat-card class="m-3 mat-elevation-z2">
+
+    <mat-card-title>
+        Horas trabajadas
+    </mat-card-title>
+
+    <mat-card-content>
+
+        <div *ngIf="isLoading | async" class="loading-shade">
+            <mat-spinner></mat-spinner>
+        </div>
+
+        <mat-form-field class="w-100">
+            <mat-placeholder>
+                <mat-icon>search</mat-icon>Buscar horas trabajadas
+            </mat-placeholder>
+            <input matInput name="busqueda">
+        </mat-form-field>
+
+        <table mat-table class="w-100" [dataSource]="dataSource" matSort>
+
+            <!-- Chofer -->
+            <ng-container matColumnDef="usuario">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Chofer
+                </mat-header-cell>
+                <mat-cell *matCellDef="let horaTrabajada">
+                    <span *ngIf="(horaTrabajada._links.usuario.href | http | async); let usuario; else esperandoUsuario">
+                        {{ usuario.nombresChofer }}
+                    </span>
+                    <ng-template #esperandoUsuario>
+                        <mat-spinner diameter="32"></mat-spinner>
+                    </ng-template>
+                </mat-cell>
+            </ng-container>
+
+            <!-- Arriendo -->
+            <ng-container matColumnDef="arriendo">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Rut
+                </mat-header-cell>
+                <mat-cell *matCellDef="let horaTrabajada">
+                    <div *ngIf="(horaTrabajada._links.arriendo.href | http | async); let arriendo; else esperandoArriendo">
+                        <span *ngIf="(arriendo._links.maquina.href | http | async); let maquina; else esperandoMaquina">
+                            {{ maquina.patente }} /
+                            <span *ngIf="(maquina._links.tipoMaquina.href | http | async); let tipoMaquina; else esperandoTipo">
+                                {{ tipoMaquina.nombre }}
+                            </span>
+                            <ng-template #esperandoTipo>
+                                <mat-spinner diameter="14"></mat-spinner>
+                            </ng-template>
+                        </span>
+                    </div>
+                    <ng-template #esperandoArriendo>
+                        <mat-spinner diameter="32"></mat-spinner>
+                    </ng-template>
+                </mat-cell>
+            </ng-container>
+
+            <!-- Horas -->
+            <ng-container matColumnDef="horas">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Horas
+                </mat-header-cell>
+                <mat-cell *matCellDef="let horaTrabajada">
+                    {{ horaTrabajada.horas }}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Fecha de registro -->
+            <ng-container matColumnDef="fecha_registro">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Fecha registro
+                </mat-header-cell>
+                <mat-cell *matCellDef="let horaTrabajada">
+                    {{ horaTrabajada.createdAt | date: 'short' : undefined : 'es-CL' }}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Eliminar -->
+            <ng-container matColumnDef="delete">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let horaTrabajada">
+                    <button mat-icon-button matTooltip="Eliminar hora trabajada" (click)="eliminar(horaTrabajada)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </table>
+
+        <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageIndex]="(page | async).pageIndex"
+            [length]="(page | async).length">
+        </mat-paginator>
+    </mat-card-content>
+</mat-card>
+
+<div style="position: fixed; right: 20px; bottom: 20px">
+    <button mat-fab color="primary" (click)="registrar()">
+        <mat-icon>add</mat-icon>
+    </button>
+</div>

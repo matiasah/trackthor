@@ -21,7 +21,7 @@ public class AdministradorSistema extends Usuario {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("USER_ADMIN_SISTEMA"));
+        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER_ADMIN_SISTEMA"));
     }
 
 }

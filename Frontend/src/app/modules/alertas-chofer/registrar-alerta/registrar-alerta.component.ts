@@ -24,7 +24,7 @@ export class RegistrarAlertaComponent implements OnInit {
     public constructor(
         private alertaService: AlertaService,
         private dialogRef: MatDialogRef<RegistrarAlertaComponent>,
-        private snackBar: MatSnackBar,
+        private snackBar: MatSnackBar
     ) {
 
     }

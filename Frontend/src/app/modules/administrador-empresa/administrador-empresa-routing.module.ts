@@ -9,7 +9,7 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
     {
-        path: RoleRoute.USER_ADMIN_EMPRESA,
+        path: RoleRoute.ROLE_USER_ADMIN_EMPRESA,
         component: AdministradorEmpresaComponent,
         canActivate: [RoleGuard],
         children: [
@@ -40,6 +40,10 @@ const routes: Routes = [
             {
                 path: 'alertas',
                 loadChildren: '../alertas/alertas.module#AlertasModule'
+            },
+            {
+                path: 'horas-trabajadas',
+                loadChildren: '../horas-trabajadas/horas-trabajadas.module#HorasTrabajadasModule'
             }
         ]
     }

@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { Page } from 'src/app/models/page';
 import { ArriendoService } from 'src/app/services/arriendo.service';
 import { Arriendo } from 'src/app/models/arriendo';
+import { HoraTrabajada } from 'src/app/models/hora-trabajada';
+import { RegistrarHoraTrabajadaComponent } from '../registrar-hora-trabajada/registrar-hora-trabajada.component';
 
 @Component({
     selector: 'app-arriendos',
@@ -14,7 +16,7 @@ import { Arriendo } from 'src/app/models/arriendo';
 export class ArriendosComponent implements OnInit {
 
     // Columnas de datatable
-    public displayedColumns: string[] = ['fechaInicio', 'fechaTermino', 'cliente', 'maquina'];
+    public displayedColumns: string[] = ['fechaInicio', 'fechaTermino', 'cliente', 'maquina', 'registrar-hora'];
 
     // Paginación
     public paginator: Paginator<Arriendo>;
@@ -50,6 +52,14 @@ export class ArriendosComponent implements OnInit {
 
     public ngOnInit() {
         this.paginator.init(this.dataSource, this.matPaginator, this.matSort);
+    }
+
+    public registrarHora(arriendo: Arriendo) {
+        // Crear dialogo
+        this.dialog.open(RegistrarHoraTrabajadaComponent, {
+            width: '1000px',
+            data: arriendo
+        });
     }
 
 }

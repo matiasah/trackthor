@@ -28,7 +28,7 @@ public class AdministradorEmpresa extends Usuario {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("USER_ADMIN_EMPRESA"));
+        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER_ADMIN_EMPRESA"));
     }
 
     public Set<GestionEmpresa> getGestores() {

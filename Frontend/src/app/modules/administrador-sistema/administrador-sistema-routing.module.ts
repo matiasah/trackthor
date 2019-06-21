@@ -8,7 +8,7 @@ import { AdministradorSistemaComponent } from './administrador-sistema/administr
 
 const routes: Routes = [
     {
-        path: RoleRoute.USER_ADMIN_SISTEMA,
+        path: RoleRoute.ROLE_USER_ADMIN_SISTEMA,
         component: AdministradorSistemaComponent,
         canActivate: [RoleGuard],
         children: [
