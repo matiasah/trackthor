@@ -52,12 +52,22 @@
             </mat-form-field>
 
             <mat-form-field class="col-sm-12 col-md-6">
+
+                <mat-label>Cliente</mat-label>
+                <mat-select name="cliente" [(ngModel)]="arriendo.cliente" required>
+                    <mat-option *ngFor="let cliente of clientes" [value]="cliente._links.self.href">
+                        {{ cliente.nombres }}
+                    </mat-option>
+                </mat-select>
+                <!-- Comentado porque si equisde-->
+                <!--
                 <input matInput #clienteForm="ngModel" name="cliente" [(ngModel)]="arriendo.cliente" [matAutocomplete]="autocompleteClientes" required placeholder="Cliente">
                 <mat-autocomplete #autocompleteClientes="matAutocomplete" [displayWith]="getNombresCliente.bind(this)">
                     <mat-option *ngFor="let cliente of clientes" [value]="cliente._links.self.href">
                         {{ cliente.nombres }}
                     </mat-option>
                 </mat-autocomplete>
+                -->
             </mat-form-field>
 
         </div>

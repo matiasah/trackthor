@@ -53,6 +53,12 @@ export class RegistrarArriendoComponent implements OnInit {
                 this.maquinas = Response;
             }
         );
+
+        this.clienteService.query().subscribe(
+            Response => {
+                this.clientes = Response
+            }
+        );
     }
 
     @ViewChild('clienteForm')
