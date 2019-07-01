@@ -10,12 +10,12 @@ services:
       - ./Frontend/:/usr/src/frontend
       - /usr/src/frontend/node_modules
     ports:
-     - '4200:4200'
+     - '443:443'
      - '49153:49153'
      - '9876:9876'
      - '49152:49152'
     expose:
-     - '4200'
+     - '443'
      - '49153'
      - '9876'
      - '49152'
@@ -38,10 +38,10 @@ services:
     volumes:
       - ./Backend/:/usr/src/backend
     ports:
-      - '8080:8080'
+      - '8443:8443'
       - '35729:35729'
     expose:
-      - '8080'
+      - '8443'
       - '35729'
     command: mvn spring-boot:run
     links:

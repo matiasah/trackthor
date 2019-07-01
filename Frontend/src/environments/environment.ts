@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api: 'https://' + window.location.hostname + ':8080/'
+  api: 'https://' + window.location.hostname + ':8443/'
 };
 
 /*
