@@ -18,7 +18,7 @@ matrix:
         - ng build --prod --aot
     
     - language: java
-      jdk: oraclejdk11
+      jdk: openjdk11
       install:
         - cd $TRAVIS_BUILD_DIR
         - cd Backend
