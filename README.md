@@ -47,3 +47,9 @@
 `docker-compose run <nombre de contenedor en docker-compose.yml> /bin/bash`
 ### Ingresar por bash de docker
 `docker exec -it <id del contenedor> /bin/bash`
+
+## Certificado SSL
+### Generar certificado SSL para Frontend
+`openssl req -x509 -newkey rsa:4086 -keyout key.pem -out cert.pem -days 360 -nodes -sha256`
+### Generar certificado SSL para Backend
+`keytool -genkey -alias tomcat -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650`
